@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <Colores name="White">
+    <Primario>255,255,255</Primario>
+    <Secundario>255,255,255</Secundario>
+    <Terciario>102, 151, 249</Terciario>
+    <Controls>229, 230, 232</Controls>
+    <Words>103, 109, 119</Words>
+  </Colores>
+  <Colores name="Dark">
+    <Primario>111,117,130</Primario>
+    <Secundario>68,75,89</Secundario>
+    <Terciario>97, 137, 211</Terciario>
+    <Controls>76, 81, 91</Controls>
+    <Words>199, 210, 232</Words>
+  </Colores>
+</root>

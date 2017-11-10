@@ -81,17 +81,26 @@ namespace Codificador
                     }
                 }
                 comandos = Palabra.Codificar(palabras, escala);
-                foreach (long _x in comandos)
+                try
                 {
-                    textBox1.AppendText(Convert.ToString(_x, 2));
-                    textBox1.AppendText(Environment.NewLine);
-                    if (serialPort1.IsOpen)
+                    foreach (long _x in comandos)
                     {
-                        envio = SplitNumerInBytes(_x);
-                        serialPort1.Write(envio, 0, envio.Length);
-                        serialPort1.DiscardOutBuffer();
+                        textBox1.AppendText(Convert.ToString(_x, 2));
+                        textBox1.AppendText(Environment.NewLine);
+                        if (serialPort1.IsOpen)
+                        {
+                            envio = SplitNumerInBytes(_x);
+                            serialPort1.Write(envio, 0, envio.Length);
+                            serialPort1.DiscardOutBuffer();
+                        }
+
                     }
                 }
+                catch
+                {
+                    return;
+                }
+
                 
                 if (palabras.Last() != null)
                 {
@@ -103,6 +112,11 @@ namespace Codificador
                     Recuadro();
                     Grilla();
                 }  
+            }else
+            {
+                Limpiar();
+                Recuadro();
+                Grilla();
             }
             Refresh();
         }
@@ -355,19 +369,26 @@ namespace Codificador
         {
             Int64 buffer;
             List<Int64> comandos = new List<Int64>();
-            foreach (Palabra _x in palabras)
+            try
             {
-                buffer = 0;
-                foreach (int nota in _x.Nota)
+                foreach (Palabra _x in palabras)
                 {
-                    if (nota >= escala)
+                    buffer = 0;
+                    foreach (int nota in _x.Nota)
                     {
+                        if (nota >= escala)
+                        {
 #pragma warning disable CS0675 // Operador OR bit a bit utilizado en un operando de extensión de signo
-                        buffer = buffer | (1 << (byte)(nota - escala));
+                            buffer = buffer | (1 << (byte)(nota - escala));
 #pragma warning restore CS0675 // Operador OR bit a bit utilizado en un operando de extensión de signo
+                        }
                     }
+                    comandos.Add(buffer);
                 }
-                comandos.Add(buffer);
+            }
+            catch
+            {
+                return null;
             }
             return comandos;
         }

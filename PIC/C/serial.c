@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <xc.h>
-
-#define _XTAL_FREQ 4000000
-
-#define RAND_MAX = 1
+#include "Includes.h"
 
 #pragma config FOSC = INTOSCIO
 #pragma config WDTE = OFF
@@ -15,29 +9,94 @@
 #pragma config CPD = OFF
 #pragma config CP = OFF
 
-void main ()
+#define clockManual RB0
+#define dato RB1
+#define latch RB2
+
+int powKase (int base, int exponente)
 {
-    TRISA = 0b00000100;
-    INTCONbits.GIE = 1;//habilitar todas las interrupciones
-    INTCONbits.PEIE = 1;
-
-    TXSTAbits.SYNC = 0; //Transmisión Asíncrona
-    TXSTAbits.TXEN = 1; //Habilitación transmisión
-    TXSTAbits.TX9 = 1;
-    RCSTAbits.SPEN = 1; //Habilita puerto serie
-
-
-    TXSTAbits.BRGH = 1;    //Baja velocidad
-    SPBRG = 103;            // Baud Rate 9600
-
-    PIE1bits.TXIE = 1;
-    int x = 0;
-    while(1)
+    int resultado = 1;
+    if (exponente != 0)
     {
-        for(x=65;x<=90;x++)
-        {
-            TXREG = x ;
-            __delay_ms(500);
-        }
+      for (int i = 1; i <= exponente; i = i + 1)
+      {
+          resultado = resultado * base;
+      }
     }
+    return resultado;
+}
+
+void resetearSalidas (int cantidadSalidas)
+{
+  for(int i = 0; i < cantidadSalidas; i = i + 1)
+  {
+      dato = 0;
+      clockManual = 1;
+      clockManual = 0;
+  }
+  latch = 1;
+  latch = 0;
+}
+
+void escribirSalida ()
+{
+  unsigned int resultado[8] = {0,0,0,0,0,0,0,0};
+  unsigned int velocidadDecena = velocidad/10;
+  unsigned int velocidadUnidad = velocidad - velocidadDecena * 10;
+  unsigned int numero = codificacion[velocidadUnidad];
+  for (int i = 0; i < 8; i++)
+  {
+    resultado[i] = (numero >> (7 - i)) & 1;
+  }
+  for (int i = 0; i < 8; i++)
+  {
+    dato = resultado[7 -i];          //Dato
+    clockManual = 1;              //clockManual on
+    clockManual = 0;              //clockManual off
+  }
+  latch = 1;            //Latch on
+  latch = 0;           //Latch off
+  numero = codificacion[velocidadDecena];
+  for (int i = 0; i < 8; i++)
+  {
+    resultado[i] = (numero >> (7 - i)) & 1;
+  }
+  for (int i = 0; i < 8; i++)
+  {
+    dato = resultado[7 -i];          //Dato
+    clockManual = 1;              //clockManual on
+    clockManual = 0;              //clockManual off
+  }
+  latch = 1;            //Latch on
+  latch = 0;           //Latch off
+  velocidad = 0;
+}
+
+
+void interrupt ISR(void)
+{
+	if(RCIF)  // If UART Rx Interrupt
+	{
+		if(OERR) // If over run error, then reset the receiver
+		{
+			CREN = 0;
+			CREN = 1;
+		}
+
+		SendByteSerially(RCREG);	// Echo back received char
+	}
+}
+
+void main()
+{
+	InitUART();							// Initialize UART
+
+    //SendStringSerially("Hello World!");	// Send string on UART
+
+	GIE  = 1;  							// Enable global interrupts
+    PEIE = 1;  							// Enable Peripheral Interrupts
+
+	while(1)
+	{
+	}
 }

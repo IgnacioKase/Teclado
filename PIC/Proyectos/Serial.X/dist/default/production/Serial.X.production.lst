@@ -1,9 +1,9 @@
 
 
-Microchip Technology PIC LITE Macro Assembler V1.42 build -159332390 
-                                                                                               Wed Nov 08 14:22:12 2017
+Microchip Technology PIC LITE Macro Assembler V1.44 build -154322312 
+                                                                                               Fri Nov 10 11:23:59 2017
 
-Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130522
+Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140600
      1                           	processor	16F628A
      2                           	opt	pw 120
      3                           	opt	lm
@@ -19,8 +19,8 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
     13                           	psect	text5,local,class=CODE,merge=1,delta=2
     14                           	dabs	1,0x7E,2
     15  0000                     
-    16                           ; Version 1.42
-    17                           ; Generated 13/04/2017 GMT
+    16                           ; Version 1.44
+    17                           ; Generated 14/09/2017 GMT
     18                           ; 
     19                           ; Copyright © 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
     20                           ; All rights reserved.
@@ -796,8 +796,8 @@ BANK2               30      0       0       9        0.0%
 DATA                 0      0       0      10        0.0%
 
 
-Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                   Wed Nov 08 14:22:12 2017
+Microchip Technology PIC Macro Assembler V1.44 build -154322312 
+Symbol Table                                                                                   Fri Nov 10 11:23:59 2017
 
                           pc 0002                  __CFG_CP$OFF 0000                           l30 007A  
                          l75 0066                           fsr 0004                          l623 0056  

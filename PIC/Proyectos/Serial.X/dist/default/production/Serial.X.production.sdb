@@ -1,0 +1,103 @@
+[p LITE_MODE AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F628A ]
+[d frameptr 6 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 1 0 ]
+"39
+[v _memcpyee memcpyee `(v  1 e 1 0 ]
+"12 C:\PIC\Proyectos\Serial.X\main.c
+[v _ISR ISR `II(v  1 e 1 0 ]
+"26
+[v _main main `(v  1 e 1 0 ]
+"7 C:\PIC\Proyectos\Serial.X\UART.c
+[v _InitUART InitUART `(v  1 e 1 0 ]
+"27
+[v _SendByteSerially SendByteSerially `(v  1 e 1 0 ]
+[v i1_SendByteSerially SendByteSerially `(v  1 e 1 0 ]
+"46
+[v _SendStringSerially SendStringSerially `(v  1 e 1 0 ]
+"751 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"758
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1199
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"1339
+[v _BRGH BRGH `VEb  1 e 0 @1218 ]
+"1379
+[v _CREN CREN `VEb  1 e 0 @196 ]
+"1391
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"1401
+[v _OERR OERR `VEb  1 e 0 @193 ]
+"1405
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"1451
+[v _RCIE RCIE `VEb  1 e 0 @1125 ]
+"1453
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
+"1461
+[v _RX9 RX9 `VEb  1 e 0 @198 ]
+"1465
+[v _SPEN SPEN `VEb  1 e 0 @199 ]
+"1467
+[v _SREN SREN `VEb  1 e 0 @197 ]
+"1469
+[v _SYNC SYNC `VEb  1 e 0 @1220 ]
+"1533
+[v _TRISB1 TRISB1 `VEb  1 e 0 @1073 ]
+"1535
+[v _TRISB2 TRISB2 `VEb  1 e 0 @1074 ]
+"1549
+[v _TX9 TX9 `VEb  1 e 0 @1222 ]
+"1553
+[v _TXEN TXEN `VEb  1 e 0 @1221 ]
+"1555
+[v _TXIE TXIE `VEb  1 e 0 @1124 ]
+"1557
+[v _TXIF TXIF `VEb  1 e 0 @100 ]
+"26 C:\PIC\Proyectos\Serial.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"38
+} 0
+"46 C:\PIC\Proyectos\Serial.X\UART.c
+[v _SendStringSerially SendStringSerially `(v  1 e 1 0 ]
+{
+[v SendStringSerially@st st `*.24DCCuc  1 a 1 wreg ]
+[v SendStringSerially@st st `*.24DCCuc  1 a 1 wreg ]
+[v SendStringSerially@st st `*.24DCCuc  1 a 1 7 ]
+"50
+} 0
+"27
+[v _SendByteSerially SendByteSerially `(v  1 e 1 0 ]
+{
+[v SendByteSerially@Byte Byte `uc  1 a 1 wreg ]
+[v SendByteSerially@Byte Byte `uc  1 a 1 wreg ]
+[v SendByteSerially@Byte Byte `uc  1 a 1 5 ]
+"31
+} 0
+"7
+[v _InitUART InitUART `(v  1 e 1 0 ]
+{
+"24
+} 0
+"12 C:\PIC\Proyectos\Serial.X\main.c
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"24
+} 0
+"27 C:\PIC\Proyectos\Serial.X\UART.c
+[v i1_SendByteSerially SendByteSerially `(v  1 e 1 0 ]
+{
+[v i1SendByteSerially@Byte Byte `uc  1 a 1 wreg ]
+[v i1SendByteSerially@Byte Byte `uc  1 a 1 wreg ]
+[v i1SendByteSerially@Byte Byte `uc  1 a 1 0 ]
+"31
+} 0

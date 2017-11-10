@@ -14,7 +14,7 @@ using System.IO.Ports;
 
 namespace Codificador
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form 
     {
         Formato inicializacionFormato = new Formato();
         string datos = "1786 On ch=1 n=60 v=0,1792 On ch=1 n=62 v=85,1792 On ch=1 n=48 v=80,1792 On ch=1 n=58 v=79,2023 On ch=1 n=62 v=0,2048 On ch=1 n=60 v=69";

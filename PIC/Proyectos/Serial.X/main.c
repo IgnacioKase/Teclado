@@ -1,4 +1,7 @@
 #include "Includes.h"
+#include <xc.h>
+
+#define _XTAL_FREQ 4000000
 
 #pragma config FOSC = INTOSCIO
 #pragma config WDTE = OFF
@@ -9,22 +12,12 @@
 #pragma config CPD = OFF
 #pragma config CP = OFF
 
-#define clockManual RB0
-#define dato RB1
-#define latch RB2
+#define clockManual RA1
+#define dato RA0
+#define latch RA2
 
-int powKase (int base, int exponente)
-{
-    int resultado = 1;
-    if (exponente != 0)
-    {
-      for (int i = 1; i <= exponente; i = i + 1)
-      {
-          resultado = resultado * base;
-      }
-    }
-    return resultado;
-}
+unsigned int dataLength = 0;
+unsigned long palabra = 0;
 
 void resetearSalidas (int cantidadSalidas)
 {
@@ -40,36 +33,15 @@ void resetearSalidas (int cantidadSalidas)
 
 void escribirSalida ()
 {
-  unsigned int resultado[8] = {0,0,0,0,0,0,0,0};
-  unsigned int velocidadDecena = velocidad/10;
-  unsigned int velocidadUnidad = velocidad - velocidadDecena * 10;
-  unsigned int numero = codificacion[velocidadUnidad];
-  for (int i = 0; i < 8; i++)
+  for(int i = 0; i < 61; i++)
   {
-    resultado[i] = (numero >> (7 - i)) & 1;
-  }
-  for (int i = 0; i < 8; i++)
-  {
-    dato = resultado[7 -i];          //Dato
-    clockManual = 1;              //clockManual on
-    clockManual = 0;              //clockManual off
+    //dato = ((palabra >> (61 - i)) & 1);       //Dato
+    dato = 1;
+    clockManual = 1;                          //clockManual on
+    clockManual = 0;                          //clockManual off
   }
   latch = 1;            //Latch on
   latch = 0;           //Latch off
-  numero = codificacion[velocidadDecena];
-  for (int i = 0; i < 8; i++)
-  {
-    resultado[i] = (numero >> (7 - i)) & 1;
-  }
-  for (int i = 0; i < 8; i++)
-  {
-    dato = resultado[7 -i];          //Dato
-    clockManual = 1;              //clockManual on
-    clockManual = 0;              //clockManual off
-  }
-  latch = 1;            //Latch on
-  latch = 0;           //Latch off
-  velocidad = 0;
 }
 
 
@@ -82,21 +54,44 @@ void interrupt ISR(void)
 			CREN = 0;
 			CREN = 1;
 		}
-        
-		SendByteSerially(RCREG);	// Echo back received char
+        escribirSalida();
+        /*if(dataLength > 0)
+        {
+          dataLength--;
+          palabra = palabra | (1 << RCREG);
+        }
+        else
+        {
+          if(palabra != 0)
+          {
+            escribirSalida();
+          }
+          else
+          {
+            resetearSalidas(61);
+          }
+          palabra = 0;
+          dataLength = RCREG;
+        }*/
 	}
 }
 
 void main()
-{	
-	InitUART();							// Initialize UART
+{
+    CMCON = 0x07;
+    TRISA = 0b00000000;
     
+	InitUART();							// Initialize UART
+
     //SendStringSerially("Hello World!");	// Send string on UART
 
 	GIE  = 1;  							// Enable global interrupts
     PEIE = 1;  							// Enable Peripheral Interrupts
 
+    resetearSalidas(61);
+    
 	while(1)
 	{
+        
 	}
 }

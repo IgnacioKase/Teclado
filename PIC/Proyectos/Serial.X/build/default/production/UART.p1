@@ -1,9 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"1535 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
-[v _TRISB2 `Vb ~T0 @X0 0 e@1074 ]
-"1533
-[v _TRISB1 `Vb ~T0 @X0 0 e@1073 ]
-"1199
+"1199 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _SPBRG `Vuc ~T0 @X0 0 e@153 ]
 "1339
 [v _BRGH `Vb ~T0 @X0 0 e@1218 ]
@@ -39,7 +35,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f628a.h: 50: extern volatile unsigned char INDF @ 0x000;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [; ;pic16f628a.h: 52: asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
 [; ;pic16f628a.h: 57: extern volatile unsigned char TMR0 @ 0x001;
@@ -590,164 +586,158 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic16f628a.h: 1591: extern volatile __bit nRBPU @ (((unsigned) &OPTION_REG)*8) + 7;
 [; ;pic16f628a.h: 1593: extern volatile __bit nT1SYNC @ (((unsigned) &T1CON)*8) + 2;
 [; ;pic16f628a.h: 1595: extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
-[; ;pic.h: 28: extern void __nop(void);
-[; ;pic.h: 77: extern unsigned int flash_read(unsigned short addr);
-[; ;pic.h: 141: extern void flash_erase(unsigned short addr);
+[; ;pic.h: 29: extern void __nop(void);
+[; ;pic.h: 78: extern unsigned int flash_read(unsigned short addr);
+[; ;pic.h: 142: extern void flash_erase(unsigned short addr);
 [; ;eeprom_routines.h: 114: extern void eeprom_write(unsigned char addr, unsigned char value);
 [; ;eeprom_routines.h: 115: extern unsigned char eeprom_read(unsigned char addr);
 [; ;eeprom_routines.h: 116: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 117: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
-[; ;pic.h: 152: extern __nonreentrant void _delay(unsigned long);
-[; ;pic.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic.h: 192: extern unsigned char __resetbits;
-[; ;pic.h: 193: extern __bit __powerdown;
-[; ;pic.h: 194: extern __bit __timeout;
+[; ;pic.h: 153: extern __nonreentrant void _delay(unsigned long);
+[; ;pic.h: 155: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
+[; ;pic.h: 194: extern __bank0 __bit __powerdown;
+[; ;pic.h: 195: extern __bank0 __bit __timeout;
 [; ;UART.h: 15: void InitUART(void);
 [; ;UART.h: 16: void SendByteSerially(unsigned char);
 [; ;UART.h: 17: unsigned char ReceiveByteSerially(void);
 [; ;UART.h: 18: void SendStringSerially(const unsigned char*);
 [; ;ISR.h: 5: void interrupt ISR(void);
-"7 UART.c
+"3 UART.c
 [v _InitUART `(v ~T0 @X0 1 ef ]
-"8
+"4
 {
-[; ;UART.c: 7: void InitUART(void)
-[; ;UART.c: 8: {
+[; ;UART.c: 3: void InitUART(void)
+[; ;UART.c: 4: {
 [e :U _InitUART ]
 [f ]
-[; ;UART.c: 9: TRISB2 = 0;
-"9
-[e = _TRISB2 -> -> 0 `i `b ]
-[; ;UART.c: 10: TRISB1 = 1;
-"10
-[e = _TRISB1 -> -> 1 `i `b ]
-[; ;UART.c: 12: SPBRG = ((4000000/16)/9600) - 1;
-"12
-[e = _SPBRG -> - / / -> 4000000 `l -> -> 16 `i `l -> -> 9600 `i `l -> -> 1 `i `l `uc ]
-[; ;UART.c: 13: BRGH = 1;
-"13
+[; ;UART.c: 6: SPBRG = 12;
+"6
+[e = _SPBRG -> -> 12 `i `uc ]
+[; ;UART.c: 7: BRGH = 1;
+"7
 [e = _BRGH -> -> 1 `i `b ]
-[; ;UART.c: 14: SYNC = 0;
-"14
+[; ;UART.c: 8: SYNC = 0;
+"8
 [e = _SYNC -> -> 0 `i `b ]
-[; ;UART.c: 15: SPEN = 1;
-"15
+[; ;UART.c: 9: SPEN = 1;
+"9
 [e = _SPEN -> -> 1 `i `b ]
-[; ;UART.c: 16: CREN = 1;
-"16
+[; ;UART.c: 10: CREN = 1;
+"10
 [e = _CREN -> -> 1 `i `b ]
-[; ;UART.c: 17: SREN = 0;
-"17
+[; ;UART.c: 11: SREN = 0;
+"11
 [e = _SREN -> -> 0 `i `b ]
-[; ;UART.c: 18: TXIE = 0;
-"18
+[; ;UART.c: 12: TXIE = 0;
+"12
 [e = _TXIE -> -> 0 `i `b ]
-[; ;UART.c: 19: RCIE = 1;
-"19
+[; ;UART.c: 13: RCIE = 1;
+"13
 [e = _RCIE -> -> 1 `i `b ]
-[; ;UART.c: 20: TX9 = 0;
-"20
+[; ;UART.c: 14: TX9 = 0;
+"14
 [e = _TX9 -> -> 0 `i `b ]
-[; ;UART.c: 21: RX9 = 0;
-"21
+[; ;UART.c: 15: RX9 = 0;
+"15
 [e = _RX9 -> -> 0 `i `b ]
-[; ;UART.c: 22: TXEN = 0;
-"22
+[; ;UART.c: 16: TXEN = 0;
+"16
 [e = _TXEN -> -> 0 `i `b ]
-[; ;UART.c: 23: TXEN = 1;
-"23
+[; ;UART.c: 17: TXEN = 1;
+"17
 [e = _TXEN -> -> 1 `i `b ]
-[; ;UART.c: 24: }
-"24
+[; ;UART.c: 18: }
+"18
 [e :UE 51 ]
 }
-"27
+"21
 [v _SendByteSerially `(v ~T0 @X0 1 ef1`uc ]
-"28
+"22
 {
-[; ;UART.c: 27: void SendByteSerially(unsigned char Byte)
-[; ;UART.c: 28: {
+[; ;UART.c: 21: void SendByteSerially(unsigned char Byte)
+[; ;UART.c: 22: {
 [e :U _SendByteSerially ]
-"27
+"21
 [v _Byte `uc ~T0 @X0 1 r1 ]
-"28
+"22
 [f ]
-[; ;UART.c: 29: while(!TXIF);
-"29
+[; ;UART.c: 23: while(!TXIF);
+"23
 [e $U 53  ]
 [e :U 54 ]
 [e :U 53 ]
 [e $ ! _TXIF 54  ]
 [e :U 55 ]
-[; ;UART.c: 30: TXREG = Byte;
-"30
+[; ;UART.c: 24: TXREG = Byte;
+"24
 [e = _TXREG _Byte ]
-[; ;UART.c: 31: }
-"31
+[; ;UART.c: 25: }
+"25
 [e :UE 52 ]
 }
-"33
+"27
 [v _ReceiveByteSerially `(uc ~T0 @X0 1 ef ]
-"34
+"28
 {
-[; ;UART.c: 33: unsigned char ReceiveByteSerially(void)
-[; ;UART.c: 34: {
+[; ;UART.c: 27: unsigned char ReceiveByteSerially(void)
+[; ;UART.c: 28: {
 [e :U _ReceiveByteSerially ]
 [f ]
-[; ;UART.c: 35: if(OERR)
-"35
+[; ;UART.c: 29: if(OERR)
+"29
 [e $ ! _OERR 57  ]
-[; ;UART.c: 36: {
-"36
+[; ;UART.c: 30: {
+"30
 {
-[; ;UART.c: 37: CREN = 0;
-"37
+[; ;UART.c: 31: CREN = 0;
+"31
 [e = _CREN -> -> 0 `i `b ]
-[; ;UART.c: 38: CREN = 1;
-"38
+[; ;UART.c: 32: CREN = 1;
+"32
 [e = _CREN -> -> 1 `i `b ]
-"39
+"33
 }
 [e :U 57 ]
-[; ;UART.c: 39: }
-[; ;UART.c: 41: while(!RCIF);
-"41
+[; ;UART.c: 33: }
+[; ;UART.c: 35: while(!RCIF);
+"35
 [e $U 58  ]
 [e :U 59 ]
 [e :U 58 ]
 [e $ ! _RCIF 59  ]
 [e :U 60 ]
-[; ;UART.c: 43: return RCREG;
-"43
+[; ;UART.c: 37: return RCREG;
+"37
 [e ) _RCREG ]
 [e $UE 56  ]
-[; ;UART.c: 44: }
-"44
+[; ;UART.c: 38: }
+"38
 [e :UE 56 ]
 }
-"46
+"40
 [v _SendStringSerially `(v ~T0 @X0 1 ef1`*Cuc ]
-"47
+"41
 {
-[; ;UART.c: 46: void SendStringSerially(const unsigned char* st)
-[; ;UART.c: 47: {
+[; ;UART.c: 40: void SendStringSerially(const unsigned char* st)
+[; ;UART.c: 41: {
 [e :U _SendStringSerially ]
-"46
+"40
 [v _st `*Cuc ~T0 @X0 1 r1 ]
-"47
+"41
 [f ]
-[; ;UART.c: 48: while(*st)
-"48
+[; ;UART.c: 42: while(*st)
+"42
 [e $U 62  ]
 [e :U 63 ]
-[; ;UART.c: 49: SendByteSerially(*st++);
-"49
+[; ;UART.c: 43: SendByteSerially(*st++);
+"43
 [e ( _SendByteSerially (1 *U ++ _st * -> -> 1 `i `x -> -> # *U _st `i `x ]
 [e :U 62 ]
-"48
+"42
 [e $ != -> *U _st `i -> -> -> 0 `i `Cuc `i 63  ]
 [e :U 64 ]
-[; ;UART.c: 50: }
-"50
+[; ;UART.c: 44: }
+"44
 [e :UE 61 ]
 }

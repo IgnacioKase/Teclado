@@ -1,15 +1,9 @@
-/*  File:     UART.c
-    Purpose:  To provide UART functionality for PIC uC
-*/
-
-#include "Includes.h"
+ #include "Includes.h"
 
 void InitUART(void)
-{
-	TRISB2 = 0;   					// TX Pin
-	TRISB1 = 1;   					// RX Pin
-	
-	SPBRG = ((_XTAL_FREQ/16)/BAUDRATE) - 1;
+{	
+	//SPBRG = ((_XTAL_FREQ/16)/BAUDRATE) - 1;
+    SPBRG = 12;
 	BRGH  = 1;                   	// Fast baudrate
 	SYNC  = 0;						// Asynchronous
 	SPEN  = 1;						// Enable serial port pins

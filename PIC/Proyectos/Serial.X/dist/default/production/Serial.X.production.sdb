@@ -3,27 +3,27 @@
 [d edition pro ]
 [d chip 16F628A ]
 [d frameptr 6 ]
-"62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
-"86 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c
+"86 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\pic\eeprom.c
+"6 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\pic\eeprom.c
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"22 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"23 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
-"34
+"35
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
 "48
 [v _ISR ISR `II(v  1 e 1 0 ]
-"79
+"76
 [v _main main `(v  1 e 1 0 ]
-"7 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\UART.c
+"3 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\UART.c
 [v _InitUART InitUART `(v  1 e 1 0 ]
-"27
+"21
 [v _SendByteSerially SendByteSerially `(v  1 e 1 0 ]
-"751 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"751 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "758
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
@@ -31,6 +31,8 @@
 [v _CMCON CMCON `VEuc  1 e 1 @31 ]
 "905
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"967
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1199
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "1339
@@ -49,6 +51,10 @@
 [v _RA1 RA1 `VEb  1 e 0 @41 ]
 "1419
 [v _RA2 RA2 `VEb  1 e 0 @42 ]
+"1443
+[v _RB6 RB6 `VEb  1 e 0 @54 ]
+"1445
+[v _RB7 RB7 `VEb  1 e 0 @55 ]
 "1451
 [v _RCIE RCIE `VEb  1 e 0 @1125 ]
 "1453
@@ -61,10 +67,6 @@
 [v _SREN SREN `VEb  1 e 0 @197 ]
 "1469
 [v _SYNC SYNC `VEb  1 e 0 @1220 ]
-"1533
-[v _TRISB1 TRISB1 `VEb  1 e 0 @1073 ]
-"1535
-[v _TRISB2 TRISB2 `VEb  1 e 0 @1074 ]
 "1549
 [v _TX9 TX9 `VEb  1 e 0 @1222 ]
 "1553
@@ -73,34 +75,40 @@
 [v _TXIE TXIE `VEb  1 e 0 @1124 ]
 "1557
 [v _TXIF TXIF `VEb  1 e 0 @100 ]
-"79 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"19 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+[v _dataLength dataLength `ui  1 e 2 0 ]
+"20
+[v _palabra palabra `ul  1 e 4 0 ]
+"21
+[v _x x `ul  1 e 4 0 ]
+"76
 [v _main main `(v  1 e 1 0 ]
 {
-"97
+"93
 } 0
-"22
+"23
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
 {
-"24
-[v resetearSalidas@i i `i  1 a 2 3 ]
-"22
-[v resetearSalidas@cantidadSalidas cantidadSalidas `i  1 p 2 0 ]
-"32
+"25
+[v resetearSalidas@i i `i  1 a 2 18 ]
+"23
+[v resetearSalidas@cantidadSalidas cantidadSalidas `i  1 p 2 15 ]
+"33
 } 0
-"7 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\UART.c
+"3 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\UART.c
 [v _InitUART InitUART `(v  1 e 1 0 ]
 {
-"24
+"18
 } 0
-"48 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"48 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"77
+"74
 } 0
-"34
+"35
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
 {
-"36
-[v escribirSalida@i i `i  1 a 2 0 ]
+"37
+[v escribirSalida@i i `i  1 a 2 4 ]
 "45
 } 0

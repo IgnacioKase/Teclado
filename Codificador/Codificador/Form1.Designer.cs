@@ -120,6 +120,10 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // serialPort1
+            // 
+            this.serialPort1.BaudRate = 19200;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -158,7 +162,7 @@
             // textBox3
             // 
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Font = new System.Drawing.Font("Roboto Slab", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(812, 3);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -169,7 +173,7 @@
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Roboto Slab", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(486, 3);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -211,7 +215,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Font = new System.Drawing.Font("Roboto Slab", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 41);
@@ -223,11 +227,11 @@
             // comboBox1
             // 
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.Font = new System.Drawing.Font("Roboto Slab", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(3, 50);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(139, 36);
+            this.comboBox1.Size = new System.Drawing.Size(139, 33);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
@@ -235,7 +239,7 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Roboto Slab", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(160, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";

@@ -78,7 +78,6 @@ namespace Codificador
                 textBox2.AppendText(Environment.NewLine);
                 if (serialPort1.IsOpen)
                 {
-                    serialPort1.DiscardOutBuffer();
                     serialPort1.Write(envio.ToArray(), 0, envio.Count);
                     foreach (byte instruccion in envio)
                     {

@@ -1,5 +1,5 @@
 #include "Includes.h"
-#include <xc.h>
+
 
 #define _XTAL_FREQ 4000000
 
@@ -18,6 +18,7 @@
 
 unsigned int dataLength = 0;
 unsigned long palabra = 0;
+unsigned long x;
 
 void resetearSalidas (int cantidadSalidas)
 {
@@ -35,8 +36,7 @@ void escribirSalida ()
 {
   for(int i = 0; i < 61; i++)
   {
-    //dato = ((palabra >> (61 - i)) & 1);       //Dato
-    dato = 1;
+    dato = ((palabra >> (61 - i)) & 1);       //Dato
     clockManual = 1;                          //clockManual on
     clockManual = 0;                          //clockManual off
   }
@@ -47,32 +47,29 @@ void escribirSalida ()
 
 void interrupt ISR(void)
 {
+    
 	if(RCIF)  // If UART Rx Interrupt
 	{
+        x=RCREG;
 		if(OERR) // If over run error, then reset the receiver
 		{
 			CREN = 0;
 			CREN = 1;
 		}
-        escribirSalida();
-        /*if(dataLength > 0)
+        if(dataLength > 0)
         {
+            RB7=1;
           dataLength--;
-          palabra = palabra | (1 << RCREG);
+          palabra = palabra | (1 << x);
+          //palabra = x;
+          if(dataLength <= 0) escribirSalida();
         }
         else
         {
-          if(palabra != 0)
-          {
-            escribirSalida();
-          }
-          else
-          {
-            resetearSalidas(61);
-          }
+            RB6=1;
           palabra = 0;
-          dataLength = RCREG;
-        }*/
+          dataLength = x;
+        }
 	}
 }
 
@@ -80,18 +77,17 @@ void main()
 {
     CMCON = 0x07;
     TRISA = 0b00000000;
-    
+    TRISB = 0b00111111;
+    RB7=0;
+    RB6=0;
 	InitUART();							// Initialize UART
-
-    //SendStringSerially("Hello World!");	// Send string on UART
 
 	GIE  = 1;  							// Enable global interrupts
     PEIE = 1;  							// Enable Peripheral Interrupts
 
     resetearSalidas(61);
-    
+
 	while(1)
 	{
-        
 	}
 }

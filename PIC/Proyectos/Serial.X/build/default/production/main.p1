@@ -1,26 +1,34 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"765 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"765 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _CMCON `Vuc ~T0 @X0 0 e@31 ]
 "905
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
 "1421
 [v _RA3 `Vb ~T0 @X0 0 e@43 ]
-"23 main.c
+"24 main.c
 [v _InitUART `(v ~T0 @X0 0 ef ]
-"1391 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"1391 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "1405
 [v _PEIE `Vb ~T0 @X0 0 e@94 ]
-"28 main.c
+"29 main.c
 [v _resetearSalidas `(v ~T0 @X0 0 ef1`i ]
-"1453 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"1423 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
+[v _RA4 `Vb ~T0 @X0 0 e@44 ]
+"31 main.c
+[v _resetDatos `(v ~T0 @X0 0 ef ]
+[v F599 `(v ~T0 @X0 1 tf1`ul ]
+"153 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic.h
+[v __delay `JF599 ~T0 @X0 0 e ]
+[p i __delay ]
+"1453 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _RCIF `Vb ~T0 @X0 0 e@101 ]
-"25 main.c
+"26 main.c
 [v _ReceiveByteSerially `(uc ~T0 @X0 0 ef ]
-"29
+"30
 [v _escribirSalida `(v ~T0 @X0 0 ef ]
-"1415 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"1415 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [v _RA0 `Vb ~T0 @X0 0 e@40 ]
 "1417
 [v _RA1 `Vb ~T0 @X0 0 e@41 ]
@@ -56,7 +64,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f628a.h: 50: extern volatile unsigned char INDF @ 0x000;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
 [; ;pic16f628a.h: 52: asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
 [; ;pic16f628a.h: 57: extern volatile unsigned char TMR0 @ 0x001;
@@ -607,18 +615,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic16f628a.h: 1591: extern volatile __bit nRBPU @ (((unsigned) &OPTION_REG)*8) + 7;
 [; ;pic16f628a.h: 1593: extern volatile __bit nT1SYNC @ (((unsigned) &T1CON)*8) + 2;
 [; ;pic16f628a.h: 1595: extern volatile __bit nTO @ (((unsigned) &STATUS)*8) + 4;
-[; ;pic.h: 28: extern void __nop(void);
-[; ;pic.h: 77: extern unsigned int flash_read(unsigned short addr);
-[; ;pic.h: 141: extern void flash_erase(unsigned short addr);
+[; ;pic.h: 29: extern void __nop(void);
+[; ;pic.h: 78: extern unsigned int flash_read(unsigned short addr);
+[; ;pic.h: 142: extern void flash_erase(unsigned short addr);
 [; ;eeprom_routines.h: 114: extern void eeprom_write(unsigned char addr, unsigned char value);
 [; ;eeprom_routines.h: 115: extern unsigned char eeprom_read(unsigned char addr);
 [; ;eeprom_routines.h: 116: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 117: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
-[; ;pic.h: 152: extern __nonreentrant void _delay(unsigned long);
-[; ;pic.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic.h: 192: extern unsigned char __resetbits;
-[; ;pic.h: 193: extern __bit __powerdown;
-[; ;pic.h: 194: extern __bit __timeout;
+[; ;pic.h: 153: extern __nonreentrant void _delay(unsigned long);
+[; ;pic.h: 155: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic.h: 193: extern __bank0 unsigned char __resetbits;
+[; ;pic.h: 194: extern __bank0 __bit __powerdown;
+[; ;pic.h: 195: extern __bank0 __bit __timeout;
 "6 main.c
 [p x FOSC=INTOSCIO ]
 "7
@@ -635,7 +643,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CPD=OFF ]
 "13
 [p x CP=OFF ]
-"20
+"21
 [v _palabras `ui ~T0 @X0 -> 4 `i e ]
 [i _palabras
 :U ..
@@ -645,8 +653,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `ui
 ..
 ]
-[; ;main.c: 20: unsigned int palabras[4] = {0, 0, 0, 0};
-"21
+[; ;main.c: 21: unsigned int palabras[4] = {0, 0, 0, 0};
+"22
 [v _dataLength `ui ~T0 @X0 1 e ]
 [i _dataLength
 -> -> 0 `i `ui
@@ -656,325 +664,429 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `ui
 ]
 [v _indice `ui ~T0 @X0 1 e ]
-[; ;main.c: 21: unsigned int dataLength = 0, lectura = 0, indice;
-[; ;main.c: 23: void InitUART(void);
-[; ;main.c: 24: void SendByteSerially(unsigned char);
-[; ;main.c: 25: unsigned char ReceiveByteSerially(void);
-[; ;main.c: 26: void SendStringSerially(const unsigned char*);
-[; ;main.c: 27: void interrupt Interrupcion(void);
-[; ;main.c: 28: void resetearSalidas (int cantidadSalidas);
-[; ;main.c: 29: void escribirSalida (void);
+[; ;main.c: 22: unsigned int dataLength = 0, lectura = 0, indice;
+[; ;main.c: 24: void InitUART(void);
+[; ;main.c: 25: void SendByteSerially(unsigned char);
+[; ;main.c: 26: unsigned char ReceiveByteSerially(void);
+[; ;main.c: 27: void SendStringSerially(const unsigned char*);
+[; ;main.c: 28: void interrupt Interrupcion(void);
+[; ;main.c: 29: void resetearSalidas (int cantidadSalidas);
+[; ;main.c: 30: void escribirSalida (void);
+[; ;main.c: 31: void resetDatos(void);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"31
+"33
 [v _main `(v ~T0 @X0 1 ef ]
-"32
+"34
 {
-[; ;main.c: 31: void main()
-[; ;main.c: 32: {
+[; ;main.c: 33: void main()
+[; ;main.c: 34: {
 [e :U _main ]
 [f ]
-[; ;main.c: 33: CMCON = 0x07;
-"33
-[e = _CMCON -> -> 7 `i `uc ]
-[; ;main.c: 34: TRISA = 0b00000000;
-"34
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;main.c: 35: RA3 = 0;
+[; ;main.c: 35: CMCON = 0x07;
 "35
-[e = _RA3 -> -> 0 `i `b ]
-[; ;main.c: 37: InitUART();
+[e = _CMCON -> -> 7 `i `uc ]
+[; ;main.c: 36: TRISA = 0b00010000;
+"36
+[e = _TRISA -> -> 16 `i `uc ]
+[; ;main.c: 37: RA3 = 0;
 "37
-[e ( _InitUART ..  ]
-[; ;main.c: 39: GIE = 1;
+[e = _RA3 -> -> 0 `i `b ]
+[; ;main.c: 39: InitUART();
 "39
+[e ( _InitUART ..  ]
+[; ;main.c: 41: GIE = 1;
+"41
 [e = _GIE -> -> 1 `i `b ]
-[; ;main.c: 40: PEIE = 1;
-"40
-[e = _PEIE -> -> 1 `i `b ]
-[; ;main.c: 42: resetearSalidas(64);
+[; ;main.c: 42: PEIE = 1;
 "42
-[e ( _resetearSalidas (1 -> 64 `i ]
-[; ;main.c: 44: while(1)
+[e = _PEIE -> -> 1 `i `b ]
+[; ;main.c: 44: resetearSalidas(64);
 "44
-[e :U 53 ]
-[; ;main.c: 45: {
-"45
-{
+[e ( _resetearSalidas (1 -> 64 `i ]
+[; ;main.c: 46: while(1)
 "46
+[e :U 53 ]
+[; ;main.c: 47: {
+"47
+{
+[; ;main.c: 48: if(RA4)
+"48
+[e $ ! _RA4 55  ]
+[; ;main.c: 49: {
+"49
+{
+[; ;main.c: 50: resetDatos();
+"50
+[e ( _resetDatos ..  ]
+[; ;main.c: 51: _delay((unsigned long)((500)*(4000000/4000.0)));
+"51
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"53
+}
+[e :U 55 ]
+"54
 }
 [e :U 52 ]
-"44
+"46
 [e $U 53  ]
 [e :U 54 ]
-[; ;main.c: 46: }
-[; ;main.c: 47: }
-"47
+[; ;main.c: 53: }
+[; ;main.c: 54: }
+[; ;main.c: 55: }
+"55
 [e :UE 51 ]
 }
 [v $root$_Interrupcion `(v ~T0 @X0 0 e ]
 [v F620 `(v ~T0 @X0 1 tf ]
-"49
+"57
 [v _Interrupcion `IF620 ~T0 @X0 1 e ]
-"50
+"58
 {
-[; ;main.c: 49: void interrupt Interrupcion(void)
-[; ;main.c: 50: {
+[; ;main.c: 57: void interrupt Interrupcion(void)
+[; ;main.c: 58: {
 [e :U _Interrupcion ]
 [f ]
-[; ;main.c: 51: if(RCIF)
-"51
-[e $ ! _RCIF 56  ]
-[; ;main.c: 52: {
-"52
-{
-[; ;main.c: 53: lectura = ReceiveByteSerially();
-"53
-[e = _lectura -> ( _ReceiveByteSerially ..  `ui ]
-[; ;main.c: 54: RA3 = !RA3;
-"54
-[e = _RA3 ! _RA3 ]
-[; ;main.c: 55: if(dataLength > 0)
-"55
-[e $ ! > _dataLength -> -> 0 `i `ui 57  ]
-[; ;main.c: 56: {
-"56
-{
-[; ;main.c: 57: indice = lectura/16;
-"57
-[e = _indice / _lectura -> -> 16 `i `ui ]
-[; ;main.c: 58: dataLength--;
-"58
-[e -- _dataLength -> -> 1 `i `ui ]
-[; ;main.c: 59: palabras[ indice ] = palabras[ indice ] | (1 << (lectura - (indice * 16)));
+[; ;main.c: 59: if(RCIF)
 "59
-[e = *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux | *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux -> << -> 1 `i - _lectura * _indice -> -> 16 `i `ui `ui ]
-[; ;main.c: 60: if(dataLength <= 0) escribirSalida();
+[e $ ! _RCIF 57  ]
+[; ;main.c: 60: {
 "60
-[e $ ! <= _dataLength -> -> 0 `i `ui 58  ]
-[e ( _escribirSalida ..  ]
-[e :U 58 ]
+{
+[; ;main.c: 61: lectura = ReceiveByteSerially();
 "61
-}
-[; ;main.c: 61: }
-[e $U 59  ]
+[e = _lectura -> ( _ReceiveByteSerially ..  `ui ]
+[; ;main.c: 62: RA3 = !RA3;
 "62
-[e :U 57 ]
-[; ;main.c: 62: else
-[; ;main.c: 63: {
+[e = _RA3 ! _RA3 ]
+[; ;main.c: 63: if(dataLength > 0)
 "63
-{
-[; ;main.c: 64: dataLength = lectura;
+[e $ ! > _dataLength -> -> 0 `i `ui 58  ]
+[; ;main.c: 64: {
 "64
-[e = _dataLength _lectura ]
-"65
-}
-[e :U 59 ]
-"66
-}
-[e :U 56 ]
-[; ;main.c: 65: }
-[; ;main.c: 66: }
-[; ;main.c: 67: }
-"67
-[e :UE 55 ]
-}
-"69
-[v _escribirSalida `(v ~T0 @X0 1 ef ]
-"70
 {
-[; ;main.c: 69: void escribirSalida ()
-[; ;main.c: 70: {
+[; ;main.c: 65: indice = lectura/16;
+"65
+[e = _indice / _lectura -> -> 16 `i `ui ]
+[; ;main.c: 66: dataLength--;
+"66
+[e -- _dataLength -> -> 1 `i `ui ]
+[; ;main.c: 67: palabras[ indice ] = palabras[ indice ] | (1 << (lectura - (indice * 16)));
+"67
+[e = *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux | *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux -> << -> 1 `i - _lectura * _indice -> -> 16 `i `ui `ui ]
+[; ;main.c: 68: if(dataLength <= 0) escribirSalida();
+"68
+[e $ ! <= _dataLength -> -> 0 `i `ui 59  ]
+[e ( _escribirSalida ..  ]
+[e :U 59 ]
+"69
+}
+[; ;main.c: 69: }
+[e $U 60  ]
+"70
+[e :U 58 ]
+[; ;main.c: 70: else
+[; ;main.c: 71: {
+"71
+{
+[; ;main.c: 72: dataLength = lectura;
+"72
+[e = _dataLength _lectura ]
+"73
+}
+[e :U 60 ]
+"74
+}
+[e :U 57 ]
+[; ;main.c: 73: }
+[; ;main.c: 74: }
+[; ;main.c: 75: }
+"75
+[e :UE 56 ]
+}
+"77
+[v _escribirSalida `(v ~T0 @X0 1 ef ]
+"78
+{
+[; ;main.c: 77: void escribirSalida ()
+[; ;main.c: 78: {
 [e :U _escribirSalida ]
 [f ]
-[; ;main.c: 71: for(int k = 0; k < 4; k++)
-"71
+[; ;main.c: 79: for(int k = 0; k < 4; k++)
+"79
 {
 [v _k `i ~T0 @X0 1 a ]
 [e = _k -> 0 `i ]
-[e $ < _k -> 4 `i 61  ]
-[e $U 62  ]
-"72
-[e :U 61 ]
-[; ;main.c: 72: {
-{
-[; ;main.c: 73: for(int i = 0; i < 16; i++)
-"73
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 64  ]
-[e $U 65  ]
-"74
-[e :U 64 ]
-[; ;main.c: 74: {
-{
-[; ;main.c: 75: RA0 = ((palabras[k] >> (16 - i)) & 1);
-"75
-[e = _RA0 -> & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 16 `i _i -> -> 1 `i `ui `b ]
-[; ;main.c: 76: RA1 = 1;
-"76
-[e = _RA1 -> -> 1 `i `b ]
-[; ;main.c: 77: RA1 = 0;
-"77
-[e = _RA1 -> -> 0 `i `b ]
-"78
-}
-"73
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 64  ]
-[e :U 65 ]
-"78
-}
-[; ;main.c: 78: }
-[; ;main.c: 79: palabras[k] = 0;
-"79
-[e = *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux -> -> 0 `i `ui ]
+[e $ < _k -> 4 `i 62  ]
+[e $U 63  ]
 "80
-}
-"71
-[e ++ _k -> 1 `i ]
-[e $ < _k -> 4 `i 61  ]
 [e :U 62 ]
-"80
-}
-[; ;main.c: 80: }
-[; ;main.c: 82: RA2 = 1;
-"82
-[e = _RA2 -> -> 1 `i `b ]
-[; ;main.c: 83: RA2 = 0;
-"83
-[e = _RA2 -> -> 0 `i `b ]
-[; ;main.c: 84: }
-"84
-[e :UE 60 ]
-}
-"86
-[v _resetearSalidas `(v ~T0 @X0 1 ef1`i ]
-"87
+[; ;main.c: 80: {
 {
-[; ;main.c: 86: void resetearSalidas (int cantidadSalidas)
-[; ;main.c: 87: {
-[e :U _resetearSalidas ]
-"86
-[v _cantidadSalidas `i ~T0 @X0 1 r1 ]
-"87
-[f ]
-[; ;main.c: 88: for(int i = 0; i < cantidadSalidas; i = i + 1)
-"88
+[; ;main.c: 81: for(int i = 0; i < 16; i++)
+"81
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 71  ]
-"89
-[e :U 68 ]
-[; ;main.c: 89: {
+[e $ < _i -> 16 `i 65  ]
+[e $U 66  ]
+"82
+[e :U 65 ]
+[; ;main.c: 82: {
 {
-[; ;main.c: 90: RA0 = 0;
-"90
-[e = _RA0 -> -> 0 `i `b ]
-[; ;main.c: 91: RA1 = 1;
-"91
+[; ;main.c: 83: RA0 = ((palabras[k] >> (16 - i)) & 1);
+"83
+[e = _RA0 -> & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 16 `i _i -> -> 1 `i `ui `b ]
+[; ;main.c: 84: RA1 = 1;
+"84
 [e = _RA1 -> -> 1 `i `b ]
-[; ;main.c: 92: RA1 = 0;
-"92
+[; ;main.c: 85: RA1 = 0;
+"85
 [e = _RA1 -> -> 0 `i `b ]
-"93
+"86
 }
+"81
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 16 `i 65  ]
+[e :U 66 ]
+"86
+}
+[; ;main.c: 86: }
+[; ;main.c: 87: palabras[k] = 0;
+"87
+[e = *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux -> -> 0 `i `ui ]
 "88
-[e = _i + _i -> 1 `i ]
-[e :U 71 ]
-[e $ < _i _cantidadSalidas 68  ]
-[e :U 69 ]
-"93
 }
-[; ;main.c: 93: }
-[; ;main.c: 94: RA2 = 1;
-"94
+"79
+[e ++ _k -> 1 `i ]
+[e $ < _k -> 4 `i 62  ]
+[e :U 63 ]
+"88
+}
+[; ;main.c: 88: }
+[; ;main.c: 90: RA2 = 1;
+"90
 [e = _RA2 -> -> 1 `i `b ]
-[; ;main.c: 95: RA2 = 0;
-"95
+[; ;main.c: 91: RA2 = 0;
+"91
 [e = _RA2 -> -> 0 `i `b ]
-[; ;main.c: 96: }
-"96
-[e :UE 67 ]
+[; ;main.c: 92: }
+"92
+[e :UE 61 ]
 }
-"98
-[v _InitUART `(v ~T0 @X0 1 ef ]
-"99
+"94
+[v _resetearSalidas `(v ~T0 @X0 1 ef1`i ]
+"95
 {
-[; ;main.c: 98: void InitUART(void)
-[; ;main.c: 99: {
+[; ;main.c: 94: void resetearSalidas (int cantidadSalidas)
+[; ;main.c: 95: {
+[e :U _resetearSalidas ]
+"94
+[v _cantidadSalidas `i ~T0 @X0 1 r1 ]
+"95
+[f ]
+[; ;main.c: 96: for(int i = 0; i < cantidadSalidas; i = i + 1)
+"96
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 72  ]
+"97
+[e :U 69 ]
+[; ;main.c: 97: {
+{
+[; ;main.c: 98: RA0 = 0;
+"98
+[e = _RA0 -> -> 0 `i `b ]
+[; ;main.c: 99: RA1 = 1;
+"99
+[e = _RA1 -> -> 1 `i `b ]
+[; ;main.c: 100: RA1 = 0;
+"100
+[e = _RA1 -> -> 0 `i `b ]
+"101
+}
+"96
+[e = _i + _i -> 1 `i ]
+[e :U 72 ]
+[e $ < _i _cantidadSalidas 69  ]
+[e :U 70 ]
+"101
+}
+[; ;main.c: 101: }
+[; ;main.c: 102: RA2 = 1;
+"102
+[e = _RA2 -> -> 1 `i `b ]
+[; ;main.c: 103: RA2 = 0;
+"103
+[e = _RA2 -> -> 0 `i `b ]
+[; ;main.c: 104: }
+"104
+[e :UE 68 ]
+}
+"106
+[v _InitUART `(v ~T0 @X0 1 ef ]
+"107
+{
+[; ;main.c: 106: void InitUART(void)
+[; ;main.c: 107: {
 [e :U _InitUART ]
 [f ]
-[; ;main.c: 100: SPBRG = ((4000000/16)/19200) - 1;
-"100
-[e = _SPBRG -> - / / -> 4000000 `l -> -> 16 `i `l -> -> 19200 `i `l -> -> 1 `i `l `uc ]
-[; ;main.c: 101: BRGH = 1;
-"101
-[e = _BRGH -> -> 1 `i `b ]
-[; ;main.c: 102: SYNC = 0;
-"102
-[e = _SYNC -> -> 0 `i `b ]
-[; ;main.c: 103: SPEN = 1;
-"103
-[e = _SPEN -> -> 1 `i `b ]
-[; ;main.c: 104: CREN = 1;
-"104
-[e = _CREN -> -> 1 `i `b ]
-[; ;main.c: 105: SREN = 0;
-"105
-[e = _SREN -> -> 0 `i `b ]
-[; ;main.c: 106: TXIE = 0;
-"106
-[e = _TXIE -> -> 0 `i `b ]
-[; ;main.c: 107: RCIE = 1;
-"107
-[e = _RCIE -> -> 1 `i `b ]
-[; ;main.c: 108: TX9 = 0;
+[; ;main.c: 108: SPBRG = ((4000000/16)/19200) - 1;
 "108
-[e = _TX9 -> -> 0 `i `b ]
-[; ;main.c: 109: RX9 = 0;
+[e = _SPBRG -> - / / -> 4000000 `l -> -> 16 `i `l -> -> 19200 `i `l -> -> 1 `i `l `uc ]
+[; ;main.c: 109: BRGH = 1;
 "109
-[e = _RX9 -> -> 0 `i `b ]
-[; ;main.c: 110: TXEN = 0;
+[e = _BRGH -> -> 1 `i `b ]
+[; ;main.c: 110: SYNC = 0;
 "110
-[e = _TXEN -> -> 0 `i `b ]
-[; ;main.c: 111: TXEN = 1;
+[e = _SYNC -> -> 0 `i `b ]
+[; ;main.c: 111: SPEN = 1;
 "111
-[e = _TXEN -> -> 1 `i `b ]
-[; ;main.c: 112: }
+[e = _SPEN -> -> 1 `i `b ]
+[; ;main.c: 112: CREN = 1;
 "112
-[e :UE 72 ]
-}
+[e = _CREN -> -> 1 `i `b ]
+[; ;main.c: 113: SREN = 0;
+"113
+[e = _SREN -> -> 0 `i `b ]
+[; ;main.c: 114: TXIE = 0;
 "114
-[v _ReceiveByteSerially `(uc ~T0 @X0 1 ef ]
+[e = _TXIE -> -> 0 `i `b ]
+[; ;main.c: 115: RCIE = 1;
 "115
+[e = _RCIE -> -> 1 `i `b ]
+[; ;main.c: 116: TX9 = 0;
+"116
+[e = _TX9 -> -> 0 `i `b ]
+[; ;main.c: 117: RX9 = 0;
+"117
+[e = _RX9 -> -> 0 `i `b ]
+[; ;main.c: 118: TXEN = 0;
+"118
+[e = _TXEN -> -> 0 `i `b ]
+[; ;main.c: 119: TXEN = 1;
+"119
+[e = _TXEN -> -> 1 `i `b ]
+[; ;main.c: 120: }
+"120
+[e :UE 73 ]
+}
+"122
+[v _ReceiveByteSerially `(uc ~T0 @X0 1 ef ]
+"123
 {
-[; ;main.c: 114: unsigned char ReceiveByteSerially(void)
-[; ;main.c: 115: {
+[; ;main.c: 122: unsigned char ReceiveByteSerially(void)
+[; ;main.c: 123: {
 [e :U _ReceiveByteSerially ]
 [f ]
-[; ;main.c: 116: if(OERR)
-"116
-[e $ ! _OERR 74  ]
-[; ;main.c: 117: {
-"117
+[; ;main.c: 124: if(OERR)
+"124
+[e $ ! _OERR 75  ]
+[; ;main.c: 125: {
+"125
 {
-[; ;main.c: 118: CREN = 0;
-"118
+[; ;main.c: 126: CREN = 0;
+"126
 [e = _CREN -> -> 0 `i `b ]
-[; ;main.c: 119: CREN = 1;
-"119
+[; ;main.c: 127: CREN = 1;
+"127
 [e = _CREN -> -> 1 `i `b ]
-"120
+"128
 }
-[e :U 74 ]
-[; ;main.c: 120: }
-[; ;main.c: 121: return RCREG;
-"121
+[e :U 75 ]
+[; ;main.c: 128: }
+[; ;main.c: 129: return RCREG;
+"129
 [e ) _RCREG ]
-[e $UE 73  ]
-[; ;main.c: 122: }
-"122
-[e :UE 73 ]
+[e $UE 74  ]
+[; ;main.c: 130: }
+"130
+[e :UE 74 ]
+}
+"132
+[v _resetDatos `(v ~T0 @X0 1 ef ]
+"133
+{
+[; ;main.c: 132: void resetDatos()
+[; ;main.c: 133: {
+[e :U _resetDatos ]
+[f ]
+[; ;main.c: 134: for(int i = 0; i < 5; i++)
+"134
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 5 `i 77  ]
+[e $U 78  ]
+"135
+[e :U 77 ]
+[; ;main.c: 135: {
+{
+[; ;main.c: 136: if(RA4)
+"136
+[e $ ! _RA4 80  ]
+[; ;main.c: 137: {
+"137
+{
+[; ;main.c: 138: RA3 = 1;
+"138
+[e = _RA3 -> -> 1 `i `b ]
+[; ;main.c: 139: _delay((unsigned long)((200)*(4000000/4000.0)));
+"139
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 140: RA3 = 0;
+"140
+[e = _RA3 -> -> 0 `i `b ]
+[; ;main.c: 141: if(i >= 4)
+"141
+[e $ ! >= _i -> 4 `i 81  ]
+[; ;main.c: 142: {
+"142
+{
+[; ;main.c: 143: dataLength = 0;
+"143
+[e = _dataLength -> -> 0 `i `ui ]
+[; ;main.c: 144: for(int j = 0; j < 4; j++)
+"144
+{
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+[e $ < _j -> 4 `i 82  ]
+[e $U 83  ]
+"145
+[e :U 82 ]
+[; ;main.c: 145: {
+{
+[; ;main.c: 146: palabras[j] = 0;
+"146
+[e = *U + &U _palabras * -> -> _j `ui `ux -> -> # *U &U _palabras `ui `ux -> -> 0 `i `ui ]
+"147
+}
+"144
+[e ++ _j -> 1 `i ]
+[e $ < _j -> 4 `i 82  ]
+[e :U 83 ]
+"147
+}
+"148
+}
+[e :U 81 ]
+"149
+}
+[e :U 80 ]
+"150
+}
+"134
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 5 `i 77  ]
+[e :U 78 ]
+"150
+}
+[; ;main.c: 147: }
+[; ;main.c: 148: }
+[; ;main.c: 149: }
+[; ;main.c: 150: }
+[; ;main.c: 151: }
+"151
+[e :UE 76 ]
 }

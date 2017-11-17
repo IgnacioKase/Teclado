@@ -16,6 +16,7 @@
 #define dato RA0
 #define latch RA2
 #define led RA3
+#define pulsadorReset RA4
 
 unsigned int palabras[4] = {0, 0, 0, 0};
 unsigned int dataLength = 0, lectura = 0, indice;
@@ -27,11 +28,12 @@ void SendStringSerially(const unsigned char*);
 void interrupt Interrupcion(void);
 void resetearSalidas (int cantidadSalidas);
 void escribirSalida (void);
+void resetDatos(void);
 
 void main()
 {
     CMCON = 0x07;
-    TRISA = 0b00000000;
+    TRISA = 0b00010000;
     led = 0;
     
 	InitUART();							// Initialize UART
@@ -43,6 +45,12 @@ void main()
 
 	while(1)
 	{
+        if(pulsadorReset)
+        {
+            resetDatos();
+            __delay_ms (500);
+            
+        }
 	}
 }
 
@@ -121,3 +129,23 @@ unsigned char ReceiveByteSerially(void)
 	return RCREG;
 }
 
+void resetDatos()
+{
+    for(int i = 0; i < 5; i++)
+    {
+        if(pulsadorReset)
+        {
+            led = 1;
+            __delay_ms (200);
+            led = 0;
+            if(i >= 4)
+            {
+                dataLength = 0;
+                for(int j = 0; j < 4; j++)
+                {
+                    palabras[j] = 0;
+                }
+            }
+        }
+    }
+}

@@ -1,9 +1,14 @@
 #include <xc.h>
 
+//#define _XTAL_FREQ 4000000
 #define BAUDRATE 19200
-#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 20000000
 
-#pragma config FOSC = INTOSCIO
+
+/*__CONFIG(FOSC_HS & WDTE_OFF & PWRTE_ON & MCLRE_ON & BOREN_ON 
+		& LVP_OFF & CPD_OFF & CP_OFF);
+//#pragma config FOSC = INTOSCIO*/
+#pragma config FOSC = HS
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
 #pragma config MCLRE = OFF
@@ -62,7 +67,6 @@ void interrupt ISR(void)
 	{
         lectura = ReceiveByteSerially();
         led = !led;
-        if (lectura == 255) trama = 1;
         if (lectura == 0) trama = 0;
         if(trama)
         {
@@ -78,6 +82,7 @@ void interrupt ISR(void)
                 dataLength = lectura;
             } 
         }  
+        if (lectura == 0xff) trama = 1;
 	}
 }
 

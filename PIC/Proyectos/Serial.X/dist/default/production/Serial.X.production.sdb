@@ -3,29 +3,29 @@
 [d edition pro ]
 [d chip 16F628A ]
 [d frameptr 6 ]
-"62 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\float.c
+"62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
-"86 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\ftadd.c
+"86 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\pic\eeprom.c
+"6 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\pic\eeprom.c
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"35 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"40 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"59
+"64
 [v _ISR ISR `II(v  1 e 1 0 ]
-"84
+"89
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
-"101
+"106
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
-"113
+"118
 [v _InitUART InitUART `(v  1 e 1 0 ]
-"129
+"134
 [v _ReceiveByteSerially ReceiveByteSerially `(uc  1 e 1 0 ]
-"143
+"148
 [v _resetDatos resetDatos `(v  1 e 1 0 ]
-"758 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic16f628a.h
+"758 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
 "765
 [v _CMCON CMCON `VEuc  1 e 1 @31 ]
@@ -71,58 +71,58 @@
 [v _TXEN TXEN `VEb  1 e 0 @1221 ]
 "1555
 [v _TXIE TXIE `VEb  1 e 0 @1124 ]
-"21 C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"26 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 [v _palabras palabras `[4]ui  1 e 8 0 ]
-"22
+"27
 [v _dataLength dataLength `ui  1 e 2 0 ]
 [v _lectura lectura `ui  1 e 2 0 ]
 [v _indice indice `ui  1 e 2 0 ]
-"23
+"28
 [v _trama trama `us  1 e 2 0 ]
-"35
+"40
 [v _main main `(v  1 e 1 0 ]
 {
-"57
+"62
 } 0
-"101
+"106
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
 {
-"103
+"108
 [v resetearSalidas@i i `i  1 a 2 17 ]
-"101
+"106
 [v resetearSalidas@cantidadSalidas cantidadSalidas `i  1 p 2 14 ]
-"111
+"116
 } 0
-"143
+"148
 [v _resetDatos resetDatos `(v  1 e 1 0 ]
 {
-"155
+"160
 [v resetDatos@j j `i  1 a 2 19 ]
-"145
+"150
 [v resetDatos@i i `i  1 a 2 17 ]
-"162
+"167
 } 0
-"113
+"118
 [v _InitUART InitUART `(v  1 e 1 0 ]
 {
-"127
+"132
 } 0
-"59
+"64
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"82
+"87
 } 0
-"84
+"89
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
 {
-"88
+"93
 [v escribirSalida@i i `i  1 a 2 3 ]
-"86
+"91
 [v escribirSalida@k k `i  1 a 2 5 ]
-"99
+"104
 } 0
-"129
+"134
 [v _ReceiveByteSerially ReceiveByteSerially `(uc  1 e 1 0 ]
 {
-"137
+"142
 } 0

@@ -16,9 +16,8 @@ namespace Codificador
     public partial class Form1 : Form 
     {
         Formato inicializacionFormato = new Formato();
-        string datos = "1786 On ch=1 n=60 v=0,1792 On ch=1 n=62 v=85,1792 On ch=1 n=48 v=80,1792 On ch=1 n=58 v=79,2023 On ch=1 n=62 v=0,2048 On ch=1 n=60 v=69";
         string[] rows = new string[] { };
-        List<Palabra> palabras = new List<Palabra>();
+        List<Midi> palabras = new List<Midi>();
         List<int> comandos = new List<int>();
         List<ThemesAppearance> temas = new List<ThemesAppearance>();
         short escala = 40;
@@ -27,7 +26,7 @@ namespace Codificador
 
         List<byte> envio = new List<byte>();
         string[] puertos = new string[] { };
-
+        ulong tiempo;
         public Form1()
         {
             InitializeComponent();
@@ -51,17 +50,17 @@ namespace Codificador
         private void CodificarMidi()
         {
             canvas.Clean();
-            List<Palabra> palabras = new List<Palabra>() { Palabra.ReadFile() };
+            List<Midi> palabras = new List<Midi>() { Midi.ReadFile() };
             if (palabras.Last() != null)
             {
                 while (palabras.Last().Tiempo == 0)
                 {
-                    palabras.Add(Palabra.ReadFile());
+                    palabras.Add(Midi.ReadFile());
                     if (palabras.Last() == null) break;
                 }
                 envio.Add(0xff);
                 envio.Add((byte)palabras.Count);
-                foreach (Palabra _x in palabras)
+                foreach (Midi _x in palabras)
                 {
                     if (_x != null)
                     { 
@@ -70,14 +69,13 @@ namespace Codificador
                             canvas.DrawNotes(nota);
                             textBox1.AppendText(Convert.ToString(nota, 2) + " ");
                             textBox2.AppendText(Convert.ToString(nota) + " ");          
-                            envio.Add((byte)(Math.Abs(nota - escala)));
-                            
+                            envio.Add((byte)(Math.Abs(nota - escala))); 
                         }
                     }
                 }
+                envio.Add(0);
                 textBox1.AppendText(Environment.NewLine);
                 textBox2.AppendText(Environment.NewLine);
-                envio.Add(0);
                 if (serialPort1.IsOpen)
                 {
                     serialPort1.Write(envio.ToArray(), 0, envio.Count);
@@ -92,8 +90,12 @@ namespace Codificador
                 
                 if (palabras.Last() != null)
                 {
-                    timer1.Interval = palabras.Last().Tiempo * 5;
+                    if ((Midi.TotalTiempoSong >= Midi.TotalTiempoMap) && (Midi.Cuenta <= Midi.TempoMap.Length)) Midi.NextTempo();
+                    tiempo = (ulong)(palabras.Last().Tiempo * (int)(Midi.TempoQN / Midi.TicksQN) / 1000);
+                    timer1.Interval = (int)tiempo;        
+                    Midi.TotalTiempoSong += (ulong)timer1.Interval;
                     timer1.Enabled = true;
+                    Text = Convert.ToString(Midi.TempoQN);
                 }else
                 {
                     canvas.Clean();
@@ -119,17 +121,10 @@ namespace Codificador
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
-            //saveFileDialog1.ShowDialog();
-            //saveFileDialog1.DefaultExt = ".txt";
-            /*Palabra.ParseDataByFile(openFileDialog1.FileName, saveFileDialog1.FileName);
-            Palabra.CodificarByFile(palabras, escala);
-            textBox1.Text = "";
-            foreach (long _x in comandos)
-            {
-                textBox1.AppendText(Convert.ToString(_x, 2));
-                textBox1.AppendText(Environment.NewLine);
-            }*/
-            Palabra.OpenFile(openFileDialog1.FileName, saveFileDialog1.FileName);
+            Midi.OpenFile(openFileDialog1.FileName, saveFileDialog1.FileName);
+            Midi.TotalTiempoSong = 0;
+            Pause.Enabled = true;
+            Stop.Enabled = true;
             CodificarMidi();
         }
 
@@ -188,6 +183,44 @@ namespace Codificador
             {
                 comboBox1.Items.Add(puertos[i]);
             }
+        }
+
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            Midi.Stop();
+            timer1.Enabled = false;
+            canvas.Clean();
+            Pause.Enabled = false;
+            Stop.Enabled = false;
+            Continue.Enabled = true;
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            Refresh();
+        }
+
+        private void Pause_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            Pause.Enabled = false;
+            Continue.Enabled = true;
+        }
+
+        private void Continue_Click(object sender, EventArgs e)
+        { 
+            if (Stop.Enabled)
+            {
+                timer1.Enabled = true;
+            }
+            else
+            {
+                Midi.OpenFile(openFileDialog1.FileName, saveFileDialog1.FileName);
+                Midi.TotalTiempoSong = 0;
+                CodificarMidi();
+            }
+            Continue.Enabled = false;
+            Pause.Enabled = true;
+            Stop.Enabled = true;
         }
     }
 }

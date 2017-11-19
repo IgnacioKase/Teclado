@@ -20,15 +20,17 @@
 
 unsigned int palabras[4] = {0, 0, 0, 0};
 unsigned int dataLength = 0, lectura = 0, indice;
+unsigned short trama = 0;
 
 void InitUART(void);
 void SendByteSerially(unsigned char);
 unsigned char ReceiveByteSerially(void);
 void SendStringSerially(const unsigned char*);
-void interrupt Interrupcion(void);
+void interrupt ISR(void);
 void resetearSalidas (int cantidadSalidas);
 void escribirSalida (void);
 void resetDatos(void);
+short CRC (void);
 
 void main()
 {
@@ -54,23 +56,28 @@ void main()
 	}
 }
 
-void interrupt Interrupcion(void)
+void interrupt ISR(void)
 {
 	if(RCIF)
 	{
         lectura = ReceiveByteSerially();
         led = !led;
-        if(dataLength > 0)
+        if (lectura == 255) trama = 1;
+        if (lectura == 0) trama = 0;
+        if(trama)
         {
-            indice = lectura/16;
-            dataLength--;
-            palabras[ indice ] = palabras[ indice ] |  (1 << (lectura - (indice * 16)));
-            if(dataLength <= 0) escribirSalida();
-        }
-        else
-        {
-            dataLength = lectura;
-        }
+           if(dataLength > 0)
+            {
+                indice = lectura/16;
+                dataLength--;
+                palabras[ indice ] = palabras[ indice ] |  (1 << (lectura - (indice * 16)));
+                if( dataLength <= 0 ) escribirSalida();
+            }
+            else
+            {
+                dataLength = lectura;
+            } 
+        }  
 	}
 }
 
@@ -129,6 +136,10 @@ unsigned char ReceiveByteSerially(void)
 	return RCREG;
 }
 
+short CRC (void)
+{
+    
+}
 void resetDatos()
 {
     for(int i = 0; i < 5; i++)

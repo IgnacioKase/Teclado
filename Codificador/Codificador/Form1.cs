@@ -59,6 +59,7 @@ namespace Codificador
                     palabras.Add(Palabra.ReadFile());
                     if (palabras.Last() == null) break;
                 }
+                envio.Add(0xff);
                 envio.Add((byte)palabras.Count);
                 foreach (Palabra _x in palabras)
                 {
@@ -76,6 +77,7 @@ namespace Codificador
                 }
                 textBox1.AppendText(Environment.NewLine);
                 textBox2.AppendText(Environment.NewLine);
+                envio.Add(0);
                 if (serialPort1.IsOpen)
                 {
                     serialPort1.Write(envio.ToArray(), 0, envio.Count);

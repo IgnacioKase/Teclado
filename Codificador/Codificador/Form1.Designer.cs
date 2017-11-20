@@ -51,19 +51,19 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Jog = new System.Windows.Forms.Button();
+            this.ResetQs = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.ResetQs = new System.Windows.Forms.Button();
-            this.Jog = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -277,8 +277,62 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(139, 33);
             this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ChangePort);
+            this.comboBox1.Click += new System.EventHandler(this.LoadSerialPorts);
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.Jog, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.ResetQs, 0, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 197);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 4;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(145, 189);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(139, 47);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Enviar comando";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Jog
+            // 
+            this.Jog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Jog.Enabled = false;
+            this.Jog.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Jog.Location = new System.Drawing.Point(3, 50);
+            this.Jog.Name = "Jog";
+            this.Jog.Size = new System.Drawing.Size(139, 41);
+            this.Jog.TabIndex = 1;
+            this.Jog.Text = "Jog";
+            this.Jog.UseVisualStyleBackColor = true;
+            // 
+            // ResetQs
+            // 
+            this.ResetQs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ResetQs.Enabled = false;
+            this.ResetQs.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResetQs.Location = new System.Drawing.Point(3, 3);
+            this.ResetQs.Name = "ResetQs";
+            this.ResetQs.Size = new System.Drawing.Size(139, 41);
+            this.ResetQs.TabIndex = 0;
+            this.ResetQs.Text = "Reset Qs";
+            this.ResetQs.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -302,60 +356,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.label1, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.Jog, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.ResetQs, 0, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 197);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 4;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(145, 189);
-            this.tableLayoutPanel5.TabIndex = 1;
-            // 
-            // ResetQs
-            // 
-            this.ResetQs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResetQs.Enabled = false;
-            this.ResetQs.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResetQs.Location = new System.Drawing.Point(3, 3);
-            this.ResetQs.Name = "ResetQs";
-            this.ResetQs.Size = new System.Drawing.Size(139, 41);
-            this.ResetQs.TabIndex = 0;
-            this.ResetQs.Text = "Reset Qs";
-            this.ResetQs.UseVisualStyleBackColor = true;
-            // 
-            // Jog
-            // 
-            this.Jog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Jog.Enabled = false;
-            this.Jog.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Jog.Location = new System.Drawing.Point(3, 50);
-            this.Jog.Name = "Jog";
-            this.Jog.Size = new System.Drawing.Size(139, 41);
-            this.Jog.TabIndex = 1;
-            this.Jog.Text = "Jog";
-            this.Jog.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 94);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 47);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Enviar comando";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,9 +373,9 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

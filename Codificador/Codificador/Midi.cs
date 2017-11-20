@@ -7,98 +7,64 @@ namespace Codificador
 {
     public class Midi
     {
-        #region Attributes
-        private List<int> nota;
-        private List<int> velocidad;
-        private int tiempo;
-        static private int cantidad;
-        static StreamReader lectura;
-        static StreamWriter registros;
-        static private ulong tempoQN;
-        static private ulong ticksQN;
-        static TempoMap[] tempoMap;
-        static ulong totalTiempoMap;
-        static ulong totalTiempoSong;
-        static uint cuenta = 0;
+        #region Attributes 
+        private StreamReader lectura;
+        private StreamWriter registros;
+        private ulong tempoQN = 500000;
+        private ulong ticksQN;
+        private TempoMap[] tempoMap;
+        private ulong totalTiempoMap;
+        private ulong totalTiempoSong;
+        private uint cuenta = 0;
         #endregion
 
         #region Properties
-        static public int Cantidad
-        {
-            get { return cantidad; }
-        }
-
-        public int Tiempo
-        {
-            get { return tiempo; }
-            set { tiempo = value; }
-        }
-
-        public List<int> Velocidad
-        {
-            get { return velocidad; }
-            set { velocidad = value; }
-        }
-
-        public List<int> Nota
-        {
-            get { return nota; }
-            set { nota = value; }
-        }
-
-        public static StreamReader Lectura { get => lectura; set => lectura = value; }
-        public static StreamWriter Registros { get => registros; set => registros = value; }
-        static public ulong TicksQN { get => ticksQN; set => ticksQN = value; }
-        public static ulong TempoQN { get => tempoQN; set => tempoQN = value; }
-        internal static TempoMap[] TempoMap { get => tempoMap; set => tempoMap = value; }
-        public static ulong TotalTiempoSong { get => totalTiempoSong; set => totalTiempoSong = value; }
-        public static ulong TotalTiempoMap { get => totalTiempoMap; set => totalTiempoMap = value; }
-        public static uint Cuenta { get => cuenta; set => cuenta = value; }
+        public StreamReader Lectura { get => lectura; set => lectura = value; }
+        public StreamWriter Registros { get => registros; set => registros = value; }
+        public ulong TicksQN { get => ticksQN; set => ticksQN = value; }
+        public ulong TempoQN { get => tempoQN; set => tempoQN = value; }
+        public TempoMap[] TempoMap { get => tempoMap; set => tempoMap = value; }
+        public ulong TotalTiempoSong { get => totalTiempoSong; set => totalTiempoSong = value; }
+        public ulong TotalTiempoMap { get => totalTiempoMap; set => totalTiempoMap = value; }
+        public uint Cuenta { get => cuenta; set => cuenta = value; }
         #endregion
 
         #region Constructores
-        public Midi()
-        {
-            cantidad++;
-        }
-
-        public Midi(int tiempo, List<int> nota, List<int> velocidad)
-        {
-            Nota = nota;
-            Tiempo = tiempo;
-            Velocidad = velocidad;
-            cantidad++;
-        }
+        
         #endregion
 
         #region Methods
 
-        static public bool OpenFile(string openFile, string saveFile)
+        public bool OpenFile(string openFile)
         {
             Lectura = new StreamReader(openFile);
-            //Registros = new StreamWriter(saveFile);
             string dato = Lectura.ReadLine();
             string[] rows = dato.Split();
+            Int32 Btiempo = 0;
+            Int32 tiempo = 0;
             List<TempoMap> tempoMapList = new List<TempoMap>();
-            while(dato != "TrkEnd")
+           // while(dato != "TrkEnd")
+            while(dato != null)
             {
                 if( rows.Length > 1)
                 {
+                    Int32.TryParse(rows[0], out Btiempo);
+                    tiempo += Btiempo;
                     switch (rows[1])
                     {
                         case "TimeSig":
-                            TicksQN = ((ulong)Int32.Parse(rows[2].Split('/')[0]) / (ulong)Int32.Parse(rows[2].Split('/')[1])) * 4 * (ulong)Int32.Parse(rows[3]);
+                            TicksQN = ((ulong)Int32.Parse(rows[2].Split('/')[0]) * 4 / (ulong)Int32.Parse(rows[2].Split('/')[1])) * (ulong)Int32.Parse(rows[3]);
                             break;
                         case "Tempo":
-                            tempoMapList.Add(new TempoMap((ulong)Int32.Parse(rows[0]), (ulong)Int32.Parse(rows[2])));
+                            tempoMapList.Add(new TempoMap((ulong)tiempo, (ulong)Int32.Parse(rows[2])));
                             break;
                     }
                 }
                 dato = Lectura.ReadLine();
-                rows = dato.Split();
+                if(dato != null) rows = dato.Split();
             }
             TempoMap = tempoMapList.ToArray();
-            TempoQN = TempoMap[Cuenta].Velocidad;
+            if(TempoMap.Length > 0) TempoQN = TempoMap[Cuenta].Velocidad;      ///Areglar el tiempo al inciar
             if(TempoMap.Length > 1)
             {
                 TotalTiempoMap = TempoMap[Cuenta + 1].Tiempo;
@@ -107,34 +73,36 @@ namespace Codificador
             {
                 TotalTiempoMap = 0;
             }
+            Lectura.Close();
+            Lectura = new StreamReader(openFile);
             return true;
         }
 
-        static public Midi ReadFile()
+        public NotaMidi NextNote()
         {
             try
             {
                 string dato = Lectura.ReadLine();
                 string[] rows = dato.Split();
-                Midi palabra = new Midi();
-                while (dato != "TrkEnd")
+                NotaMidi palabra = new NotaMidi();
+                while (dato != null)
                 {
                     if(rows.Length > 1)
                     {
                         if (rows[1] == "On")
                         {
-                            palabra = new Midi()
+                            palabra = new NotaMidi()
                             {
-                                tiempo = Int16.Parse(dato.Split()[0]),
-                                nota = new List<int>() { Int16.Parse(dato.Split()[3].Replace("n=", string.Empty)) },
-                                velocidad = new List<int>() { Int16.Parse(dato.Split()[4].Replace("v=", string.Empty)) }
+                                Tiempo = Int16.Parse(dato.Split()[0]),
+                                Nota = new List<int>() { Int16.Parse(dato.Split()[3].Replace("n=", string.Empty)) },
+                                Velocidad = new List<int>() { Int16.Parse(dato.Split()[4].Replace("v=", string.Empty)) }
                             };
                             return palabra;
 
                         }
                     }
                     dato = Lectura.ReadLine();
-                    rows = dato.Split();
+                    if (dato != null) rows = dato.Split();
                 }
                 return null;
             }
@@ -144,18 +112,18 @@ namespace Codificador
             }
         }
 
-        public static void NextTempo()
+        public void NextTempo()
         {
             Cuenta++;
-            if(Cuenta <= TempoMap.Length )
+            if(Cuenta < (TempoMap.Length - 1) )
             {
-                TotalTiempoMap = (ulong)(TempoMap[Cuenta + 1].Tiempo * (ulong)(Midi.TempoQN / Midi.TicksQN) / 1000);
+                TotalTiempoMap += (ulong)(TempoMap[Cuenta + 1].Tiempo * (ulong)(TempoQN / TicksQN) / 1000);
                 TempoQN = TempoMap[Cuenta].Velocidad;
             }
         }
         #endregion
 
-        public static void Stop()
+        public void Stop()
         {
             if( Lectura != null)
             {

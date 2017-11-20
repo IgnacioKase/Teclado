@@ -11,19 +11,19 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"40 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
+"41 C:\Users\Ignacio\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"64
+"65
 [v _ISR ISR `II(v  1 e 1 0 ]
-"89
+"98
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
-"106
+"114
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
-"118
+"126
 [v _InitUART InitUART `(v  1 e 1 0 ]
-"134
+"142
 [v _ReceiveByteSerially ReceiveByteSerially `(uc  1 e 1 0 ]
-"148
+"156
 [v _resetDatos resetDatos `(v  1 e 1 0 ]
 "758 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
@@ -79,50 +79,52 @@
 [v _indice indice `ui  1 e 2 0 ]
 "28
 [v _trama trama `us  1 e 2 0 ]
-"40
+"29
+[v _buffer buffer `ui  1 e 2 0 ]
+"41
 [v _main main `(v  1 e 1 0 ]
 {
-"62
+"63
 } 0
-"106
+"114
 [v _resetearSalidas resetearSalidas `(v  1 e 1 0 ]
 {
-"108
-[v resetearSalidas@i i `i  1 a 2 17 ]
-"106
-[v resetearSalidas@cantidadSalidas cantidadSalidas `i  1 p 2 14 ]
 "116
+[v resetearSalidas@i i `i  1 a 2 19 ]
+"114
+[v resetearSalidas@cantidadSalidas cantidadSalidas `i  1 p 2 16 ]
+"124
 } 0
-"148
+"156
 [v _resetDatos resetDatos `(v  1 e 1 0 ]
 {
-"160
-[v resetDatos@j j `i  1 a 2 19 ]
-"150
-[v resetDatos@i i `i  1 a 2 17 ]
-"167
+"168
+[v resetDatos@j j `i  1 a 2 21 ]
+"158
+[v resetDatos@i i `i  1 a 2 19 ]
+"175
 } 0
-"118
+"126
 [v _InitUART InitUART `(v  1 e 1 0 ]
 {
-"132
+"140
 } 0
-"64
+"65
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"87
+"96
 } 0
-"89
+"98
 [v _escribirSalida escribirSalida `(v  1 e 1 0 ]
 {
-"93
-[v escribirSalida@i i `i  1 a 2 3 ]
-"91
-[v escribirSalida@k k `i  1 a 2 5 ]
-"104
+"102
+[v escribirSalida@i i `i  1 a 2 5 ]
+"100
+[v escribirSalida@k k `i  1 a 2 3 ]
+"112
 } 0
-"134
+"142
 [v _ReceiveByteSerially ReceiveByteSerially `(uc  1 e 1 0 ]
 {
-"142
+"150
 } 0

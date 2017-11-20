@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Codificador
 {
-    class TempoMap
+    public class TempoMap
     {
         #region Properties
         private ulong tiempo;

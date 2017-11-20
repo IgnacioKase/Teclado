@@ -16,17 +16,12 @@ namespace Codificador
     public partial class Form1 : Form 
     {
         Formato inicializacionFormato = new Formato();
-        string[] rows = new string[] { };
-        List<Midi> palabras = new List<Midi>();
-        List<int> comandos = new List<int>();
         List<ThemesAppearance> temas = new List<ThemesAppearance>();
         short escala = 40;
         Color claro = Color.FromArgb(255, 240, 240, 240);
         Draw canvas = new Draw();
-
-        List<byte> envio = new List<byte>();
-        string[] puertos = new string[] { };
-        ulong tiempo;
+        Midi midiFile = new Midi();
+        
         public Form1()
         {
             InitializeComponent();
@@ -49,31 +44,35 @@ namespace Codificador
 
         private void CodificarMidi()
         {
-            canvas.Clean();
-            List<Midi> palabras = new List<Midi>() { Midi.ReadFile() };
-            if (palabras.Last() != null)
+            ulong tiempo;
+            //canvas.Clean();
+            List<NotaMidi> notas = new List<NotaMidi>() { midiFile.NextNote() };
+            List<byte> envio = new List<byte>();
+            if (notas.Last() != null)
             {
-                while (palabras.Last().Tiempo == 0)
+                while (notas.Last().Tiempo == 0)
                 {
-                    palabras.Add(Midi.ReadFile());
-                    if (palabras.Last() == null) break;
+                    notas.Add(midiFile.NextNote());
+                    if (notas.Last() == null) break;
                 }
                 envio.Add(0xff);
-                envio.Add((byte)palabras.Count);
-                foreach (Midi _x in palabras)
+                envio.Add((byte)(notas.Count*2));
+                foreach (NotaMidi _x in notas)
                 {
                     if (_x != null)
-                    { 
-                        foreach (int nota in _x.Nota)
+                    {
+                        for (int i = 0; i < _x.Nota.Count; i++)
                         {
-                            canvas.DrawNotes(nota);
-                            textBox1.AppendText(Convert.ToString(nota, 2) + " ");
-                            textBox2.AppendText(Convert.ToString(nota) + " ");          
-                            envio.Add((byte)(Math.Abs(nota - escala))); 
+                            canvas.DrawNotes(_x.Nota[i], (_x.Velocidad[i] == 0));
+                            textBox1.AppendText(Convert.ToString(_x.Nota[i], 2) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
+                            textBox2.AppendText(Convert.ToString(_x.Nota[i]) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
+                            envio.Add((byte)(Math.Abs(_x.Nota[i] - escala)));
+                            envio.Add(Convert.ToByte(_x.Velocidad[i] > 0));
                         }
                     }
                 }
-                envio.Add(0);
+                pictureBox1.Refresh();
+                envio.Add(0xfe);
                 textBox1.AppendText(Environment.NewLine);
                 textBox2.AppendText(Environment.NewLine);
                 if (serialPort1.IsOpen)
@@ -88,15 +87,16 @@ namespace Codificador
                 envio.Clear();
 
                 
-                if (palabras.Last() != null)
+                if (notas.Last() != null)
                 {
-                    if ((Midi.TotalTiempoSong >= Midi.TotalTiempoMap) && (Midi.Cuenta <= Midi.TempoMap.Length)) Midi.NextTempo();
-                    tiempo = (ulong)(palabras.Last().Tiempo * (int)(Midi.TempoQN / Midi.TicksQN) / 1000);
-                    timer1.Interval = (int)tiempo;        
-                    Midi.TotalTiempoSong += (ulong)timer1.Interval;
+                    if ((midiFile.TotalTiempoSong >= midiFile.TotalTiempoMap) && (midiFile.Cuenta < (midiFile.TempoMap.Length - 1))) midiFile.NextTempo();
+                    tiempo = (ulong)(notas.Last().Tiempo * (int)(midiFile.TempoQN / midiFile.TicksQN) / 1000);
+                    timer1.Interval = (int)tiempo;
+                    midiFile.TotalTiempoSong += (ulong)timer1.Interval;
                     timer1.Enabled = true;
-                    Text = Convert.ToString(Midi.TempoQN);
-                }else
+                    Text = Convert.ToString(midiFile.TempoQN);
+                }
+                else
                 {
                     canvas.Clean();
                 }  
@@ -104,9 +104,25 @@ namespace Codificador
             {
                 canvas.Clean();
             }
-            pictureBox1.Refresh();
         }
 
+        #region Eventos Varios
+        private void pictureBox1_Resize(object sender, EventArgs e)
+        {
+            canvas.Set();
+            canvas.Box();
+            canvas.Grid();
+            Refresh();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            CodificarMidi();
+        }
+        #endregion
+
+        #region ToolStrip
         private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
         {
             foreach (ThemesAppearance _x in temas)
@@ -121,73 +137,17 @@ namespace Codificador
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
-            Midi.OpenFile(openFileDialog1.FileName, saveFileDialog1.FileName);
-            Midi.TotalTiempoSong = 0;
+            midiFile.OpenFile(openFileDialog1.FileName);
+            midiFile.TotalTiempoSong = 0;
+            midiFile.TotalTiempoMap = 0;
             Pause.Enabled = true;
             Stop.Enabled = true;
             CodificarMidi();
         }
 
-        private void pictureBox1_Resize(object sender, EventArgs e)
-        {
-            canvas.Set();
-            canvas.Box();
-            canvas.Grid();
-            Refresh();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-            CodificarMidi();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (serialPort1.IsOpen)
-            {
-                serialPort1.Close();
-                button1.Text = "Abrir";
-            }
-            else
-            {
-                serialPort1.Open();
-                button1.Text = "Cerrar";
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!serialPort1.IsOpen)
-            {
-                try
-                {
-                    serialPort1.PortName = comboBox1.Text;
-                }
-                catch
-                {
-                    MessageBox.Show("Cierre el puerto para cambiar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Cierre el puerto para cambiar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-            comboBox1.Items.Clear();
-            puertos = SerialPort.GetPortNames();
-            for (int i = 0; i < puertos.Length; i++)
-            {
-                comboBox1.Items.Add(puertos[i]);
-            }
-        }
-
         private void Stop_Click(object sender, EventArgs e)
         {
-            Midi.Stop();
+            midiFile.Stop();
             timer1.Enabled = false;
             canvas.Clean();
             Pause.Enabled = false;
@@ -207,20 +167,70 @@ namespace Codificador
         }
 
         private void Continue_Click(object sender, EventArgs e)
-        { 
+        {
             if (Stop.Enabled)
             {
                 timer1.Enabled = true;
             }
             else
             {
-                Midi.OpenFile(openFileDialog1.FileName, saveFileDialog1.FileName);
-                Midi.TotalTiempoSong = 0;
+                midiFile.OpenFile(openFileDialog1.FileName);
+                midiFile.TotalTiempoSong = 0;
                 CodificarMidi();
             }
             Continue.Enabled = false;
             Pause.Enabled = true;
             Stop.Enabled = true;
         }
+        #endregion
+
+        #region SerialPort
+        private void LoadSerialPorts(object sender, EventArgs e)
+        {
+            string[] Puertos = new string[] { };
+            ComboBox comboBox = ((ComboBox)sender);
+            comboBox.Items.Clear();
+            Puertos = SerialPort.GetPortNames();
+            for (int i = 0; i < Puertos.Length; i++)
+            {
+                comboBox.Items.Add(Puertos[i]);
+            }
+        }
+
+        private void ChangePort(object sender, EventArgs e)
+        {
+            ComboBox Combo = ((ComboBox)sender);
+            if (!serialPort1.IsOpen && Combo != null)
+            {
+                try
+                {
+                    serialPort1.PortName = Combo.Text;
+                }
+                catch
+                {
+                    MessageBox.Show("Cierre el puerto para cambiar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cierre el puerto para cambiar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+                button1.Text = "Abrir";
+            }
+            else
+            {
+                serialPort1.Open();
+                button1.Text = "Cerrar";
+            }
+        }
+        #endregion
+
     }
 }

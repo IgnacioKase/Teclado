@@ -23,9 +23,10 @@
 #define led RA3
 #define pulsadorReset RA4
 
-unsigned int palabras[4] = {0, 0, 0, 0};
+unsigned int palabras[4] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
 unsigned int dataLength = 0, lectura = 0, indice;
 unsigned short trama = 0;
+unsigned int buffer = 0;
 
 void InitUART(void);
 void SendByteSerially(unsigned char);
@@ -67,15 +68,23 @@ void interrupt ISR(void)
 	{
         lectura = ReceiveByteSerially();
         led = !led;
-        if (lectura == 0) trama = 0;
+        if (lectura == 0xfe) trama = 0;
         if(trama)
         {
            if(dataLength > 0)
             {
-                indice = lectura/16;
-                dataLength--;
-                palabras[ indice ] = palabras[ indice ] |  (1 << (lectura - (indice * 16)));
-                if( dataLength <= 0 ) escribirSalida();
+               dataLength--;
+               if(buffer == 0) 
+               {
+                    buffer = lectura;
+               }
+               else
+               {
+                    indice = buffer/16;
+                    palabras[ indice ] = palabras[ indice ] & (!(((1 * lectura) << (buffer - (indice * 16)))));
+                    buffer = 0;
+                    if( dataLength <= 0 ) escribirSalida();
+               }
             }
             else
             {
@@ -92,11 +101,10 @@ void escribirSalida ()
     {
         for(int i = 0; i < 16; i++)
         {
-          dato = ((palabras[k] >> (16 - i)) & 1);
+          dato = !((palabras[k] >> (16 - i)) & 1);
           clockManual = 1;
           clockManual = 0;
         }
-        palabras[k] = 0;
     }
     
   latch = 1;

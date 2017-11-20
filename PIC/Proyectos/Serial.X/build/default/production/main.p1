@@ -6,17 +6,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
 "1421
 [v _RA3 `Vb ~T0 @X0 0 e@43 ]
-"30 main.c
+"31 main.c
 [v _InitUART `(v ~T0 @X0 0 ef ]
 "1391 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "1405
 [v _PEIE `Vb ~T0 @X0 0 e@94 ]
-"35 main.c
+"36 main.c
 [v _resetearSalidas `(v ~T0 @X0 0 ef1`i ]
 "1423 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _RA4 `Vb ~T0 @X0 0 e@44 ]
-"37 main.c
+"38 main.c
 [v _resetDatos `(v ~T0 @X0 0 ef ]
 [v F599 `(v ~T0 @X0 1 tf1`ul ]
 "152 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic.h
@@ -24,9 +24,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i __delay ]
 "1453 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _RCIF `Vb ~T0 @X0 0 e@101 ]
-"32 main.c
+"33 main.c
 [v _ReceiveByteSerially `(uc ~T0 @X0 0 ef ]
-"36
+"37
 [v _escribirSalida `(v ~T0 @X0 0 ef ]
 "1415 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic16f628a.h
 [v _RA0 `Vb ~T0 @X0 0 e@40 ]
@@ -647,13 +647,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _palabras `ui ~T0 @X0 -> 4 `i e ]
 [i _palabras
 :U ..
--> -> 0 `i `ui
--> -> 0 `i `ui
--> -> 0 `i `ui
--> -> 0 `i `ui
+-> 65535 `ui
+-> 65535 `ui
+-> 65535 `ui
+-> 65535 `ui
 ..
 ]
-[; ;main.c: 26: unsigned int palabras[4] = {0, 0, 0, 0};
+[; ;main.c: 26: unsigned int palabras[4] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
 "27
 [v _dataLength `ui ~T0 @X0 1 e ]
 [i _dataLength
@@ -671,461 +671,490 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `us
 ]
 [; ;main.c: 28: unsigned short trama = 0;
-[; ;main.c: 30: void InitUART(void);
-[; ;main.c: 31: void SendByteSerially(unsigned char);
-[; ;main.c: 32: unsigned char ReceiveByteSerially(void);
-[; ;main.c: 33: void SendStringSerially(const unsigned char*);
-[; ;main.c: 34: void interrupt ISR(void);
-[; ;main.c: 35: void resetearSalidas (int cantidadSalidas);
-[; ;main.c: 36: void escribirSalida (void);
-[; ;main.c: 37: void resetDatos(void);
-[; ;main.c: 38: short CRC (void);
+"29
+[v _buffer `ui ~T0 @X0 1 e ]
+[i _buffer
+-> -> 0 `i `ui
+]
+[; ;main.c: 29: unsigned int buffer = 0;
+[; ;main.c: 31: void InitUART(void);
+[; ;main.c: 32: void SendByteSerially(unsigned char);
+[; ;main.c: 33: unsigned char ReceiveByteSerially(void);
+[; ;main.c: 34: void SendStringSerially(const unsigned char*);
+[; ;main.c: 35: void interrupt ISR(void);
+[; ;main.c: 36: void resetearSalidas (int cantidadSalidas);
+[; ;main.c: 37: void escribirSalida (void);
+[; ;main.c: 38: void resetDatos(void);
+[; ;main.c: 39: short CRC (void);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"40
-[v _main `(v ~T0 @X0 1 ef ]
 "41
+[v _main `(v ~T0 @X0 1 ef ]
+"42
 {
-[; ;main.c: 40: void main()
-[; ;main.c: 41: {
+[; ;main.c: 41: void main()
+[; ;main.c: 42: {
 [e :U _main ]
 [f ]
-[; ;main.c: 42: CMCON = 0x07;
-"42
-[e = _CMCON -> -> 7 `i `uc ]
-[; ;main.c: 43: TRISA = 0b00010000;
+[; ;main.c: 43: CMCON = 0x07;
 "43
-[e = _TRISA -> -> 16 `i `uc ]
-[; ;main.c: 44: RA3 = 0;
+[e = _CMCON -> -> 7 `i `uc ]
+[; ;main.c: 44: TRISA = 0b00010000;
 "44
+[e = _TRISA -> -> 16 `i `uc ]
+[; ;main.c: 45: RA3 = 0;
+"45
 [e = _RA3 -> -> 0 `i `b ]
-[; ;main.c: 46: InitUART();
-"46
+[; ;main.c: 47: InitUART();
+"47
 [e ( _InitUART ..  ]
-[; ;main.c: 48: GIE = 1;
-"48
-[e = _GIE -> -> 1 `i `b ]
-[; ;main.c: 49: PEIE = 1;
+[; ;main.c: 49: GIE = 1;
 "49
+[e = _GIE -> -> 1 `i `b ]
+[; ;main.c: 50: PEIE = 1;
+"50
 [e = _PEIE -> -> 1 `i `b ]
-[; ;main.c: 51: resetearSalidas(64);
-"51
+[; ;main.c: 52: resetearSalidas(64);
+"52
 [e ( _resetearSalidas (1 -> 64 `i ]
-[; ;main.c: 53: while(1)
-"53
-[e :U 53 ]
-[; ;main.c: 54: {
+[; ;main.c: 54: while(1)
 "54
-{
-[; ;main.c: 55: if(RA4)
+[e :U 53 ]
+[; ;main.c: 55: {
 "55
-[e $ ! _RA4 55  ]
-[; ;main.c: 56: {
-"56
 {
-[; ;main.c: 57: resetDatos();
+[; ;main.c: 56: if(RA4)
+"56
+[e $ ! _RA4 55  ]
+[; ;main.c: 57: {
 "57
-[e ( _resetDatos ..  ]
-[; ;main.c: 58: _delay((unsigned long)((500)*(20000000/4000.0)));
+{
+[; ;main.c: 58: resetDatos();
 "58
+[e ( _resetDatos ..  ]
+[; ;main.c: 59: _delay((unsigned long)((500)*(20000000/4000.0)));
+"59
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"60
-}
-[e :U 55 ]
 "61
 }
+[e :U 55 ]
+"62
+}
 [e :U 52 ]
-"53
+"54
 [e $U 53  ]
 [e :U 54 ]
-[; ;main.c: 60: }
 [; ;main.c: 61: }
 [; ;main.c: 62: }
-"62
+[; ;main.c: 63: }
+"63
 [e :UE 51 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-[v F621 `(v ~T0 @X0 1 tf ]
-"64
-[v _ISR `IF621 ~T0 @X0 1 e ]
+[v F622 `(v ~T0 @X0 1 tf ]
 "65
+[v _ISR `IF622 ~T0 @X0 1 e ]
+"66
 {
-[; ;main.c: 64: void interrupt ISR(void)
-[; ;main.c: 65: {
+[; ;main.c: 65: void interrupt ISR(void)
+[; ;main.c: 66: {
 [e :U _ISR ]
 [f ]
-[; ;main.c: 66: if(RCIF)
-"66
-[e $ ! _RCIF 57  ]
-[; ;main.c: 67: {
+[; ;main.c: 67: if(RCIF)
 "67
-{
-[; ;main.c: 68: lectura = ReceiveByteSerially();
+[e $ ! _RCIF 57  ]
+[; ;main.c: 68: {
 "68
-[e = _lectura -> ( _ReceiveByteSerially ..  `ui ]
-[; ;main.c: 69: RA3 = !RA3;
+{
+[; ;main.c: 69: lectura = ReceiveByteSerially();
 "69
-[e = _RA3 ! _RA3 ]
-[; ;main.c: 70: if (lectura == 0) trama = 0;
+[e = _lectura -> ( _ReceiveByteSerially ..  `ui ]
+[; ;main.c: 70: RA3 = !RA3;
 "70
-[e $ ! == _lectura -> -> 0 `i `ui 58  ]
+[e = _RA3 ! _RA3 ]
+[; ;main.c: 71: if (lectura == 0xfe) trama = 0;
+"71
+[e $ ! == _lectura -> -> 254 `i `ui 58  ]
 [e = _trama -> -> 0 `i `us ]
 [e :U 58 ]
-[; ;main.c: 71: if(trama)
-"71
-[e $ ! != -> _trama `ui -> -> -> 0 `i `us `ui 59  ]
-[; ;main.c: 72: {
+[; ;main.c: 72: if(trama)
 "72
-{
-[; ;main.c: 73: if(dataLength > 0)
+[e $ ! != -> _trama `ui -> -> -> 0 `i `us `ui 59  ]
+[; ;main.c: 73: {
 "73
-[e $ ! > _dataLength -> -> 0 `i `ui 60  ]
-[; ;main.c: 74: {
-"74
 {
-[; ;main.c: 75: indice = lectura/16;
+[; ;main.c: 74: if(dataLength > 0)
+"74
+[e $ ! > _dataLength -> -> 0 `i `ui 60  ]
+[; ;main.c: 75: {
 "75
-[e = _indice / _lectura -> -> 16 `i `ui ]
+{
 [; ;main.c: 76: dataLength--;
 "76
 [e -- _dataLength -> -> 1 `i `ui ]
-[; ;main.c: 77: palabras[ indice ] = palabras[ indice ] | (1 << (lectura - (indice * 16)));
+[; ;main.c: 77: if(buffer == 0)
 "77
-[e = *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux | *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux -> << -> 1 `i - _lectura * _indice -> -> 16 `i `ui `ui ]
-[; ;main.c: 78: if( dataLength <= 0 ) escribirSalida();
+[e $ ! == _buffer -> -> 0 `i `ui 61  ]
+[; ;main.c: 78: {
 "78
-[e $ ! <= _dataLength -> -> 0 `i `ui 61  ]
-[e ( _escribirSalida ..  ]
-[e :U 61 ]
-"79
-}
-[; ;main.c: 79: }
-[e $U 62  ]
-"80
-[e :U 60 ]
-[; ;main.c: 80: else
-[; ;main.c: 81: {
-"81
 {
-[; ;main.c: 82: dataLength = lectura;
+[; ;main.c: 79: buffer = lectura;
+"79
+[e = _buffer _lectura ]
+"80
+}
+[; ;main.c: 80: }
+[e $U 62  ]
+"81
+[e :U 61 ]
+[; ;main.c: 81: else
+[; ;main.c: 82: {
 "82
-[e = _dataLength _lectura ]
+{
+[; ;main.c: 83: indice = buffer/16;
 "83
+[e = _indice / _buffer -> -> 16 `i `ui ]
+[; ;main.c: 84: palabras[ indice ] = palabras[ indice ] & (!(((1 * lectura) << (buffer - (indice * 16)))));
+"84
+[e = *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux & *U + &U _palabras * -> _indice `ux -> -> # *U &U _palabras `ui `ux -> -> ! != << * -> -> 1 `i `ui _lectura - _buffer * _indice -> -> 16 `i `ui -> -> 0 `i `ui `i `ui ]
+[; ;main.c: 85: buffer = 0;
+"85
+[e = _buffer -> -> 0 `i `ui ]
+[; ;main.c: 86: if( dataLength <= 0 ) escribirSalida();
+"86
+[e $ ! <= _dataLength -> -> 0 `i `ui 63  ]
+[e ( _escribirSalida ..  ]
+[e :U 63 ]
+"87
 }
 [e :U 62 ]
-"84
+"88
 }
-[e :U 59 ]
-[; ;main.c: 83: }
-[; ;main.c: 84: }
-[; ;main.c: 85: if (lectura == 0xff) trama = 1;
-"85
-[e $ ! == _lectura -> -> 255 `i `ui 63  ]
-[e = _trama -> -> 1 `i `us ]
-[e :U 63 ]
-"86
-}
-[e :U 57 ]
-[; ;main.c: 86: }
 [; ;main.c: 87: }
-"87
-[e :UE 56 ]
-}
+[; ;main.c: 88: }
+[e $U 64  ]
 "89
-[v _escribirSalida `(v ~T0 @X0 1 ef ]
+[e :U 60 ]
+[; ;main.c: 89: else
+[; ;main.c: 90: {
 "90
 {
-[; ;main.c: 89: void escribirSalida ()
-[; ;main.c: 90: {
+[; ;main.c: 91: dataLength = lectura;
+"91
+[e = _dataLength _lectura ]
+"92
+}
+[e :U 64 ]
+"93
+}
+[e :U 59 ]
+[; ;main.c: 92: }
+[; ;main.c: 93: }
+[; ;main.c: 94: if (lectura == 0xff) trama = 1;
+"94
+[e $ ! == _lectura -> -> 255 `i `ui 65  ]
+[e = _trama -> -> 1 `i `us ]
+[e :U 65 ]
+"95
+}
+[e :U 57 ]
+[; ;main.c: 95: }
+[; ;main.c: 96: }
+"96
+[e :UE 56 ]
+}
+"98
+[v _escribirSalida `(v ~T0 @X0 1 ef ]
+"99
+{
+[; ;main.c: 98: void escribirSalida ()
+[; ;main.c: 99: {
 [e :U _escribirSalida ]
 [f ]
-[; ;main.c: 91: for(int k = 0; k < 4; k++)
-"91
+[; ;main.c: 100: for(int k = 0; k < 4; k++)
+"100
 {
 [v _k `i ~T0 @X0 1 a ]
 [e = _k -> 0 `i ]
-[e $ < _k -> 4 `i 65  ]
-[e $U 66  ]
-"92
-[e :U 65 ]
-[; ;main.c: 92: {
+[e $ < _k -> 4 `i 67  ]
+[e $U 68  ]
+"101
+[e :U 67 ]
+[; ;main.c: 101: {
 {
-[; ;main.c: 93: for(int i = 0; i < 16; i++)
-"93
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 68  ]
-[e $U 69  ]
-"94
-[e :U 68 ]
-[; ;main.c: 94: {
-{
-[; ;main.c: 95: RA0 = ((palabras[k] >> (16 - i)) & 1);
-"95
-[e = _RA0 -> & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 16 `i _i -> -> 1 `i `ui `b ]
-[; ;main.c: 96: RA1 = 1;
-"96
-[e = _RA1 -> -> 1 `i `b ]
-[; ;main.c: 97: RA1 = 0;
-"97
-[e = _RA1 -> -> 0 `i `b ]
-"98
-}
-"93
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 68  ]
-[e :U 69 ]
-"98
-}
-[; ;main.c: 98: }
-[; ;main.c: 99: palabras[k] = 0;
-"99
-[e = *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux -> -> 0 `i `ui ]
-"100
-}
-"91
-[e ++ _k -> 1 `i ]
-[e $ < _k -> 4 `i 65  ]
-[e :U 66 ]
-"100
-}
-[; ;main.c: 100: }
-[; ;main.c: 102: RA2 = 1;
+[; ;main.c: 102: for(int i = 0; i < 16; i++)
 "102
-[e = _RA2 -> -> 1 `i `b ]
-[; ;main.c: 103: RA2 = 0;
-"103
-[e = _RA2 -> -> 0 `i `b ]
-[; ;main.c: 104: }
-"104
-[e :UE 64 ]
-}
-"106
-[v _resetearSalidas `(v ~T0 @X0 1 ef1`i ]
-"107
-{
-[; ;main.c: 106: void resetearSalidas (int cantidadSalidas)
-[; ;main.c: 107: {
-[e :U _resetearSalidas ]
-"106
-[v _cantidadSalidas `i ~T0 @X0 1 r1 ]
-"107
-[f ]
-[; ;main.c: 108: for(int i = 0; i < cantidadSalidas; i = i + 1)
-"108
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 75  ]
-"109
-[e :U 72 ]
-[; ;main.c: 109: {
+[e $ < _i -> 16 `i 70  ]
+[e $U 71  ]
+"103
+[e :U 70 ]
+[; ;main.c: 103: {
 {
-[; ;main.c: 110: RA0 = 0;
-"110
-[e = _RA0 -> -> 0 `i `b ]
-[; ;main.c: 111: RA1 = 1;
-"111
+[; ;main.c: 104: RA0 = !((palabras[k] >> (16 - i)) & 1);
+"104
+[e = _RA0 ! != & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 16 `i _i -> -> 1 `i `ui -> -> 0 `i `ui ]
+[; ;main.c: 105: RA1 = 1;
+"105
 [e = _RA1 -> -> 1 `i `b ]
-[; ;main.c: 112: RA1 = 0;
-"112
+[; ;main.c: 106: RA1 = 0;
+"106
 [e = _RA1 -> -> 0 `i `b ]
-"113
+"107
+}
+"102
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 16 `i 70  ]
+[e :U 71 ]
+"107
 }
 "108
-[e = _i + _i -> 1 `i ]
-[e :U 75 ]
-[e $ < _i _cantidadSalidas 72  ]
-[e :U 73 ]
-"113
 }
-[; ;main.c: 113: }
-[; ;main.c: 114: RA2 = 1;
-"114
+"100
+[e ++ _k -> 1 `i ]
+[e $ < _k -> 4 `i 67  ]
+[e :U 68 ]
+"108
+}
+[; ;main.c: 107: }
+[; ;main.c: 108: }
+[; ;main.c: 110: RA2 = 1;
+"110
 [e = _RA2 -> -> 1 `i `b ]
-[; ;main.c: 115: RA2 = 0;
-"115
+[; ;main.c: 111: RA2 = 0;
+"111
 [e = _RA2 -> -> 0 `i `b ]
-[; ;main.c: 116: }
-"116
-[e :UE 71 ]
+[; ;main.c: 112: }
+"112
+[e :UE 66 ]
 }
-"118
-[v _InitUART `(v ~T0 @X0 1 ef ]
-"119
+"114
+[v _resetearSalidas `(v ~T0 @X0 1 ef1`i ]
+"115
 {
-[; ;main.c: 118: void InitUART(void)
-[; ;main.c: 119: {
+[; ;main.c: 114: void resetearSalidas (int cantidadSalidas)
+[; ;main.c: 115: {
+[e :U _resetearSalidas ]
+"114
+[v _cantidadSalidas `i ~T0 @X0 1 r1 ]
+"115
+[f ]
+[; ;main.c: 116: for(int i = 0; i < cantidadSalidas; i = i + 1)
+"116
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 77  ]
+"117
+[e :U 74 ]
+[; ;main.c: 117: {
+{
+[; ;main.c: 118: RA0 = 0;
+"118
+[e = _RA0 -> -> 0 `i `b ]
+[; ;main.c: 119: RA1 = 1;
+"119
+[e = _RA1 -> -> 1 `i `b ]
+[; ;main.c: 120: RA1 = 0;
+"120
+[e = _RA1 -> -> 0 `i `b ]
+"121
+}
+"116
+[e = _i + _i -> 1 `i ]
+[e :U 77 ]
+[e $ < _i _cantidadSalidas 74  ]
+[e :U 75 ]
+"121
+}
+[; ;main.c: 121: }
+[; ;main.c: 122: RA2 = 1;
+"122
+[e = _RA2 -> -> 1 `i `b ]
+[; ;main.c: 123: RA2 = 0;
+"123
+[e = _RA2 -> -> 0 `i `b ]
+[; ;main.c: 124: }
+"124
+[e :UE 73 ]
+}
+"126
+[v _InitUART `(v ~T0 @X0 1 ef ]
+"127
+{
+[; ;main.c: 126: void InitUART(void)
+[; ;main.c: 127: {
 [e :U _InitUART ]
 [f ]
-[; ;main.c: 120: SPBRG = ((20000000/16)/19200) - 1;
-"120
-[e = _SPBRG -> - / / -> 20000000 `l -> -> 16 `i `l -> -> 19200 `i `l -> -> 1 `i `l `uc ]
-[; ;main.c: 121: BRGH = 1;
-"121
-[e = _BRGH -> -> 1 `i `b ]
-[; ;main.c: 122: SYNC = 0;
-"122
-[e = _SYNC -> -> 0 `i `b ]
-[; ;main.c: 123: SPEN = 1;
-"123
-[e = _SPEN -> -> 1 `i `b ]
-[; ;main.c: 124: CREN = 1;
-"124
-[e = _CREN -> -> 1 `i `b ]
-[; ;main.c: 125: SREN = 0;
-"125
-[e = _SREN -> -> 0 `i `b ]
-[; ;main.c: 126: TXIE = 0;
-"126
-[e = _TXIE -> -> 0 `i `b ]
-[; ;main.c: 127: RCIE = 1;
-"127
-[e = _RCIE -> -> 1 `i `b ]
-[; ;main.c: 128: TX9 = 0;
+[; ;main.c: 128: SPBRG = ((20000000/16)/19200) - 1;
 "128
-[e = _TX9 -> -> 0 `i `b ]
-[; ;main.c: 129: RX9 = 0;
+[e = _SPBRG -> - / / -> 20000000 `l -> -> 16 `i `l -> -> 19200 `i `l -> -> 1 `i `l `uc ]
+[; ;main.c: 129: BRGH = 1;
 "129
-[e = _RX9 -> -> 0 `i `b ]
-[; ;main.c: 130: TXEN = 0;
+[e = _BRGH -> -> 1 `i `b ]
+[; ;main.c: 130: SYNC = 0;
 "130
-[e = _TXEN -> -> 0 `i `b ]
-[; ;main.c: 131: TXEN = 1;
+[e = _SYNC -> -> 0 `i `b ]
+[; ;main.c: 131: SPEN = 1;
 "131
-[e = _TXEN -> -> 1 `i `b ]
-[; ;main.c: 132: }
+[e = _SPEN -> -> 1 `i `b ]
+[; ;main.c: 132: CREN = 1;
 "132
-[e :UE 76 ]
-}
+[e = _CREN -> -> 1 `i `b ]
+[; ;main.c: 133: SREN = 0;
+"133
+[e = _SREN -> -> 0 `i `b ]
+[; ;main.c: 134: TXIE = 0;
 "134
-[v _ReceiveByteSerially `(uc ~T0 @X0 1 ef ]
+[e = _TXIE -> -> 0 `i `b ]
+[; ;main.c: 135: RCIE = 1;
 "135
+[e = _RCIE -> -> 1 `i `b ]
+[; ;main.c: 136: TX9 = 0;
+"136
+[e = _TX9 -> -> 0 `i `b ]
+[; ;main.c: 137: RX9 = 0;
+"137
+[e = _RX9 -> -> 0 `i `b ]
+[; ;main.c: 138: TXEN = 0;
+"138
+[e = _TXEN -> -> 0 `i `b ]
+[; ;main.c: 139: TXEN = 1;
+"139
+[e = _TXEN -> -> 1 `i `b ]
+[; ;main.c: 140: }
+"140
+[e :UE 78 ]
+}
+"142
+[v _ReceiveByteSerially `(uc ~T0 @X0 1 ef ]
+"143
 {
-[; ;main.c: 134: unsigned char ReceiveByteSerially(void)
-[; ;main.c: 135: {
+[; ;main.c: 142: unsigned char ReceiveByteSerially(void)
+[; ;main.c: 143: {
 [e :U _ReceiveByteSerially ]
 [f ]
-[; ;main.c: 136: if(OERR)
-"136
-[e $ ! _OERR 78  ]
-[; ;main.c: 137: {
-"137
-{
-[; ;main.c: 138: CREN = 0;
-"138
-[e = _CREN -> -> 0 `i `b ]
-[; ;main.c: 139: CREN = 1;
-"139
-[e = _CREN -> -> 1 `i `b ]
-"140
-}
-[e :U 78 ]
-[; ;main.c: 140: }
-[; ;main.c: 141: return RCREG;
-"141
-[e ) _RCREG ]
-[e $UE 77  ]
-[; ;main.c: 142: }
-"142
-[e :UE 77 ]
-}
+[; ;main.c: 144: if(OERR)
 "144
-[v _CRC `(s ~T0 @X0 1 ef ]
+[e $ ! _OERR 80  ]
+[; ;main.c: 145: {
 "145
 {
-[; ;main.c: 144: short CRC (void)
-[; ;main.c: 145: {
-[e :U _CRC ]
-[f ]
-[; ;main.c: 147: }
+[; ;main.c: 146: CREN = 0;
+"146
+[e = _CREN -> -> 0 `i `b ]
+[; ;main.c: 147: CREN = 1;
 "147
+[e = _CREN -> -> 1 `i `b ]
+"148
+}
+[e :U 80 ]
+[; ;main.c: 148: }
+[; ;main.c: 149: return RCREG;
+"149
+[e ) _RCREG ]
+[e $UE 79  ]
+[; ;main.c: 150: }
+"150
 [e :UE 79 ]
 }
-"148
-[v _resetDatos `(v ~T0 @X0 1 ef ]
-"149
+"152
+[v _CRC `(s ~T0 @X0 1 ef ]
+"153
 {
-[; ;main.c: 148: void resetDatos()
-[; ;main.c: 149: {
+[; ;main.c: 152: short CRC (void)
+[; ;main.c: 153: {
+[e :U _CRC ]
+[f ]
+[; ;main.c: 155: }
+"155
+[e :UE 81 ]
+}
+"156
+[v _resetDatos `(v ~T0 @X0 1 ef ]
+"157
+{
+[; ;main.c: 156: void resetDatos()
+[; ;main.c: 157: {
 [e :U _resetDatos ]
 [f ]
-[; ;main.c: 150: for(int i = 0; i < 5; i++)
-"150
+[; ;main.c: 158: for(int i = 0; i < 5; i++)
+"158
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 5 `i 81  ]
-[e $U 82  ]
-"151
-[e :U 81 ]
-[; ;main.c: 151: {
-{
-[; ;main.c: 152: if(RA4)
-"152
-[e $ ! _RA4 84  ]
-[; ;main.c: 153: {
-"153
-{
-[; ;main.c: 154: RA3 = 1;
-"154
-[e = _RA3 -> -> 1 `i `b ]
-[; ;main.c: 155: _delay((unsigned long)((200)*(20000000/4000.0)));
-"155
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;main.c: 156: RA3 = 0;
-"156
-[e = _RA3 -> -> 0 `i `b ]
-[; ;main.c: 157: if(i >= 4)
-"157
-[e $ ! >= _i -> 4 `i 85  ]
-[; ;main.c: 158: {
-"158
-{
-[; ;main.c: 159: dataLength = 0;
+[e $ < _i -> 5 `i 83  ]
+[e $U 84  ]
 "159
-[e = _dataLength -> -> 0 `i `ui ]
-[; ;main.c: 160: for(int j = 0; j < 4; j++)
+[e :U 83 ]
+[; ;main.c: 159: {
+{
+[; ;main.c: 160: if(RA4)
 "160
+[e $ ! _RA4 86  ]
+[; ;main.c: 161: {
+"161
+{
+[; ;main.c: 162: RA3 = 1;
+"162
+[e = _RA3 -> -> 1 `i `b ]
+[; ;main.c: 163: _delay((unsigned long)((200)*(20000000/4000.0)));
+"163
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 164: RA3 = 0;
+"164
+[e = _RA3 -> -> 0 `i `b ]
+[; ;main.c: 165: if(i >= 4)
+"165
+[e $ ! >= _i -> 4 `i 87  ]
+[; ;main.c: 166: {
+"166
+{
+[; ;main.c: 167: dataLength = 0;
+"167
+[e = _dataLength -> -> 0 `i `ui ]
+[; ;main.c: 168: for(int j = 0; j < 4; j++)
+"168
 {
 [v _j `i ~T0 @X0 1 a ]
 [e = _j -> 0 `i ]
-[e $ < _j -> 4 `i 86  ]
-[e $U 87  ]
-"161
-[e :U 86 ]
-[; ;main.c: 161: {
+[e $ < _j -> 4 `i 88  ]
+[e $U 89  ]
+"169
+[e :U 88 ]
+[; ;main.c: 169: {
 {
-[; ;main.c: 162: palabras[j] = 0;
-"162
+[; ;main.c: 170: palabras[j] = 0;
+"170
 [e = *U + &U _palabras * -> -> _j `ui `ux -> -> # *U &U _palabras `ui `ux -> -> 0 `i `ui ]
-"163
+"171
 }
-"160
+"168
 [e ++ _j -> 1 `i ]
-[e $ < _j -> 4 `i 86  ]
+[e $ < _j -> 4 `i 88  ]
+[e :U 89 ]
+"171
+}
+"172
+}
 [e :U 87 ]
-"163
+"173
 }
-"164
+[e :U 86 ]
+"174
 }
-[e :U 85 ]
-"165
-}
-[e :U 84 ]
-"166
-}
-"150
+"158
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 5 `i 81  ]
-[e :U 82 ]
-"166
+[e $ < _i -> 5 `i 83  ]
+[e :U 84 ]
+"174
 }
-[; ;main.c: 163: }
-[; ;main.c: 164: }
-[; ;main.c: 165: }
-[; ;main.c: 166: }
-[; ;main.c: 167: }
-"167
-[e :UE 80 ]
+[; ;main.c: 171: }
+[; ;main.c: 172: }
+[; ;main.c: 173: }
+[; ;main.c: 174: }
+[; ;main.c: 175: }
+"175
+[e :UE 82 ]
 }

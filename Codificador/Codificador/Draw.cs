@@ -85,9 +85,11 @@ namespace Codificador
             }
         }
 
-        public void DrawNotes(int nota)
+        public void DrawNotes(int nota, bool hidden)
         {
-            Sheet.FillRectangle(new SolidBrush(NotesColor), ((int)PictureBox.Width / 127) * nota, 0, ((int)PictureBox.Width / 127), PictureBox.Height);
+            SolidBrush Pincel = new SolidBrush(NotesColor);
+            if (hidden) Pincel = new SolidBrush(Background);
+            Sheet.FillRectangle(Pincel, ((int)PictureBox.Width / 127) * nota + 1, 2, ((int)PictureBox.Width / 127) - 1, PictureBox.Height - 4);
         }
         #endregion
     }

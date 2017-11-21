@@ -313,7 +313,6 @@
             // Jog
             // 
             this.Jog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Jog.Enabled = false;
             this.Jog.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Jog.Location = new System.Drawing.Point(3, 50);
             this.Jog.Name = "Jog";
@@ -321,11 +320,11 @@
             this.Jog.TabIndex = 1;
             this.Jog.Text = "Jog";
             this.Jog.UseVisualStyleBackColor = true;
+            this.Jog.Click += new System.EventHandler(this.Jog_Click);
             // 
             // ResetQs
             // 
             this.ResetQs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResetQs.Enabled = false;
             this.ResetQs.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResetQs.Location = new System.Drawing.Point(3, 3);
             this.ResetQs.Name = "ResetQs";
@@ -333,6 +332,7 @@
             this.ResetQs.TabIndex = 0;
             this.ResetQs.Text = "Reset Qs";
             this.ResetQs.UseVisualStyleBackColor = true;
+            this.ResetQs.Click += new System.EventHandler(this.ResetQs_Click);
             // 
             // textBox1
             // 

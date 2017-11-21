@@ -23,7 +23,7 @@
 #define led RA3
 #define pulsadorReset RA4
 
-unsigned int palabras[4] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
+unsigned int palabras[4] = {0, 0, 0, 0};
 unsigned int dataLength = 0, lectura = 0, indice;
 unsigned short trama = 0;
 unsigned int buffer = 0;
@@ -36,7 +36,6 @@ void interrupt ISR(void);
 void resetearSalidas (int cantidadSalidas);
 void escribirSalida (void);
 void resetDatos(void);
-short CRC (void);
 
 void main()
 {
@@ -55,9 +54,22 @@ void main()
 	{
         if(pulsadorReset)
         {
-            resetDatos();
-            __delay_ms (500);
-            
+            __delay_ms(1000);
+            if(!pulsadorReset) break;
+            GIE = 0;
+            GIE = 1;
+            dataLength = 0;
+            for(int k = 0; k < 4; k++)
+            {
+                led = 1;
+                __delay_ms(250);
+                palabras[k] = 0;
+                led = 0;
+            }
+            buffer = 0;
+            trama = 0;
+            resetearSalidas(64); 
+            __delay_ms(4000);
         }
 	}
 }
@@ -81,7 +93,10 @@ void interrupt ISR(void)
                else
                {
                     indice = buffer/16;
-                    palabras[ indice ] = palabras[ indice ] & (!(((1 * lectura) << (buffer - (indice * 16)))));
+                    if(lectura)
+                        palabras[ indice] |= ( 1 << (buffer - (indice * 16)));
+                    else
+                        palabras[ indice] &= (!( 1 << (buffer - (indice * 16))));
                     buffer = 0;
                     if( dataLength <= 0 ) escribirSalida();
                }
@@ -97,11 +112,11 @@ void interrupt ISR(void)
 
 void escribirSalida ()
 {
-    for(int k = 0; k < 4; k++)
+    for(int k = 3; k >= 0; k--)
     {
         for(int i = 0; i < 16; i++)
         {
-          dato = !((palabras[k] >> (16 - i)) & 1);
+          dato = ((palabras[k] >> (16 - i)) & 1);
           clockManual = 1;
           clockManual = 0;
         }
@@ -147,29 +162,4 @@ unsigned char ReceiveByteSerially(void)
 		CREN = 1;
 	}
 	return RCREG;
-}
-
-short CRC (void)
-{
-    
-}
-void resetDatos()
-{
-    for(int i = 0; i < 5; i++)
-    {
-        if(pulsadorReset)
-        {
-            led = 1;
-            __delay_ms (200);
-            led = 0;
-            if(i >= 4)
-            {
-                dataLength = 0;
-                for(int j = 0; j < 4; j++)
-                {
-                    palabras[j] = 0;
-                }
-            }
-        }
-    }
 }

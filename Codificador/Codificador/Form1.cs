@@ -232,5 +232,41 @@ namespace Codificador
         }
         #endregion
 
+        private void ResetQs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    for (int i = 0; i < 64; i++)
+                    {
+
+                        serialPort1.Write(new byte[] { 0xff, 2, (byte)i, 0, 0xfe }, 0, 5);
+
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+            
+        }
+
+        private void Jog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    serialPort1.Write(new byte[] { 0xff, 2, (byte)2, 1, 0xfe }, 0, 5);
+                }
+            }
+            catch
+            {
+                return;
+            }
+            
+        }
     }
 }

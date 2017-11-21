@@ -847,7 +847,7 @@ extern __bit __timeout;
 #pragma config CP = OFF
 
 # 26
-unsigned int palabras[4] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
+unsigned int palabras[4] = {0, 0, 0, 0};
 unsigned int dataLength = 0, lectura = 0, indice;
 unsigned short trama = 0;
 unsigned int buffer = 0;
@@ -860,7 +860,6 @@ void interrupt ISR(void);
 void resetearSalidas (int cantidadSalidas);
 void escribirSalida (void);
 void resetDatos(void);
-short CRC (void);
 
 void main()
 {
@@ -879,9 +878,22 @@ while(1)
 {
 if(RA4)
 {
-resetDatos();
-_delay((unsigned long)((500)*(20000000/4000.0)));
-
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+if(!RA4) break;
+GIE = 0;
+GIE = 1;
+dataLength = 0;
+for(int k = 0; k < 4; k++)
+{
+RA3 = 1;
+_delay((unsigned long)((250)*(20000000/4000.0)));
+palabras[k] = 0;
+RA3 = 0;
+}
+buffer = 0;
+trama = 0;
+resetearSalidas(64);
+_delay((unsigned long)((4000)*(20000000/4000.0)));
 }
 }
 }
@@ -905,7 +917,10 @@ buffer = lectura;
 else
 {
 indice = buffer/16;
-palabras[ indice ] = palabras[ indice ] & (!(((1 * lectura) << (buffer - (indice * 16)))));
+if(lectura)
+palabras[ indice] |= ( 1 << (buffer - (indice * 16)));
+else
+palabras[ indice] &= (!( 1 << (buffer - (indice * 16))));
 buffer = 0;
 if( dataLength <= 0 ) escribirSalida();
 }
@@ -925,7 +940,7 @@ for(int k = 0; k < 4; k++)
 {
 for(int i = 0; i < 16; i++)
 {
-RA0 = !((palabras[k] >> (16 - i)) & 1);
+RA0 = ((palabras[k] >> (16 - i)) & 1);
 RA1 = 1;
 RA1 = 0;
 }
@@ -971,29 +986,4 @@ CREN = 0;
 CREN = 1;
 }
 return RCREG;
-}
-
-short CRC (void)
-{
-
-}
-void resetDatos()
-{
-for(int i = 0; i < 5; i++)
-{
-if(RA4)
-{
-RA3 = 1;
-_delay((unsigned long)((200)*(20000000/4000.0)));
-RA3 = 0;
-if(i >= 4)
-{
-dataLength = 0;
-for(int j = 0; j < 4; j++)
-{
-palabras[j] = 0;
-}
-}
-}
-}
 }

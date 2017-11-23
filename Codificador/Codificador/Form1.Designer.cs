@@ -57,6 +57,8 @@
             this.ResetQs = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.notaTextBox = new System.Windows.Forms.TextBox();
+            this.timerJob = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -68,7 +70,7 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton2,
             this.toolStripDropDownButton1,
@@ -89,7 +91,7 @@
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(53, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(52, 22);
             this.toolStripDropDownButton2.Text = "Files";
             // 
             // loadToolStripMenuItem
@@ -115,7 +117,7 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(67, 22);
             this.toolStripDropDownButton1.Text = "Temas";
             // 
             // toolStripComboBox1
@@ -130,7 +132,7 @@
             this.Continue.Image = ((System.Drawing.Image)(resources.GetObject("Continue.Image")));
             this.Continue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Continue.Name = "Continue";
-            this.Continue.Size = new System.Drawing.Size(88, 22);
+            this.Continue.Size = new System.Drawing.Size(87, 22);
             this.Continue.Text = "Continue";
             this.Continue.Click += new System.EventHandler(this.Continue_Click);
             // 
@@ -140,7 +142,7 @@
             this.Pause.Image = ((System.Drawing.Image)(resources.GetObject("Pause.Image")));
             this.Pause.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Pause.Name = "Pause";
-            this.Pause.Size = new System.Drawing.Size(69, 22);
+            this.Pause.Size = new System.Drawing.Size(70, 22);
             this.Pause.Text = "Pause";
             this.Pause.Click += new System.EventHandler(this.Pause_Click);
             // 
@@ -204,7 +206,7 @@
             // textBox3
             // 
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(812, 3);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -215,7 +217,7 @@
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(486, 3);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -245,7 +247,7 @@
             this.tableLayoutPanel4.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.comboBox1, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 4;
@@ -259,7 +261,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 41);
@@ -271,7 +273,7 @@
             // comboBox1
             // 
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(3, 50);
             this.comboBox1.Name = "comboBox1";
@@ -287,6 +289,7 @@
             this.tableLayoutPanel5.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.Jog, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.ResetQs, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.notaTextBox, 0, 3);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 197);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -302,7 +305,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 47);
@@ -313,7 +316,7 @@
             // Jog
             // 
             this.Jog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Jog.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Jog.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Jog.Location = new System.Drawing.Point(3, 50);
             this.Jog.Name = "Jog";
             this.Jog.Size = new System.Drawing.Size(139, 41);
@@ -325,7 +328,7 @@
             // ResetQs
             // 
             this.ResetQs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ResetQs.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResetQs.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResetQs.Location = new System.Drawing.Point(3, 3);
             this.ResetQs.Name = "ResetQs";
             this.ResetQs.Size = new System.Drawing.Size(139, 41);
@@ -337,7 +340,7 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(160, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -355,6 +358,19 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
+            // 
+            // notaTextBox
+            // 
+            this.notaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.notaTextBox.Location = new System.Drawing.Point(3, 144);
+            this.notaTextBox.Name = "notaTextBox";
+            this.notaTextBox.Size = new System.Drawing.Size(139, 20);
+            this.notaTextBox.TabIndex = 4;
+            // 
+            // timerJob
+            // 
+            this.timerJob.Interval = 1000;
+            this.timerJob.Tick += new System.EventHandler(this.timerJob_Tick);
             // 
             // Form1
             // 
@@ -409,6 +425,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Jog;
         private System.Windows.Forms.Button ResetQs;
+        private System.Windows.Forms.TextBox notaTextBox;
+        private System.Windows.Forms.Timer timerJob;
     }
 }
 

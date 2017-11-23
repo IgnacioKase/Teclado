@@ -259,7 +259,8 @@ namespace Codificador
             {
                 if (serialPort1.IsOpen)
                 {
-                    serialPort1.Write(new byte[] { 0xff, 2, (byte)2, 1, 0xfe }, 0, 5);
+                    serialPort1.Write(new byte[] { 0xff, 2, (byte)Int16.Parse(notaTextBox.Text), 1, 0xfe }, 0, 5);
+                    timerJob.Enabled = true;
                 }
             }
             catch
@@ -267,6 +268,22 @@ namespace Codificador
                 return;
             }
             
+        }
+
+        private void timerJob_Tick(object sender, EventArgs e)
+        {
+            timerJob.Enabled = false;
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    serialPort1.Write(new byte[] { 0xff, 2, (byte)Int16.Parse(notaTextBox.Text), 0, 0xfe }, 0, 5);
+                }
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

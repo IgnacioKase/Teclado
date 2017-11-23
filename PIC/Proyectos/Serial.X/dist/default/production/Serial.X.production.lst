@@ -1,9 +1,9 @@
 
 
-Microchip Technology PIC LITE Macro Assembler V1.42 build -159332390 
-                                                                                               Mon Nov 20 21:11:23 2017
+Microchip Technology PIC LITE Macro Assembler V1.44 build -154322312 
+                                                                                               Wed Nov 22 11:46:53 2017
 
-Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130522
+Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140600
      1                           	processor	16F628A
      2                           	opt	pw 120
      3                           	opt	lm
@@ -22,8 +22,8 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
     16                           	psect	text5,local,class=CODE,merge=1,delta=2
     17                           	dabs	1,0x7E,2
     18  0000                     
-    19                           ; Version 1.42
-    20                           ; Generated 13/04/2017 GMT
+    19                           ; Version 1.44
+    20                           ; Generated 14/09/2017 GMT
     21                           ; 
     22                           ; Copyright © 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
     23                           ; All rights reserved.
@@ -135,14 +135,14 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    121  0011  3077               	movlw	low __pbssCOMMON
    122  0012  0084               	movwf	4
    123  0013  307D               	movlw	low (__pbssCOMMON+6)
-   124  0014  21EF               	fcall	clear_ram0
+   124  0014  21DF               	fcall	clear_ram0
    125                           
    126                           ; Clear objects allocated to BANK0
    127  0015  1383               	bcf	3,7	;select IRP bank0
    128  0016  3035               	movlw	low __pbssBANK0
    129  0017  0084               	movwf	4
    130  0018  3041               	movlw	low (__pbssBANK0+12)
-   131  0019  21EF               	fcall	clear_ram0
+   131  0019  21DF               	fcall	clear_ram0
    132  001A                     end_of_initialization:	
    133                           ;End of C runtime variable initialization code
    134                           
@@ -169,19 +169,19 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    155  003F                     	ds	2
    156                           
    157                           	psect	clrtext
-   158  01EF                     clear_ram0:	
+   158  01DF                     clear_ram0:	
    159                           ;	Called with FSR containing the base address, and
    160                           ;	W with the last address+1
    161                           
-   162  01EF  0064               	clrwdt	;clear the watchdog before getting into this loop
-   163  01F0                     clrloop0:	
-   164  01F0  0180               	clrf	0	;clear RAM location pointed to by FSR
-   165  01F1  0A84               	incf	4,f	;increment pointer
-   166  01F2  0604               	xorwf	4,w	;XOR with final address
-   167  01F3  1903               	btfsc	3,2	;have we reached the end yet?
-   168  01F4  3400               	retlw	0	;all done for this memory range, return
-   169  01F5  0604               	xorwf	4,w	;XOR again to restore value
-   170  01F6  29F0               	goto	clrloop0	;do the next byte
+   162  01DF  0064               	clrwdt	;clear the watchdog before getting into this loop
+   163  01E0                     clrloop0:	
+   164  01E0  0180               	clrf	0	;clear RAM location pointed to by FSR
+   165  01E1  0A84               	incf	4,f	;increment pointer
+   166  01E2  0604               	xorwf	4,w	;XOR with final address
+   167  01E3  1903               	btfsc	3,2	;have we reached the end yet?
+   168  01E4  3400               	retlw	0	;all done for this memory range, return
+   169  01E5  0604               	xorwf	4,w	;XOR again to restore value
+   170  01E6  29E0               	goto	clrloop0	;do the next byte
    171                           
    172                           	psect	cstackCOMMON
    173  0070                     __pcstackCOMMON:	
@@ -309,7 +309,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    295  00D5  1185               	bcf	5,3	;volatile
    296                           
    297                           ;main.c: 46: InitUART();
-   298  00D6  21D7               	fcall	_InitUART
+   298  00D6  21C7               	fcall	_InitUART
    299                           
    300                           ;main.c: 48: GIE = 1;
    301  00D7  178B               	bsf	11,7	;volatile
@@ -324,7 +324,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    310  00DC  00AB               	movwf	resetearSalidas@cantidadSalidas
    311  00DD  3000               	movlw	0
    312  00DE  00AC               	movwf	resetearSalidas@cantidadSalidas+1
-   313  00DF  21B4               	fcall	_resetearSalidas
+   313  00DF  21A4               	fcall	_resetearSalidas
    314  00E0                     l900:	
    315                           ;main.c: 53: while(1)
    316                           
@@ -462,7 +462,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    448  013D  00AB               	movwf	resetearSalidas@cantidadSalidas
    449  013E  3000               	movlw	0
    450  013F  00AC               	movwf	resetearSalidas@cantidadSalidas+1
-   451  0140  21B4               	fcall	_resetearSalidas
+   451  0140  21A4               	fcall	_resetearSalidas
    452                           
    453                           ;main.c: 72: _delay((unsigned long)((4000)*(20000000/4000.0)));
    454  0141  3066               	movlw	102
@@ -487,7 +487,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    473  0152                     __end_of_main:	
    474                           
    475                           	psect	text1
-   476  01B4                     __ptext1:	
+   476  01A4                     __ptext1:	
    477 ;; *************** function _resetearSalidas *****************
    478 ;; Defined at:
    479 ;;		line 129 in file "main.c"
@@ -520,66 +520,66 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    506                           
    507                           
    508                           ;psect for function _resetearSalidas
-   509  01B4                     _resetearSalidas:	
+   509  01A4                     _resetearSalidas:	
    510                           
    511                           ;main.c: 131: for(int i = 0; i < cantidadSalidas; i = i + 1)
    512                           
    513                           ;incstack = 0
    514                           ; Regs used in _resetearSalidas: [wreg+status,2+status,0]
-   515  01B4  1283               	bcf	3,5	;RP0=0, select bank0
-   516  01B5  1303               	bcf	3,6	;RP1=0, select bank0
-   517  01B6  01AE               	clrf	resetearSalidas@i
-   518  01B7  01AF               	clrf	resetearSalidas@i+1
-   519  01B8                     l748:	
-   520  01B8  082F               	movf	resetearSalidas@i+1,w
-   521  01B9  3A80               	xorlw	128
-   522  01BA  00AD               	movwf	??_resetearSalidas
-   523  01BB  082C               	movf	resetearSalidas@cantidadSalidas+1,w
-   524  01BC  3A80               	xorlw	128
-   525  01BD  022D               	subwf	??_resetearSalidas,w
-   526  01BE  1D03               	skipz
-   527  01BF  29C2               	goto	u285
-   528  01C0  082B               	movf	resetearSalidas@cantidadSalidas,w
-   529  01C1  022E               	subwf	resetearSalidas@i,w
-   530  01C2                     u285:	
-   531  01C2  1803               	btfsc	3,0
-   532  01C3  29D2               	goto	l108
+   515  01A4  1283               	bcf	3,5	;RP0=0, select bank0
+   516  01A5  1303               	bcf	3,6	;RP1=0, select bank0
+   517  01A6  01AE               	clrf	resetearSalidas@i
+   518  01A7  01AF               	clrf	resetearSalidas@i+1
+   519  01A8                     l748:	
+   520  01A8  082F               	movf	resetearSalidas@i+1,w
+   521  01A9  3A80               	xorlw	128
+   522  01AA  00AD               	movwf	??_resetearSalidas
+   523  01AB  082C               	movf	resetearSalidas@cantidadSalidas+1,w
+   524  01AC  3A80               	xorlw	128
+   525  01AD  022D               	subwf	??_resetearSalidas,w
+   526  01AE  1D03               	skipz
+   527  01AF  29B2               	goto	u285
+   528  01B0  082B               	movf	resetearSalidas@cantidadSalidas,w
+   529  01B1  022E               	subwf	resetearSalidas@i,w
+   530  01B2                     u285:	
+   531  01B2  1803               	btfsc	3,0
+   532  01B3  29C2               	goto	l108
    533                           
    534                           ;main.c: 132: {
    535                           ;main.c: 133: RA0 = 0;
-   536  01C4  1283               	bcf	3,5	;RP0=0, select bank0
-   537  01C5  1303               	bcf	3,6	;RP1=0, select bank0
-   538  01C6  1005               	bcf	5,0	;volatile
+   536  01B4  1283               	bcf	3,5	;RP0=0, select bank0
+   537  01B5  1303               	bcf	3,6	;RP1=0, select bank0
+   538  01B6  1005               	bcf	5,0	;volatile
    539                           
    540                           ;main.c: 134: RA1 = 1;
-   541  01C7  1485               	bsf	5,1	;volatile
+   541  01B7  1485               	bsf	5,1	;volatile
    542                           
    543                           ;main.c: 135: RA1 = 0;
-   544  01C8  1085               	bcf	5,1	;volatile
-   545  01C9  082E               	movf	resetearSalidas@i,w
-   546  01CA  3E01               	addlw	1
-   547  01CB  00AE               	movwf	resetearSalidas@i
-   548  01CC  082F               	movf	resetearSalidas@i+1,w
-   549  01CD  1803               	skipnc
-   550  01CE  3E01               	addlw	1
-   551  01CF  3E00               	addlw	0
-   552  01D0  00AF               	movwf	resetearSalidas@i+1
-   553  01D1  29B8               	goto	l748
-   554  01D2                     l108:	
+   544  01B8  1085               	bcf	5,1	;volatile
+   545  01B9  082E               	movf	resetearSalidas@i,w
+   546  01BA  3E01               	addlw	1
+   547  01BB  00AE               	movwf	resetearSalidas@i
+   548  01BC  082F               	movf	resetearSalidas@i+1,w
+   549  01BD  1803               	skipnc
+   550  01BE  3E01               	addlw	1
+   551  01BF  3E00               	addlw	0
+   552  01C0  00AF               	movwf	resetearSalidas@i+1
+   553  01C1  29A8               	goto	l748
+   554  01C2                     l108:	
    555                           
    556                           ;main.c: 136: }
    557                           ;main.c: 137: RA2 = 1;
-   558  01D2  1283               	bcf	3,5	;RP0=0, select bank0
-   559  01D3  1303               	bcf	3,6	;RP1=0, select bank0
-   560  01D4  1505               	bsf	5,2	;volatile
+   558  01C2  1283               	bcf	3,5	;RP0=0, select bank0
+   559  01C3  1303               	bcf	3,6	;RP1=0, select bank0
+   560  01C4  1505               	bsf	5,2	;volatile
    561                           
    562                           ;main.c: 138: RA2 = 0;
-   563  01D5  1105               	bcf	5,2	;volatile
-   564  01D6  0008               	return
-   565  01D7                     __end_of_resetearSalidas:	
+   563  01C5  1105               	bcf	5,2	;volatile
+   564  01C6  0008               	return
+   565  01C7                     __end_of_resetearSalidas:	
    566                           
    567                           	psect	text2
-   568  01D7                     __ptext2:	
+   568  01C7                     __ptext2:	
    569 ;; *************** function _InitUART *****************
    570 ;; Defined at:
    571 ;;		line 141 in file "main.c"
@@ -612,59 +612,59 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    598                           
    599                           
    600                           ;psect for function _InitUART
-   601  01D7                     _InitUART:	
+   601  01C7                     _InitUART:	
    602                           
    603                           ;main.c: 143: SPBRG = ((20000000/16)/19200) - 1;
    604                           
    605                           ;incstack = 0
    606                           ; Regs used in _InitUART: [wreg]
-   607  01D7  3040               	movlw	64
-   608  01D8  1683               	bsf	3,5	;RP0=1, select bank1
-   609  01D9  1303               	bcf	3,6	;RP1=0, select bank1
-   610  01DA  0099               	movwf	25	;volatile
+   607  01C7  3040               	movlw	64
+   608  01C8  1683               	bsf	3,5	;RP0=1, select bank1
+   609  01C9  1303               	bcf	3,6	;RP1=0, select bank1
+   610  01CA  0099               	movwf	25	;volatile
    611                           
    612                           ;main.c: 144: BRGH = 1;
-   613  01DB  1518               	bsf	24,2	;volatile
+   613  01CB  1518               	bsf	24,2	;volatile
    614                           
    615                           ;main.c: 145: SYNC = 0;
-   616  01DC  1218               	bcf	24,4	;volatile
+   616  01CC  1218               	bcf	24,4	;volatile
    617                           
    618                           ;main.c: 146: SPEN = 1;
-   619  01DD  1283               	bcf	3,5	;RP0=0, select bank0
-   620  01DE  1303               	bcf	3,6	;RP1=0, select bank0
-   621  01DF  1798               	bsf	24,7	;volatile
+   619  01CD  1283               	bcf	3,5	;RP0=0, select bank0
+   620  01CE  1303               	bcf	3,6	;RP1=0, select bank0
+   621  01CF  1798               	bsf	24,7	;volatile
    622                           
    623                           ;main.c: 147: CREN = 1;
-   624  01E0  1618               	bsf	24,4	;volatile
+   624  01D0  1618               	bsf	24,4	;volatile
    625                           
    626                           ;main.c: 148: SREN = 0;
-   627  01E1  1298               	bcf	24,5	;volatile
+   627  01D1  1298               	bcf	24,5	;volatile
    628                           
    629                           ;main.c: 149: TXIE = 0;
-   630  01E2  1683               	bsf	3,5	;RP0=1, select bank1
-   631  01E3  1303               	bcf	3,6	;RP1=0, select bank1
-   632  01E4  120C               	bcf	12,4	;volatile
+   630  01D2  1683               	bsf	3,5	;RP0=1, select bank1
+   631  01D3  1303               	bcf	3,6	;RP1=0, select bank1
+   632  01D4  120C               	bcf	12,4	;volatile
    633                           
    634                           ;main.c: 150: RCIE = 1;
-   635  01E5  168C               	bsf	12,5	;volatile
+   635  01D5  168C               	bsf	12,5	;volatile
    636                           
    637                           ;main.c: 151: TX9 = 0;
-   638  01E6  1318               	bcf	24,6	;volatile
+   638  01D6  1318               	bcf	24,6	;volatile
    639                           
    640                           ;main.c: 152: RX9 = 0;
-   641  01E7  1283               	bcf	3,5	;RP0=0, select bank0
-   642  01E8  1303               	bcf	3,6	;RP1=0, select bank0
-   643  01E9  1318               	bcf	24,6	;volatile
+   641  01D7  1283               	bcf	3,5	;RP0=0, select bank0
+   642  01D8  1303               	bcf	3,6	;RP1=0, select bank0
+   643  01D9  1318               	bcf	24,6	;volatile
    644                           
    645                           ;main.c: 153: TXEN = 0;
-   646  01EA  1683               	bsf	3,5	;RP0=1, select bank1
-   647  01EB  1303               	bcf	3,6	;RP1=0, select bank1
-   648  01EC  1298               	bcf	24,5	;volatile
+   646  01DA  1683               	bsf	3,5	;RP0=1, select bank1
+   647  01DB  1303               	bcf	3,6	;RP1=0, select bank1
+   648  01DC  1298               	bcf	24,5	;volatile
    649                           
    650                           ;main.c: 154: TXEN = 1;
-   651  01ED  1698               	bsf	24,5	;volatile
-   652  01EE  0008               	return
-   653  01EF                     __end_of_InitUART:	
+   651  01DD  1698               	bsf	24,5	;volatile
+   652  01DE  0008               	return
+   653  01DF                     __end_of_InitUART:	
    654                           
    655                           	psect	text3
    656  001C                     __ptext3:	
@@ -709,7 +709,7 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    695                           
    696                           ;main.c: 80: {
    697                           ;main.c: 81: lectura = ReceiveByteSerially();
-   698  001E  21F7               	fcall	_ReceiveByteSerially
+   698  001E  21E7               	fcall	_ReceiveByteSerially
    699  001F  1283               	bcf	3,5	;RP0=0, select bank0
    700  0020  1303               	bcf	3,6	;RP1=0, select bank0
    701  0021  00A0               	movwf	??_ISR
@@ -1000,197 +1000,179 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    986                           ;psect for function _escribirSalida
    987  0152                     _escribirSalida:	
    988                           
-   989                           ;main.c: 115: for(int k = 0; k < 4; k++)
+   989                           ;main.c: 115: for(int k = 3; k >= 0; k--)
    990                           
    991                           ;incstack = 0
    992                           ; Regs used in _escribirSalida: [wreg-fsr0h+status,2+status,0+btemp+1]
-   993  0152  01F3               	clrf	escribirSalida@k
-   994  0153  01F4               	clrf	escribirSalida@k+1
-   995  0154  0874               	movf	escribirSalida@k+1,w
-   996  0155  3A80               	xorlw	128
-   997  0156  00FF               	movwf	127
-   998  0157  3080               	movlw	128
-   999  0158  027F               	subwf	127,w
-  1000  0159  1D03               	skipz
-  1001  015A  295D               	goto	u30_25
-  1002  015B  3004               	movlw	4
-  1003  015C  0273               	subwf	escribirSalida@k,w
-  1004  015D                     u30_25:	
-  1005  015D  1803               	btfsc	3,0
-  1006  015E  29AF               	goto	i1l100
-  1007  015F                     i1l764:	
-  1008                           
-  1009                           ;main.c: 116: {
-  1010                           ;main.c: 117: for(int i = 0; i < 16; i++)
-  1011  015F  01F5               	clrf	escribirSalida@i
-  1012  0160  01F6               	clrf	escribirSalida@i+1
-  1013  0161  0876               	movf	escribirSalida@i+1,w
-  1014  0162  3A80               	xorlw	128
-  1015  0163  00FF               	movwf	127
-  1016  0164  3080               	movlw	128
-  1017  0165  027F               	subwf	127,w
-  1018  0166  1D03               	skipz
-  1019  0167  296A               	goto	u31_25
-  1020  0168  3010               	movlw	16
-  1021  0169  0275               	subwf	escribirSalida@i,w
-  1022  016A                     u31_25:	
-  1023  016A  1803               	btfsc	3,0
-  1024  016B  299E               	goto	i1l780
-  1025  016C                     i1l770:	
-  1026                           
-  1027                           ;main.c: 118: {
-  1028                           ;main.c: 119: RA0 = ((palabras[k] >> (16 - i)) & 1);
-  1029  016C  0873               	movf	escribirSalida@k,w
-  1030  016D  00F0               	movwf	??_escribirSalida
-  1031  016E  0770               	addwf	??_escribirSalida,w
-  1032  016F  3E35               	addlw	(low (_palabras| 0))& (0+255)
-  1033  0170  0084               	movwf	4
-  1034  0171  1383               	bcf	3,7	;select IRP bank0
-  1035  0172  0800               	movf	0,w
-  1036  0173  00F1               	movwf	??_escribirSalida+1
-  1037  0174  0A84               	incf	4,f
-  1038  0175  0800               	movf	0,w
-  1039  0176  00F2               	movwf	??_escribirSalida+2
-  1040  0177  0375               	decf	escribirSalida@i,w
-  1041  0178  3AFF               	xorlw	255
-  1042  0179  3E10               	addlw	16
-  1043  017A  3E01               	addlw	1
-  1044  017B  297F               	goto	u32_24
-  1045  017C                     u32_25:	
-  1046  017C  1003               	clrc
-  1047  017D  0CF2               	rrf	??_escribirSalida+2,f
-  1048  017E  0CF1               	rrf	??_escribirSalida+1,f
-  1049  017F                     u32_24:	
-  1050  017F  3EFF               	addlw	-1
-  1051  0180  1D03               	skipz
-  1052  0181  297C               	goto	u32_25
-  1053  0182  1C71               	btfss	??_escribirSalida+1,0
-  1054  0183  2988               	goto	u33_20
-  1055  0184  1283               	bcf	3,5	;RP0=0, select bank0
-  1056  0185  1303               	bcf	3,6	;RP1=0, select bank0
-  1057  0186  1405               	bsf	5,0	;volatile
-  1058  0187  298B               	goto	i1l772
-  1059  0188                     u33_20:	
-  1060  0188  1283               	bcf	3,5	;RP0=0, select bank0
-  1061  0189  1303               	bcf	3,6	;RP1=0, select bank0
-  1062  018A  1005               	bcf	5,0	;volatile
-  1063  018B                     i1l772:	
-  1064                           
-  1065                           ;main.c: 120: RA1 = 1;
-  1066  018B  1485               	bsf	5,1	;volatile
-  1067                           
-  1068                           ;main.c: 121: RA1 = 0;
-  1069  018C  1085               	bcf	5,1	;volatile
-  1070  018D  3001               	movlw	1
-  1071  018E  07F5               	addwf	escribirSalida@i,f
-  1072  018F  1803               	skipnc
-  1073  0190  0AF6               	incf	escribirSalida@i+1,f
-  1074  0191  3000               	movlw	0
-  1075  0192  07F6               	addwf	escribirSalida@i+1,f
-  1076  0193  0876               	movf	escribirSalida@i+1,w
-  1077  0194  3A80               	xorlw	128
-  1078  0195  00FF               	movwf	127
-  1079  0196  3080               	movlw	128
-  1080  0197  027F               	subwf	127,w
-  1081  0198  1D03               	skipz
-  1082  0199  299C               	goto	u35_25
-  1083  019A  3010               	movlw	16
-  1084  019B  0275               	subwf	escribirSalida@i,w
-  1085  019C                     u35_25:	
-  1086  019C  1C03               	skipc
-  1087  019D  296C               	goto	i1l770
-  1088  019E                     i1l780:	
-  1089  019E  3001               	movlw	1
-  1090  019F  07F3               	addwf	escribirSalida@k,f
-  1091  01A0  1803               	skipnc
-  1092  01A1  0AF4               	incf	escribirSalida@k+1,f
-  1093  01A2  3000               	movlw	0
-  1094  01A3  07F4               	addwf	escribirSalida@k+1,f
-  1095  01A4  0874               	movf	escribirSalida@k+1,w
-  1096  01A5  3A80               	xorlw	128
-  1097  01A6  00FF               	movwf	127
-  1098  01A7  3080               	movlw	128
-  1099  01A8  027F               	subwf	127,w
-  1100  01A9  1D03               	skipz
-  1101  01AA  29AD               	goto	u36_25
-  1102  01AB  3004               	movlw	4
-  1103  01AC  0273               	subwf	escribirSalida@k,w
-  1104  01AD                     u36_25:	
-  1105  01AD  1C03               	skipc
-  1106  01AE  295F               	goto	i1l764
-  1107  01AF                     i1l100:	
-  1108                           
-  1109                           ;main.c: 122: }
-  1110                           ;main.c: 123: }
-  1111                           ;main.c: 125: RA2 = 1;
-  1112  01AF  1283               	bcf	3,5	;RP0=0, select bank0
-  1113  01B0  1303               	bcf	3,6	;RP1=0, select bank0
-  1114  01B1  1505               	bsf	5,2	;volatile
-  1115                           
-  1116                           ;main.c: 126: RA2 = 0;
-  1117  01B2  1105               	bcf	5,2	;volatile
-  1118  01B3  0008               	return
-  1119  01B4                     __end_of_escribirSalida:	
-  1120                           
-  1121                           	psect	text5
-  1122  01F7                     __ptext5:	
-  1123 ;; *************** function _ReceiveByteSerially *****************
-  1124 ;; Defined at:
-  1125 ;;		line 157 in file "main.c"
-  1126 ;; Parameters:    Size  Location     Type
-  1127 ;;		None
-  1128 ;; Auto vars:     Size  Location     Type
-  1129 ;;		None
-  1130 ;; Return value:  Size  Location     Type
-  1131 ;;                  1    wreg      unsigned char 
-  1132 ;; Registers used:
-  1133 ;;		wreg
-  1134 ;; Tracked objects:
-  1135 ;;		On entry : 0/0
-  1136 ;;		On exit  : 0/0
-  1137 ;;		Unchanged: 0/0
-  1138 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
-  1139 ;;      Params:         0       0       0       0
-  1140 ;;      Locals:         0       0       0       0
-  1141 ;;      Temps:          0       0       0       0
-  1142 ;;      Totals:         0       0       0       0
-  1143 ;;Total ram usage:        0 bytes
-  1144 ;; Hardware stack levels used:    1
-  1145 ;; This function calls:
-  1146 ;;		Nothing
-  1147 ;; This function is called by:
-  1148 ;;		_ISR
-  1149 ;; This function uses a non-reentrant model
-  1150 ;;
-  1151                           
-  1152                           
-  1153                           ;psect for function _ReceiveByteSerially
-  1154  01F7                     _ReceiveByteSerially:	
-  1155                           
-  1156                           ;main.c: 159: if(OERR)
-  1157                           
-  1158                           ;incstack = 0
-  1159                           ; Regs used in _ReceiveByteSerially: [wreg]
-  1160  01F7  1283               	bcf	3,5	;RP0=0, select bank0
-  1161  01F8  1303               	bcf	3,6	;RP1=0, select bank0
-  1162  01F9  1C98               	btfss	24,1	;volatile
-  1163  01FA  29FD               	goto	i1l754
-  1164                           
-  1165                           ;main.c: 160: {
-  1166                           ;main.c: 161: CREN = 0;
-  1167  01FB  1218               	bcf	24,4	;volatile
-  1168                           
-  1169                           ;main.c: 162: CREN = 1;
-  1170  01FC  1618               	bsf	24,4	;volatile
-  1171  01FD                     i1l754:	
-  1172                           
-  1173                           ;main.c: 163: }
-  1174                           ;main.c: 164: return RCREG;
-  1175  01FD  081A               	movf	26,w	;volatile
-  1176  01FE  0008               	return
-  1177  01FF                     __end_of_ReceiveByteSerially:	
-  1178  007E                     btemp	set	126	;btemp
-  1179  007E                     wtemp0	set	126
+   993  0152  3003               	movlw	3
+   994  0153  00F3               	movwf	escribirSalida@k
+   995  0154  3000               	movlw	0
+   996  0155  00F4               	movwf	escribirSalida@k+1
+   997  0156  1BF4               	btfsc	escribirSalida@k+1,7
+   998  0157  299F               	goto	i1l100
+   999  0158                     i1l764:	
+  1000                           
+  1001                           ;main.c: 116: {
+  1002                           ;main.c: 117: for(int i = 0; i < 16; i++)
+  1003  0158  01F5               	clrf	escribirSalida@i
+  1004  0159  01F6               	clrf	escribirSalida@i+1
+  1005  015A  0876               	movf	escribirSalida@i+1,w
+  1006  015B  3A80               	xorlw	128
+  1007  015C  00FF               	movwf	127
+  1008  015D  3080               	movlw	128
+  1009  015E  027F               	subwf	127,w
+  1010  015F  1D03               	skipz
+  1011  0160  2963               	goto	u31_25
+  1012  0161  3010               	movlw	16
+  1013  0162  0275               	subwf	escribirSalida@i,w
+  1014  0163                     u31_25:	
+  1015  0163  1803               	btfsc	3,0
+  1016  0164  2997               	goto	i1l780
+  1017  0165                     i1l770:	
+  1018                           
+  1019                           ;main.c: 118: {
+  1020                           ;main.c: 119: RA0 = ((palabras[k] >> (16 - i)) & 1);
+  1021  0165  0873               	movf	escribirSalida@k,w
+  1022  0166  00F0               	movwf	??_escribirSalida
+  1023  0167  0770               	addwf	??_escribirSalida,w
+  1024  0168  3E35               	addlw	(low (_palabras| 0))& (0+255)
+  1025  0169  0084               	movwf	4
+  1026  016A  1383               	bcf	3,7	;select IRP bank0
+  1027  016B  0800               	movf	0,w
+  1028  016C  00F1               	movwf	??_escribirSalida+1
+  1029  016D  0A84               	incf	4,f
+  1030  016E  0800               	movf	0,w
+  1031  016F  00F2               	movwf	??_escribirSalida+2
+  1032  0170  0375               	decf	escribirSalida@i,w
+  1033  0171  3AFF               	xorlw	255
+  1034  0172  3E10               	addlw	16
+  1035  0173  3E01               	addlw	1
+  1036  0174  2978               	goto	u32_24
+  1037  0175                     u32_25:	
+  1038  0175  1003               	clrc
+  1039  0176  0CF2               	rrf	??_escribirSalida+2,f
+  1040  0177  0CF1               	rrf	??_escribirSalida+1,f
+  1041  0178                     u32_24:	
+  1042  0178  3EFF               	addlw	-1
+  1043  0179  1D03               	skipz
+  1044  017A  2975               	goto	u32_25
+  1045  017B  1C71               	btfss	??_escribirSalida+1,0
+  1046  017C  2981               	goto	u33_20
+  1047  017D  1283               	bcf	3,5	;RP0=0, select bank0
+  1048  017E  1303               	bcf	3,6	;RP1=0, select bank0
+  1049  017F  1405               	bsf	5,0	;volatile
+  1050  0180  2984               	goto	i1l772
+  1051  0181                     u33_20:	
+  1052  0181  1283               	bcf	3,5	;RP0=0, select bank0
+  1053  0182  1303               	bcf	3,6	;RP1=0, select bank0
+  1054  0183  1005               	bcf	5,0	;volatile
+  1055  0184                     i1l772:	
+  1056                           
+  1057                           ;main.c: 120: RA1 = 1;
+  1058  0184  1485               	bsf	5,1	;volatile
+  1059                           
+  1060                           ;main.c: 121: RA1 = 0;
+  1061  0185  1085               	bcf	5,1	;volatile
+  1062  0186  3001               	movlw	1
+  1063  0187  07F5               	addwf	escribirSalida@i,f
+  1064  0188  1803               	skipnc
+  1065  0189  0AF6               	incf	escribirSalida@i+1,f
+  1066  018A  3000               	movlw	0
+  1067  018B  07F6               	addwf	escribirSalida@i+1,f
+  1068  018C  0876               	movf	escribirSalida@i+1,w
+  1069  018D  3A80               	xorlw	128
+  1070  018E  00FF               	movwf	127
+  1071  018F  3080               	movlw	128
+  1072  0190  027F               	subwf	127,w
+  1073  0191  1D03               	skipz
+  1074  0192  2995               	goto	u35_25
+  1075  0193  3010               	movlw	16
+  1076  0194  0275               	subwf	escribirSalida@i,w
+  1077  0195                     u35_25:	
+  1078  0195  1C03               	skipc
+  1079  0196  2965               	goto	i1l770
+  1080  0197                     i1l780:	
+  1081  0197  30FF               	movlw	255
+  1082  0198  07F3               	addwf	escribirSalida@k,f
+  1083  0199  1803               	skipnc
+  1084  019A  0AF4               	incf	escribirSalida@k+1,f
+  1085  019B  30FF               	movlw	255
+  1086  019C  07F4               	addwf	escribirSalida@k+1,f
+  1087  019D  1FF4               	btfss	escribirSalida@k+1,7
+  1088  019E  2958               	goto	i1l764
+  1089  019F                     i1l100:	
+  1090                           
+  1091                           ;main.c: 122: }
+  1092                           ;main.c: 123: }
+  1093                           ;main.c: 125: RA2 = 1;
+  1094  019F  1283               	bcf	3,5	;RP0=0, select bank0
+  1095  01A0  1303               	bcf	3,6	;RP1=0, select bank0
+  1096  01A1  1505               	bsf	5,2	;volatile
+  1097                           
+  1098                           ;main.c: 126: RA2 = 0;
+  1099  01A2  1105               	bcf	5,2	;volatile
+  1100  01A3  0008               	return
+  1101  01A4                     __end_of_escribirSalida:	
+  1102                           
+  1103                           	psect	text5
+  1104  01E7                     __ptext5:	
+  1105 ;; *************** function _ReceiveByteSerially *****************
+  1106 ;; Defined at:
+  1107 ;;		line 157 in file "main.c"
+  1108 ;; Parameters:    Size  Location     Type
+  1109 ;;		None
+  1110 ;; Auto vars:     Size  Location     Type
+  1111 ;;		None
+  1112 ;; Return value:  Size  Location     Type
+  1113 ;;                  1    wreg      unsigned char 
+  1114 ;; Registers used:
+  1115 ;;		wreg
+  1116 ;; Tracked objects:
+  1117 ;;		On entry : 0/0
+  1118 ;;		On exit  : 0/0
+  1119 ;;		Unchanged: 0/0
+  1120 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1121 ;;      Params:         0       0       0       0
+  1122 ;;      Locals:         0       0       0       0
+  1123 ;;      Temps:          0       0       0       0
+  1124 ;;      Totals:         0       0       0       0
+  1125 ;;Total ram usage:        0 bytes
+  1126 ;; Hardware stack levels used:    1
+  1127 ;; This function calls:
+  1128 ;;		Nothing
+  1129 ;; This function is called by:
+  1130 ;;		_ISR
+  1131 ;; This function uses a non-reentrant model
+  1132 ;;
+  1133                           
+  1134                           
+  1135                           ;psect for function _ReceiveByteSerially
+  1136  01E7                     _ReceiveByteSerially:	
+  1137                           
+  1138                           ;main.c: 159: if(OERR)
+  1139                           
+  1140                           ;incstack = 0
+  1141                           ; Regs used in _ReceiveByteSerially: [wreg]
+  1142  01E7  1283               	bcf	3,5	;RP0=0, select bank0
+  1143  01E8  1303               	bcf	3,6	;RP1=0, select bank0
+  1144  01E9  1C98               	btfss	24,1	;volatile
+  1145  01EA  29ED               	goto	i1l754
+  1146                           
+  1147                           ;main.c: 160: {
+  1148                           ;main.c: 161: CREN = 0;
+  1149  01EB  1218               	bcf	24,4	;volatile
+  1150                           
+  1151                           ;main.c: 162: CREN = 1;
+  1152  01EC  1618               	bsf	24,4	;volatile
+  1153  01ED                     i1l754:	
+  1154                           
+  1155                           ;main.c: 163: }
+  1156                           ;main.c: 164: return RCREG;
+  1157  01ED  081A               	movf	26,w	;volatile
+  1158  01EE  0008               	return
+  1159  01EF                     __end_of_ReceiveByteSerially:	
+  1160  007E                     btemp	set	126	;btemp
+  1161  007E                     wtemp0	set	126
 
 
 Data Sizes:
@@ -1312,15 +1294,15 @@ BANK2               30      0       0       9        0.0%
 DATA                 0      0      2E      10        0.0%
 
 
-Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                   Mon Nov 20 21:11:23 2017
+Microchip Technology PIC Macro Assembler V1.44 build -154322312 
+Symbol Table                                                                                   Wed Nov 22 11:46:53 2017
 
                    __CFG_CP$OFF 0000                              l80 0151                              l77 0107  
-                            fsr 0004         __size_of_escribirSalida 0062                             l108 01D2  
-                           l900 00E0                             l748 01B8                             l924 0136  
+                            fsr 0004         __size_of_escribirSalida 0052                             l108 01C2  
+                           l900 00E0                             l748 01A8                             l924 0136  
                            _GIE 005F                             _RA0 0028                             _RA1 0029  
                            _RA2 002A                             _RA3 002B                             _RA4 002C  
-                  __CFG_CPD$OFF 0000                             _ISR 001C                             u285 01C2  
+                  __CFG_CPD$OFF 0000                             _ISR 001C                             u285 01B2  
                            u607 0112                             u617 0149                             u575 0105  
                            u585 0134                             u597 00EC                             _RX9 00C6  
                            _TX9 04C6                             fsr0 0004                             indf 0000  
@@ -1331,34 +1313,34 @@ Symbol Table                                                                    
                           _TXIE 0464                            _TXEN 04C5                            _SYNC 04C4  
                           _main 00CB                            btemp 007E                   __CFG_BOREN$ON 0000  
                           start 0010                           ??_ISR 0020                           ?_main 0070  
-                 __CFG_WDTE$OFF 0000                           _CMCON 001F                           i1l100 01AF  
-                         i1l754 01FD                           i1l770 016C                           i1l850 0079  
-                         i1l772 018B                           i1l780 019E                           i1l764 015F  
+                 __CFG_WDTE$OFF 0000                           _CMCON 001F                           i1l100 019F  
+                         i1l754 01ED                           i1l770 0165                           i1l850 0079  
+                         i1l772 0184                           i1l780 0197                           i1l764 0158  
                          i1l852 00A6                           i1l860 00B4                           i1l836 0030  
                          i1l846 0047                           i1l858 00AE                           _RCREG 001A  
-                         u30_25 015D                           u31_25 016A                           u32_24 017F  
-                         u32_25 017C                           u33_20 0188                           _SPBRG 0099  
-                         u50_24 0090                           u50_25 008D                           u51_20 0098  
-                         u35_25 019C                           u52_20 0099                           u36_25 01AD  
-                         u47_25 0057                           u48_24 006B                           u48_25 0068  
-                         _TRISA 0085                           u49_25 007C                           _trama 003D  
-                         main@k 0033                           pclath 000A                           status 0003  
-                         wtemp0 007E                  __CFG_MCLRE$OFF 0000                 __initialization 0011  
-              ?_resetearSalidas 002B                    __end_of_main 0152                __end_of_InitUART 01EF  
-                        ??_main 0030                  __CFG_PWRTE$OFF 0000                          _buffer 0077  
-                        _indice 0079                  _escribirSalida 0152                          saved_w 007E  
-       __end_of__initialization 001A     __end_of_ReceiveByteSerially 01FF                  __pcstackCOMMON 0070  
-        __end_of_escribirSalida 01B4                      _dataLength 003F                      __pbssBANK0 0035  
-                     ?_InitUART 0070                      __pmaintext 00CB                      __pintentry 0004  
-               ?_escribirSalida 0070                      ??_InitUART 002B                         __ptext1 01B4  
-                       __ptext2 01D7                         __ptext3 001C                         __ptext4 0152  
-                       __ptext5 01F7                    __size_of_ISR 00AF                         _lectura 007B  
-                       clrloop0 01F0            end_of_initialization 001A        __size_of_resetearSalidas 0023  
-           start_initialization 0011                     __end_of_ISR 00CB               __size_of_InitUART 0018  
-              ??_escribirSalida 0070    __size_of_ReceiveByteSerially 0008                     __pbssCOMMON 0077  
-                     ___latbits 0000                   __pcstackBANK0 0020               ??_resetearSalidas 002D  
-              resetearSalidas@i 002E               interrupt_function 0004                       clear_ram0 01EF  
-                      _InitUART 01D7             _ReceiveByteSerially 01F7                        _palabras 0035  
-                 __size_of_main 0087            ?_ReceiveByteSerially 0070                 _resetearSalidas 01B4  
-                      intlevel1 0000           ??_ReceiveByteSerially 0070  resetearSalidas@cantidadSalidas 002B  
-               escribirSalida@i 0075                 escribirSalida@k 0073         __end_of_resetearSalidas 01D7  
+                         u31_25 0163                           u32_24 0178                           u32_25 0175  
+                         u33_20 0181                           _SPBRG 0099                           u50_24 0090  
+                         u50_25 008D                           u51_20 0098                           u35_25 0195  
+                         u52_20 0099                           u47_25 0057                           u48_24 006B  
+                         u48_25 0068                           _TRISA 0085                           u49_25 007C  
+                         _trama 003D                           main@k 0033                           pclath 000A  
+                         status 0003                           wtemp0 007E                  __CFG_MCLRE$OFF 0000  
+               __initialization 0011                ?_resetearSalidas 002B                    __end_of_main 0152  
+              __end_of_InitUART 01DF                          ??_main 0030                  __CFG_PWRTE$OFF 0000  
+                        _buffer 0077                          _indice 0079                  _escribirSalida 0152  
+                        saved_w 007E         __end_of__initialization 001A     __end_of_ReceiveByteSerially 01EF  
+                __pcstackCOMMON 0070          __end_of_escribirSalida 01A4                      _dataLength 003F  
+                    __pbssBANK0 0035                       ?_InitUART 0070                      __pmaintext 00CB  
+                    __pintentry 0004                 ?_escribirSalida 0070                      ??_InitUART 002B  
+                       __ptext1 01A4                         __ptext2 01C7                         __ptext3 001C  
+                       __ptext4 0152                         __ptext5 01E7                    __size_of_ISR 00AF  
+                       _lectura 007B                         clrloop0 01E0            end_of_initialization 001A  
+      __size_of_resetearSalidas 0023             start_initialization 0011                     __end_of_ISR 00CB  
+             __size_of_InitUART 0018                ??_escribirSalida 0070    __size_of_ReceiveByteSerially 0008  
+                   __pbssCOMMON 0077                       ___latbits 0000                   __pcstackBANK0 0020  
+             ??_resetearSalidas 002D                resetearSalidas@i 002E               interrupt_function 0004  
+                     clear_ram0 01DF                        _InitUART 01C7             _ReceiveByteSerially 01E7  
+                      _palabras 0035                   __size_of_main 0087            ?_ReceiveByteSerially 0070  
+               _resetearSalidas 01A4                        intlevel1 0000           ??_ReceiveByteSerially 0070  
+resetearSalidas@cantidadSalidas 002B                 escribirSalida@i 0075                 escribirSalida@k 0073  
+       __end_of_resetearSalidas 01C7  

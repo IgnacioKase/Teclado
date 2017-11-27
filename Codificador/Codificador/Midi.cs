@@ -37,13 +37,13 @@ namespace Codificador
 
         public bool OpenFile(string openFile)
         {
+            if (openFile == "openFileDialog1") return false;
             Lectura = new StreamReader(openFile);
             string dato = Lectura.ReadLine();
             string[] rows = dato.Split();
             Int32 Btiempo = 0;
             Int32 tiempo = 0;
             List<TempoMap> tempoMapList = new List<TempoMap>();
-           // while(dato != "TrkEnd")
             while(dato != null)
             {
                 if( rows.Length > 1)
@@ -56,7 +56,7 @@ namespace Codificador
                             TicksQN = ((ulong)Int32.Parse(rows[2].Split('/')[0]) * 4 / (ulong)Int32.Parse(rows[2].Split('/')[1])) * (ulong)Int32.Parse(rows[3]);
                             break;
                         case "Tempo":
-                            tempoMapList.Add(new TempoMap((ulong)tiempo, (ulong)Int32.Parse(rows[2])));
+                            tempoMapList.Add(new TempoMap((ulong)tiempo, (ulong)Int32.Parse(rows[2]) / 10));
                             break;
                     }
                 }
@@ -64,8 +64,15 @@ namespace Codificador
                 if(dato != null) rows = dato.Split();
             }
             TempoMap = tempoMapList.ToArray();
-            if(TempoMap.Length > 0) TempoQN = TempoMap[Cuenta].Velocidad;      ///Areglar el tiempo al inciar
-            if(TempoMap.Length > 1)
+            if (TempoMap.Length > 0)
+            {
+                if (TempoMap[Cuenta].Tiempo == 0)
+                {
+                    TempoQN = TempoMap[Cuenta].Velocidad;
+                    Cuenta++;
+                }  
+            }
+            if (TempoMap.Length > 1)
             {
                 TotalTiempoMap = TempoMap[Cuenta + 1].Tiempo;
             }
@@ -112,20 +119,19 @@ namespace Codificador
             }
         }
 
-        public void NextTempo()
+        public void NextTempo(int escaler)
         {
-            Cuenta++;
-            if(Cuenta < (TempoMap.Length - 1) )
+            if ((TotalTiempoSong >= TotalTiempoMap) && ((Cuenta + 1) < (TempoMap.Length - 1)))
             {
-                TotalTiempoMap += (ulong)(TempoMap[Cuenta + 1].Tiempo * (ulong)(TempoQN / TicksQN) / 1000);
+                TotalTiempoMap += (ulong)((TempoMap[Cuenta + 1].Tiempo * (ulong)(TempoQN / TicksQN) / 1000) / (ulong)escaler);
                 TempoQN = TempoMap[Cuenta].Velocidad;
+                Cuenta++;
             }
         }
-        #endregion
 
         public void Stop()
         {
-            if( Lectura != null)
+            if (Lectura != null)
             {
                 Lectura.Close();
                 Cuenta = 0;
@@ -135,5 +141,6 @@ namespace Codificador
                 TotalTiempoSong = 0;
             }
         }
+        #endregion  
     }
 }

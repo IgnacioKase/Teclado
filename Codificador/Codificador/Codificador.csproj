@@ -68,6 +68,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Formato.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Midi.cs" />
     <Compile Include="NotaMidi.cs" />
     <Compile Include="Program.cs" />

@@ -7,149 +7,277 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using System.Collections;
 using System.IO.Ports;
+using System.Threading;
 
 namespace Codificador
 {
-    public partial class Form1 : Form 
+    public partial class Form1 : Form
     {
+        #region Properties
         Formato inicializacionFormato = new Formato();
         List<ThemesAppearance> temas = new List<ThemesAppearance>();
         short escala = 40;
         Color claro = Color.FromArgb(255, 240, 240, 240);
         Draw canvas = new Draw();
         Midi midiFile = new Midi();
-        
+        int countTest;
+        #endregion
+
+        #region Attributes
+        internal Formato InicializacionFormato { get => inicializacionFormato; set => inicializacionFormato = value; }
+        internal List<ThemesAppearance> Temas { get => temas; set => temas = value; }
+        public short Escala { get => escala; set => escala = value; }
+        public Color Claro { get => claro; set => claro = value; }
+        public Draw Canvas { get => canvas; set => canvas = value; }
+        public Midi MidiFile { get => midiFile; set => midiFile = value; }
+        public int CountTest { get => countTest; set => countTest = value; }
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
-            canvas = new Draw(pictureBox1, claro);
-            canvas.Set();
-            canvas.Box();
-            canvas.Grid();
+            SetCanvas();
+            SetThemes();
+            
+        }
 
-            temas = inicializacionFormato.loadThemesFromXml();
-            foreach (ThemesAppearance _x in temas)
+        #region MidiMethods
+        private List<NotaMidi> AgruparNotas(List<NotaMidi> listaNotas, Midi midi)
+        {
+            while (listaNotas.Last().Tiempo == 0)
+            {
+                listaNotas.Add(midi.NextNote());
+                if (listaNotas.Last() == null) break;
+            }
+            return listaNotas;
+        }
+
+        private List<byte> ProcesarNotas(List<NotaMidi> listaNotas, List<byte> serialArray)
+        {
+            serialArray.Add(0xff);
+            serialArray.Add((byte)(listaNotas.Count * 2));
+            foreach (NotaMidi _x in listaNotas)
+            {
+                if (_x != null)
+                {
+                    for (int i = 0; i < _x.Nota.Count; i++)
+                    {
+                        serialArray.Add((byte)(Math.Abs(_x.Nota[i] - Escala)));
+                        serialArray.Add(Convert.ToByte(_x.Velocidad[i] > 0));
+                    }
+                }
+            }
+            serialArray.Add(0xfe);
+            return serialArray;
+        }
+
+        private void CalcularTiempo(List<NotaMidi> listaNotas)
+        {
+            ulong tiempo;
+            if (listaNotas.Last() != null)
+            {
+                MidiFile.NextTempo(tempoScaler.Value);
+                tiempo = (ulong)(listaNotas.Last().Tiempo * (int)(MidiFile.TempoQN / MidiFile.TicksQN) / 1000) / (ulong)tempoScaler.Value;
+                if (tiempo == 0) tiempo = 1;
+                timer1.Interval = (int)tiempo;
+                MidiFile.TotalTiempoSong += (ulong)timer1.Interval;
+                timer1.Enabled = true;
+            }
+        }
+
+        private void ProcesarDibujo(List<NotaMidi> listaNotas, PictureBox picture)
+        {
+            foreach (NotaMidi _x in listaNotas)
+            {
+                if (_x != null)
+                {
+                    for (int i = 0; i < _x.Nota.Count; i++)
+                    {
+                        Canvas.DrawNotes(_x.Nota[i], (_x.Velocidad[i] == 0));
+                        picture.Refresh();
+                    }
+                }
+            }
+        }
+
+        private void ProcesarMonitores(List<NotaMidi> listaNotas, List<byte> serialArray, TextBox textBinario, TextBox textDecimal, TextBox textSerial)
+        {
+            foreach (NotaMidi _x in listaNotas)
+            {
+                if (_x != null)
+                {
+                    for (int i = 0; i < _x.Nota.Count; i++)
+                    {
+                        textBinario.AppendText(Convert.ToString(_x.Nota[i], 2) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
+                        textDecimal.AppendText(Convert.ToString(_x.Nota[i]) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
+                    }
+                }
+            }
+            textBinario.AppendText(Environment.NewLine);
+            textDecimal.AppendText(Environment.NewLine);
+            if (serialPort1.IsOpen)
+            {
+                foreach (byte instruccion in serialArray)
+                {
+                    textSerial.AppendText(Convert.ToString(instruccion) + " ");
+                }
+                textSerial.AppendText(Environment.NewLine);
+            }
+        }
+
+        private void ReproducirNotas(List<NotaMidi> listaNotas)
+        {
+            foreach (NotaMidi _x in listaNotas)
+            {
+                if (_x != null)
+                {
+                    for (int i = 0; i < _x.Nota.Count; i++)
+                    {
+                        if (_x.Velocidad[i] > 0)
+                        {
+                            int NotaActual = _x.Nota[i];
+                            new Thread(() =>
+                            {
+                                double frecuencia = ((double)(NotaActual - 69)) / 12.00;
+                                if (NotaActual > 27)
+                                    Console.Beep((int)(Math.Pow(2, frecuencia) * 440), 250);
+                            }).Start();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CodificarMidi()
+        {
+            List<NotaMidi> notas = new List<NotaMidi>() { MidiFile.NextNote() };
+            List<byte> envio = new List<byte>();
+            if (notas.Last() != null)
+            {
+                notas = AgruparNotas(notas, MidiFile);
+                envio = ProcesarNotas(notas, envio);
+                EnviarTrama(envio);
+                ProcesarDibujo(notas, pictureBox1);
+                ProcesarMonitores(notas, envio, textBox1, textBox2, textBox3);
+                ReproducirNotas(notas);
+                envio.Clear();
+                CalcularTiempo(notas);
+            }
+            if (notas.Last() == null) Canvas.Clean();
+        }
+        #endregion
+
+        #region Eventos Varios
+        private void SetCanvas()
+        {
+            Canvas = new Draw(pictureBox1, Claro);
+            Canvas.Set();
+            Canvas.Box();
+            Canvas.Grid();
+        }
+
+        private void SetThemes()
+        {
+            Temas = InicializacionFormato.loadThemesFromXml();
+            foreach (ThemesAppearance _x in Temas)
             {
                 if (_x.Name == "Dark")
                 {
-                    inicializacionFormato.inicioDesdeXml(Controls, this, _x);
+                    InicializacionFormato.inicioDesdeXml(Controls, this, _x);
                     toolStripComboBox1.Text = "Dark";
                 }
                 toolStripComboBox1.Items.Add(_x.Name);
             }
         }
 
-        private void CodificarMidi()
+        private void PictureBox1_Resize(object sender, EventArgs e)
         {
-            ulong tiempo;
-            //canvas.Clean();
-            List<NotaMidi> notas = new List<NotaMidi>() { midiFile.NextNote() };
-            List<byte> envio = new List<byte>();
-            if (notas.Last() != null)
-            {
-                while (notas.Last().Tiempo == 0)
-                {
-                    notas.Add(midiFile.NextNote());
-                    if (notas.Last() == null) break;
-                }
-                envio.Add(0xff);
-                envio.Add((byte)(notas.Count*2));
-                foreach (NotaMidi _x in notas)
-                {
-                    if (_x != null)
-                    {
-                        for (int i = 0; i < _x.Nota.Count; i++)
-                        {
-                            canvas.DrawNotes(_x.Nota[i], (_x.Velocidad[i] == 0));
-                            textBox1.AppendText(Convert.ToString(_x.Nota[i], 2) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
-                            textBox2.AppendText(Convert.ToString(_x.Nota[i]) + " " + Convert.ToByte(_x.Velocidad[i] > 0) + " ");
-                            envio.Add((byte)(Math.Abs(_x.Nota[i] - escala)));
-                            envio.Add(Convert.ToByte(_x.Velocidad[i] > 0));
-                        }
-                    }
-                }
-                pictureBox1.Refresh();
-                envio.Add(0xfe);
-                textBox1.AppendText(Environment.NewLine);
-                textBox2.AppendText(Environment.NewLine);
-                if (serialPort1.IsOpen)
-                {
-                    serialPort1.Write(envio.ToArray(), 0, envio.Count);
-                    foreach (byte instruccion in envio)
-                    {
-                        textBox3.AppendText(Convert.ToString(instruccion) + " ");
-                    }
-                    textBox3.AppendText(Environment.NewLine);
-                }
-                envio.Clear();
-
-                
-                if (notas.Last() != null)
-                {
-                    if ((midiFile.TotalTiempoSong >= midiFile.TotalTiempoMap) && (midiFile.Cuenta < (midiFile.TempoMap.Length - 1))) midiFile.NextTempo();
-                    tiempo = (ulong)(notas.Last().Tiempo * (int)(midiFile.TempoQN / midiFile.TicksQN) / 1000);
-                    timer1.Interval = (int)tiempo;
-                    midiFile.TotalTiempoSong += (ulong)timer1.Interval;
-                    timer1.Enabled = true;
-                    Text = Convert.ToString(midiFile.TempoQN);
-                }
-                else
-                {
-                    canvas.Clean();
-                }  
-            }else
-            {
-                canvas.Clean();
-            }
-        }
-
-        #region Eventos Varios
-        private void pictureBox1_Resize(object sender, EventArgs e)
-        {
-            canvas.Set();
-            canvas.Box();
-            canvas.Grid();
+            Canvas.Set();
+            Canvas.Box();
+            Canvas.Grid();
             Refresh();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             timer1.Enabled = false;
             CodificarMidi();
+        }
+
+        private void ResetQs_Click(object sender, EventArgs e)
+        {
+            SendReset();
+        }
+
+        private void Jog_Click(object sender, EventArgs e)
+        {
+            CountTest = 0;
+            SendTest(CountTest, 1);
+        }
+
+        private void TimerJob_Tick(object sender, EventArgs e)
+        {
+            timerTest.Enabled = false;
+            if (CountTest < 64)
+                SendTest(CountTest, 0);
+            CountTest++;
+            if(CountTest < 64)
+                SendTest(CountTest, 1);
+        }
+
+        private void comandoSerial_Click(object sender, EventArgs e)
+        {
+            byte[] trama = new byte[]
+            {
+                0xff,
+                (byte)notaTextBox.Text.Split(',').Length,
+                Byte.Parse(notaTextBox.Text.Split(',')[0]),
+                (byte)(Byte.Parse(notaTextBox.Text.Split(',')[1]) & 1),
+                0xfe
+            };
+            List<NotaMidi> notas = new List<NotaMidi>()
+            {
+                new NotaMidi(0, new List<int>(){Int16.Parse(notaTextBox.Text.Split(',')[0]) }, new List<int>(){ Int16.Parse(notaTextBox.Text.Split(',')[1]) & 1 } )
+            };
+            EnviarTrama(trama.ToList());
+            ProcesarMonitores(notas, trama.ToList(), textBox1, textBox2, textBox3);
+            ProcesarDibujo(notas, pictureBox1);
+            ReproducirNotas(notas);
         }
         #endregion
 
         #region ToolStrip
-        private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
+        private void ToolStripComboBox1_TextChanged(object sender, EventArgs e)
         {
-            foreach (ThemesAppearance _x in temas)
+            foreach (ThemesAppearance _x in Temas)
             {
                 if (_x.Name == toolStripComboBox1.Text)
                 {
-                    inicializacionFormato.inicioDesdeXml(Controls, this, _x);
+                    InicializacionFormato.inicioDesdeXml(Controls, this, _x);
                 }
             }
         }
 
-        private void textToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TextToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
-            midiFile.OpenFile(openFileDialog1.FileName);
-            midiFile.TotalTiempoSong = 0;
-            midiFile.TotalTiempoMap = 0;
-            Pause.Enabled = true;
-            Stop.Enabled = true;
-            CodificarMidi();
+            bool midiAbierto = MidiFile.OpenFile(openFileDialog1.FileName);
+            if (midiAbierto)
+            {
+                MidiFile.TotalTiempoSong = 0;
+                Pause.Enabled = true;
+                Stop.Enabled = true;
+                CodificarMidi();
+            }     
         }
 
         private void Stop_Click(object sender, EventArgs e)
         {
-            midiFile.Stop();
+            MidiFile.Stop();
             timer1.Enabled = false;
-            canvas.Clean();
+            Canvas.Clean();
             Pause.Enabled = false;
             Stop.Enabled = false;
             Continue.Enabled = true;
@@ -174,8 +302,8 @@ namespace Codificador
             }
             else
             {
-                midiFile.OpenFile(openFileDialog1.FileName);
-                midiFile.TotalTiempoSong = 0;
+                MidiFile.OpenFile(openFileDialog1.FileName);
+                MidiFile.TotalTiempoSong = 0;
                 CodificarMidi();
             }
             Continue.Enabled = false;
@@ -217,7 +345,7 @@ namespace Codificador
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -230,60 +358,61 @@ namespace Codificador
                 button1.Text = "Cerrar";
             }
         }
-        #endregion
 
-        private void ResetQs_Click(object sender, EventArgs e)
+        private void SendTest(int nota, byte estado)
         {
             try
             {
                 if (serialPort1.IsOpen)
                 {
-                    for (int i = 0; i < 64; i++)
+                    List<byte> trama = new List<byte>() { 0xff, 2, (byte)nota, estado, 0xfe };
+                    serialPort1.Write(trama.ToArray(), 0, 5);
+                    ProcesarMonitores(new List<NotaMidi>() { new NotaMidi(0, new List<int>() { nota }, new List<int>() { estado }) }, trama, textBox1, textBox2, textBox3);
+                    ProcesarDibujo(new List<NotaMidi>() { new NotaMidi(0, new List<int>() { nota }, new List<int>() { estado }) }, pictureBox1);
+                    ReproducirNotas(new List<NotaMidi>() { new NotaMidi(0, new List<int>() { nota }, new List<int>() { estado }) });
+                    timerTest.Enabled = true;
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void SendReset()
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    List<byte> trama = new List<byte>();
+                    List<NotaMidi> notas = new List<NotaMidi>();
+                    trama.Add(0xff);
+                    trama.Add(128);
+                    for (byte i = 0; i < 64; i++)
                     {
-
-                        serialPort1.Write(new byte[] { 0xff, 2, (byte)i, 0, 0xfe }, 0, 5);
-
+                        trama.Add(i);
+                        trama.Add(0);
+                        notas.Add(new NotaMidi(0, new List<int>() { i }, new List<int>() { 0 }));
                     }
+                    trama.Add(0xfe);
+                    serialPort1.Write(trama.ToArray(), 0, trama.Count);
+                    ProcesarMonitores(notas, trama, textBox1, textBox2, textBox3);
                 }
             }
             catch
             {
                 return;
             }
-            
         }
 
-        private void Jog_Click(object sender, EventArgs e)
+        private void EnviarTrama(List<byte> serialArray)
         {
-            try
+            if (serialPort1.IsOpen)
             {
-                if (serialPort1.IsOpen)
-                {
-                    serialPort1.Write(new byte[] { 0xff, 2, (byte)Int16.Parse(notaTextBox.Text), 1, 0xfe }, 0, 5);
-                    timerJob.Enabled = true;
-                }
-            }
-            catch
-            {
-                return;
-            }
-            
-        }
-
-        private void timerJob_Tick(object sender, EventArgs e)
-        {
-            timerJob.Enabled = false;
-            try
-            {
-                if (serialPort1.IsOpen)
-                {
-                    serialPort1.Write(new byte[] { 0xff, 2, (byte)Int16.Parse(notaTextBox.Text), 0, 0xfe }, 0, 5);
-                }
-            }
-            catch
-            {
-                return;
+                serialPort1.Write(serialArray.ToArray(), 0, serialArray.Count);
             }
         }
+        #endregion
     }
 }

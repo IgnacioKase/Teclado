@@ -338,7 +338,7 @@
             this.comandoSerial.Name = "comandoSerial";
             this.comandoSerial.Size = new System.Drawing.Size(165, 40);
             this.comandoSerial.TabIndex = 5;
-            this.comandoSerial.Text = "Enviar";
+            this.comandoSerial.Text = "||";
             this.comandoSerial.UseVisualStyleBackColor = true;
             this.comandoSerial.Click += new System.EventHandler(this.comandoSerial_Click);
             // 
@@ -369,7 +369,7 @@
             // notaTextBox
             // 
             this.notaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notaTextBox.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notaTextBox.Location = new System.Drawing.Point(3, 141);
             this.notaTextBox.Multiline = true;
             this.notaTextBox.Name = "notaTextBox";
@@ -405,13 +405,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1332, 590);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
-            this.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(300, 283);

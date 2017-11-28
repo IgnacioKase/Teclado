@@ -79,14 +79,6 @@ namespace Codificador
             PictureBox.Refresh();
         }
 
-        /*public void Grid()
-        {
-            for (int i = (PictureBox.Width / 127); i < PictureBox.Width; i += (PictureBox.Width / 127))
-            {
-                BackgroundSheet.DrawLine(Lapiz_negro, i, 0, i, PictureBox.Height);
-            }
-        }*/
-
         public void Grid()
         {
             int buffer;

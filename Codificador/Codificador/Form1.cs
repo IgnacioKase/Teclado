@@ -227,6 +227,14 @@ namespace Codificador
                 SendTest(CountTest, 1);
         }
 
+        private void AnalizarTrama(string datos)
+        {
+            /*switch()
+            {
+
+            }*/
+        }
+
         private void comandoSerial_Click(object sender, EventArgs e)
         {
             byte[] trama = new byte[]

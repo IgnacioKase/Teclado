@@ -220,10 +220,10 @@ namespace Codificador
         private void TimerJob_Tick(object sender, EventArgs e)
         {
             timerTest.Enabled = false;
-            if (CountTest < 64)
+            if (CountTest < 62)
                 SendTest(CountTest, 0);
             CountTest++;
-            if(CountTest < 64)
+            if(CountTest < 62)
                 SendTest(CountTest, 1);
         }
 
@@ -237,7 +237,9 @@ namespace Codificador
 
         private void comandoSerial_Click(object sender, EventArgs e)
         {
-            byte[] trama = new byte[]
+            try
+            {
+                byte[] trama = new byte[]
             {
                 0xff,
                 (byte)notaTextBox.Text.Split(',').Length,
@@ -245,15 +247,20 @@ namespace Codificador
                 (byte)(Byte.Parse(notaTextBox.Text.Split(',')[1]) & 1),
                 0xfe
             };
-            List<NotaMidi> notas = new List<NotaMidi>()
+                List<NotaMidi> notas = new List<NotaMidi>()
             {
                 new NotaMidi(0, new List<int>(){Int16.Parse(notaTextBox.Text.Split(',')[0]) }, new List<int>(){ Int16.Parse(notaTextBox.Text.Split(',')[1]) & 1 } )
             };
-            EnviarTrama(trama.ToList());
-            ProcesarMonitores(notas, trama.ToList(), textBox1, textBox2, textBox3);
-            ProcesarDibujo(notas, pictureBox1);
-            ReproducirNotas(notas);
-        }
+                EnviarTrama(trama.ToList());
+                ProcesarMonitores(notas, trama.ToList(), textBox1, textBox2, textBox3);
+                ProcesarDibujo(notas, pictureBox1);
+                ReproducirNotas(notas);
+
+            }
+            catch
+            {
+            }
+            }
         #endregion
 
         #region ToolStrip
@@ -396,8 +403,8 @@ namespace Codificador
                     List<byte> trama = new List<byte>();
                     List<NotaMidi> notas = new List<NotaMidi>();
                     trama.Add(0xff);
-                    trama.Add(128);
-                    for (byte i = 0; i < 64; i++)
+                    trama.Add(130);
+                    for (byte i = 0; i < 65; i++)
                     {
                         trama.Add(i);
                         trama.Add(0);

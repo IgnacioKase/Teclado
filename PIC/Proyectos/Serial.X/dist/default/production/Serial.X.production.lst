@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.44 build -154322312 
-                                                                                               Wed Nov 22 11:46:53 2017
+                                                                                               Wed Nov 29 12:56:58 2017
 
 Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140600
      1                           	processor	16F628A
@@ -1031,7 +1031,7 @@ Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140
   1017  0165                     i1l770:	
   1018                           
   1019                           ;main.c: 118: {
-  1020                           ;main.c: 119: RA0 = ((palabras[k] >> (16 - i)) & 1);
+  1020                           ;main.c: 119: RA0 = ((palabras[k] >> (15 - i)) & 1);
   1021  0165  0873               	movf	escribirSalida@k,w
   1022  0166  00F0               	movwf	??_escribirSalida
   1023  0167  0770               	addwf	??_escribirSalida,w
@@ -1045,7 +1045,7 @@ Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140
   1031  016F  00F2               	movwf	??_escribirSalida+2
   1032  0170  0375               	decf	escribirSalida@i,w
   1033  0171  3AFF               	xorlw	255
-  1034  0172  3E10               	addlw	16
+  1034  0172  3E0F               	addlw	15
   1035  0173  3E01               	addlw	1
   1036  0174  2978               	goto	u32_24
   1037  0175                     u32_25:	
@@ -1295,7 +1295,7 @@ DATA                 0      0      2E      10        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.44 build -154322312 
-Symbol Table                                                                                   Wed Nov 22 11:46:53 2017
+Symbol Table                                                                                   Wed Nov 29 12:56:58 2017
 
                    __CFG_CP$OFF 0000                              l80 0151                              l77 0107  
                             fsr 0004         __size_of_escribirSalida 0052                             l108 01C2  

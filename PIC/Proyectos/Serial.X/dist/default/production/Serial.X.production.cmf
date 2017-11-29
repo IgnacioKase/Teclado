@@ -25,7 +25,7 @@ intentry CODE 0 4 4 C 2
 bssBANK0 BANK0 1 35 35 C 1
 clrtext CODE 0 1DF 1DF 8 2
 bssCOMMON COMMON 1 77 77 6 1
-$C:\Users\kasev\AppData\Local\Temp\s92c.obj
+$C:\Users\kasev\AppData\Local\Temp\sduc.obj
 reset_vec CODE 0 0 0 1 2
 end_init CODE 0 10 10 1 2
 config CONFIG 0 2007 2007 1 2
@@ -73,20 +73,20 @@ STRING 1EF-7FF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Serial.X.production.obj
-11 cinit CODE >180:C:\Users\kasev\AppData\Local\Temp\s92c.
-11 cinit CODE >183:C:\Users\kasev\AppData\Local\Temp\s92c.
-11 cinit CODE >227:C:\Users\kasev\AppData\Local\Temp\s92c.
-12 cinit CODE >228:C:\Users\kasev\AppData\Local\Temp\s92c.
-13 cinit CODE >229:C:\Users\kasev\AppData\Local\Temp\s92c.
-14 cinit CODE >230:C:\Users\kasev\AppData\Local\Temp\s92c.
-15 cinit CODE >233:C:\Users\kasev\AppData\Local\Temp\s92c.
-16 cinit CODE >234:C:\Users\kasev\AppData\Local\Temp\s92c.
-17 cinit CODE >235:C:\Users\kasev\AppData\Local\Temp\s92c.
-18 cinit CODE >236:C:\Users\kasev\AppData\Local\Temp\s92c.
-19 cinit CODE >237:C:\Users\kasev\AppData\Local\Temp\s92c.
-1A cinit CODE >243:C:\Users\kasev\AppData\Local\Temp\s92c.
-1A cinit CODE >245:C:\Users\kasev\AppData\Local\Temp\s92c.
-1B cinit CODE >246:C:\Users\kasev\AppData\Local\Temp\s92c.
+11 cinit CODE >180:C:\Users\kasev\AppData\Local\Temp\sduc.
+11 cinit CODE >183:C:\Users\kasev\AppData\Local\Temp\sduc.
+11 cinit CODE >227:C:\Users\kasev\AppData\Local\Temp\sduc.
+12 cinit CODE >228:C:\Users\kasev\AppData\Local\Temp\sduc.
+13 cinit CODE >229:C:\Users\kasev\AppData\Local\Temp\sduc.
+14 cinit CODE >230:C:\Users\kasev\AppData\Local\Temp\sduc.
+15 cinit CODE >233:C:\Users\kasev\AppData\Local\Temp\sduc.
+16 cinit CODE >234:C:\Users\kasev\AppData\Local\Temp\sduc.
+17 cinit CODE >235:C:\Users\kasev\AppData\Local\Temp\sduc.
+18 cinit CODE >236:C:\Users\kasev\AppData\Local\Temp\sduc.
+19 cinit CODE >237:C:\Users\kasev\AppData\Local\Temp\sduc.
+1A cinit CODE >243:C:\Users\kasev\AppData\Local\Temp\sduc.
+1A cinit CODE >245:C:\Users\kasev\AppData\Local\Temp\sduc.
+1B cinit CODE >246:C:\Users\kasev\AppData\Local\Temp\sduc.
 4 intentry CODE >77:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 1E7 text5 CODE >157:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 1E7 text5 CODE >159:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
@@ -175,16 +175,16 @@ FA maintext CODE >62:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Seria
 141 maintext CODE >72:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 150 maintext CODE >53:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
 151 maintext CODE >75:C:\Users\kasev\Documents\GitHub\Teclado\PIC\Proyectos\Serial.X\main.c
-1DF clrtext CODE >214:C:\Users\kasev\AppData\Local\Temp\s92c.
-1DF clrtext CODE >215:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E0 clrtext CODE >216:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E0 clrtext CODE >217:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E1 clrtext CODE >218:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E2 clrtext CODE >219:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E3 clrtext CODE >220:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E4 clrtext CODE >221:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E5 clrtext CODE >222:C:\Users\kasev\AppData\Local\Temp\s92c.
-1E6 clrtext CODE >223:C:\Users\kasev\AppData\Local\Temp\s92c.
+1DF clrtext CODE >214:C:\Users\kasev\AppData\Local\Temp\sduc.
+1DF clrtext CODE >215:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E0 clrtext CODE >216:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E0 clrtext CODE >217:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E1 clrtext CODE >218:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E2 clrtext CODE >219:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E3 clrtext CODE >220:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E4 clrtext CODE >221:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E5 clrtext CODE >222:C:\Users\kasev\AppData\Local\Temp\sduc.
+1E6 clrtext CODE >223:C:\Users\kasev\AppData\Local\Temp\sduc.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -216,21 +216,21 @@ _SREN C5 0 ABS 0 - dist/default/production\Serial.X.production.obj
 _SYNC 4C4 0 ABS 0 - dist/default/production\Serial.X.production.obj
 _TXEN 4C5 0 ABS 0 - dist/default/production\Serial.X.production.obj
 _TXIE 464 0 ABS 0 - dist/default/production\Serial.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\kasev\AppData\Local\Temp\s92c.obj
+___sp 0 0 STACK 2 stack C:\Users\kasev\AppData\Local\Temp\sduc.obj
 _main 196 0 CODE 0 maintext dist/default/production\Serial.X.production.obj
 btemp 7E 0 ABS 0 - dist/default/production\Serial.X.production.obj
-start 20 0 CODE 0 init C:\Users\kasev\AppData\Local\Temp\s92c.obj
+start 20 0 CODE 0 init C:\Users\kasev\AppData\Local\Temp\sduc.obj
 _dataLength 3F 0 BANK0 1 bssBANK0 dist/default/production\Serial.X.production.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 resetearSalidas@cantidadSalidas 2B 0 BANK0 1 cstackBANK0 dist/default/production\Serial.X.production.obj
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
-intlevel1 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
-intlevel2 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
-intlevel3 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
-intlevel4 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
-intlevel5 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\s92c.obj
+intlevel0 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
+intlevel1 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
+intlevel2 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
+intlevel3 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
+intlevel4 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
+intlevel5 0 0 ENTRY 0 functab C:\Users\kasev\AppData\Local\Temp\sduc.obj
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -241,7 +241,7 @@ __CFG_MCLRE$OFF 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 start_initialization 22 0 CODE 0 cinit dist/default/production\Serial.X.production.obj
 clear_ram0 3BE 0 CODE 0 clrtext dist/default/production\Serial.X.production.obj
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\Serial.X.production.obj
-___int_sp 0 0 STACK 2 stack C:\Users\kasev\AppData\Local\Temp\s92c.obj
+___int_sp 0 0 STACK 2 stack C:\Users\kasev\AppData\Local\Temp\sduc.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -297,7 +297,7 @@ saved_w 7E 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __end_of_ISR 196 0 CODE 0 text3 dist/default/production\Serial.X.production.obj
 __CFG_BOREN$ON 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\kasev\AppData\Local\Temp\s92c.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\kasev\AppData\Local\Temp\sduc.obj
 __size_of_ReceiveByteSerially 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 _resetearSalidas 348 0 CODE 0 text1 dist/default/production\Serial.X.production.obj
 _indice 79 0 COMMON 1 bssCOMMON dist/default/production\Serial.X.production.obj
@@ -313,8 +313,8 @@ __CFG_CP$OFF 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __end_of_InitUART 3BE 0 CODE 0 text2 dist/default/production\Serial.X.production.obj
 __CFG_WDTE$OFF 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 _ReceiveByteSerially 3CE 0 CODE 0 text5 dist/default/production\Serial.X.production.obj
-stackhi 0 0 ABS 0 - C:\Users\kasev\AppData\Local\Temp\s92c.obj
-stacklo 0 0 ABS 0 - C:\Users\kasev\AppData\Local\Temp\s92c.obj
+stackhi 0 0 ABS 0 - C:\Users\kasev\AppData\Local\Temp\sduc.obj
+stacklo 0 0 ABS 0 - C:\Users\kasev\AppData\Local\Temp\sduc.obj
 __CFG_LVP$OFF 0 0 ABS 0 - dist/default/production\Serial.X.production.obj
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -

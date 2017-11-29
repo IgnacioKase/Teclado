@@ -116,7 +116,7 @@ void escribirSalida ()
     {
         for(int i = 0; i < 16; i++)
         {
-          dato = ((palabras[k] >> (16 - i)) & 1);
+          dato = ((palabras[k] >> (15 - i)) & 1);
           clockManual = 1;
           clockManual = 0;
         }

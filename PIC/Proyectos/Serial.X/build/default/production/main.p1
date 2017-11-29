@@ -955,9 +955,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 76 ]
 [; ;main.c: 118: {
 {
-[; ;main.c: 119: RA0 = ((palabras[k] >> (16 - i)) & 1);
+[; ;main.c: 119: RA0 = ((palabras[k] >> (15 - i)) & 1);
 "119
-[e = _RA0 -> & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 16 `i _i -> -> 1 `i `ui `b ]
+[e = _RA0 -> & >> *U + &U _palabras * -> -> _k `ui `ux -> -> # *U &U _palabras `ui `ux - -> 15 `i _i -> -> 1 `i `ui `b ]
 [; ;main.c: 120: RA1 = 1;
 "120
 [e = _RA1 -> -> 1 `i `b ]

@@ -338,7 +338,7 @@
             this.comandoSerial.Name = "comandoSerial";
             this.comandoSerial.Size = new System.Drawing.Size(165, 40);
             this.comandoSerial.TabIndex = 5;
-            this.comandoSerial.Text = "||";
+            this.comandoSerial.Text = "Enviar";
             this.comandoSerial.UseVisualStyleBackColor = true;
             this.comandoSerial.Click += new System.EventHandler(this.comandoSerial_Click);
             // 
@@ -400,7 +400,7 @@
             // 
             // timerTest
             // 
-            this.timerTest.Interval = 200;
+            this.timerTest.Interval = 1000;
             this.timerTest.Tick += new System.EventHandler(this.TimerJob_Tick);
             // 
             // Form1

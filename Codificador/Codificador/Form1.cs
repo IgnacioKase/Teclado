@@ -429,5 +429,59 @@ namespace Codificador
             }
         }
         #endregion
+
+        private void toolStripEncender_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                byte[] trama = new byte[]
+            {
+                0xff,
+                2,
+                Byte.Parse(notaTextBox.Text),
+                1,
+                0xfe
+            };
+                List<NotaMidi> notas = new List<NotaMidi>()
+            {
+                new NotaMidi(0, new List<int>(){Int16.Parse(notaTextBox.Text) }, new List<int>(){1 } )
+            };
+                EnviarTrama(trama.ToList());
+                ProcesarMonitores(notas, trama.ToList(), textBox1, textBox2, textBox3);
+                ProcesarDibujo(notas, pictureBox1);
+                ReproducirNotas(notas);
+
+            }
+            catch
+            {
+            }
+        }
+
+        private void toolStripApagar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                byte[] trama = new byte[]
+            {
+                0xff,
+                2,
+                Byte.Parse(notaTextBox.Text),
+                0,
+                0xfe
+            };
+                List<NotaMidi> notas = new List<NotaMidi>()
+            {
+                new NotaMidi(0, new List<int>(){Int16.Parse(notaTextBox.Text) }, new List<int>(){0 } )
+            };
+                EnviarTrama(trama.ToList());
+                ProcesarMonitores(notas, trama.ToList(), textBox1, textBox2, textBox3);
+                ProcesarDibujo(notas, pictureBox1);
+                ReproducirNotas(notas);
+
+            }
+            catch
+            {
+            }
+        }
     }
 }

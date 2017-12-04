@@ -39,6 +39,8 @@
             this.Continue = new System.Windows.Forms.ToolStripButton();
             this.Pause = new System.Windows.Forms.ToolStripButton();
             this.Stop = new System.Windows.Forms.ToolStripButton();
+            this.toolStripEncender = new System.Windows.Forms.ToolStripButton();
+            this.toolStripApagar = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -79,7 +81,9 @@
             this.toolStripDropDownButton1,
             this.Continue,
             this.Pause,
-            this.Stop});
+            this.Stop,
+            this.toolStripEncender,
+            this.toolStripApagar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1332, 25);
@@ -159,6 +163,26 @@
             this.Stop.Text = "Stop";
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
+            // toolStripEncender
+            // 
+            this.toolStripEncender.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripEncender.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEncender.Image")));
+            this.toolStripEncender.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripEncender.Name = "toolStripEncender";
+            this.toolStripEncender.Size = new System.Drawing.Size(75, 22);
+            this.toolStripEncender.Text = "Encender";
+            this.toolStripEncender.Click += new System.EventHandler(this.toolStripEncender_Click);
+            // 
+            // toolStripApagar
+            // 
+            this.toolStripApagar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripApagar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripApagar.Image")));
+            this.toolStripApagar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripApagar.Name = "toolStripApagar";
+            this.toolStripApagar.Size = new System.Drawing.Size(58, 22);
+            this.toolStripApagar.Text = "Apagar";
+            this.toolStripApagar.Click += new System.EventHandler(this.toolStripApagar_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -202,7 +226,6 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 389F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1326, 389);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -400,7 +423,6 @@
             // 
             // timerTest
             // 
-            this.timerTest.Interval = 1000;
             this.timerTest.Tick += new System.EventHandler(this.TimerJob_Tick);
             // 
             // Form1
@@ -469,6 +491,8 @@
         private System.Windows.Forms.Button comandoSerial;
         private System.Windows.Forms.TrackBar tempoScaler;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton toolStripEncender;
+        private System.Windows.Forms.ToolStripButton toolStripApagar;
     }
 }
 
